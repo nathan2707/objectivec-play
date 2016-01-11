@@ -14,28 +14,30 @@
     self.logoView.image = [UIImage imageNamed:self.event[@"Category"]];
     self.nameView.text = self.event[@"Name"];
     self.adressLabel.text = self.event[@"LocationString"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"eeee, HH:mm a"];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"eeee, HH:mm a"];
+//    NSString *dateInString = [dateFormatter stringFromDate:self.event[@"Date"]];
     NSString *timeString = @"";
     NSTimeInterval timeSince = [[NSDate date] timeIntervalSinceDate:self.event[@"Date"]];
+    double absoluteTime = fabs(timeSince);
     
-    if (timeSince/60 < 1) {
-        timeString = [NSString stringWithFormat:@"%is",(int)timeSince];
+    if (absoluteTime/60 < 1) {
+        timeString = [NSString stringWithFormat:@"%is",(int)absoluteTime];
     }
-    else if (timeSince/3600 < 1) {
-        timeString = [NSString stringWithFormat:@"%im",(int)timeSince/60];
+    else if (absoluteTime/3600 < 1) {
+        timeString = [NSString stringWithFormat:@"%im",(int)absoluteTime/60];
     }
-    else if (timeSince/(3600*24) < 1) {
-        timeString = [NSString stringWithFormat:@"%ih",(int)timeSince/3600];
+    else if (absoluteTime/(3600*24) < 1) {
+        timeString = [NSString stringWithFormat:@"%ih",(int)absoluteTime/3600];
     }
     else{
-        timeString = [NSString stringWithFormat:@"%id",(int)timeSince/(3600*24)];
+        timeString = [NSString stringWithFormat:@"%id",(int)absoluteTime/(3600*24)];
     }
-    
-    NSString *dateInString = [dateFormatter stringFromDate:self.event[@"Date"]];
-    self.dateLabel.text = timeString;
-//    [self.contentView setBackgroundColor:[UIColor whiteColor]];
-//    [self.contentView setOpaque:NO];
+    if (timeSince < 0){
+        self.dateLabel.text = [NSString stringWithFormat:@"in %@",timeString];
+    } else {
+        self.dateLabel.text = [NSString stringWithFormat:@"%@ ago",timeString];
+    }
 }
 
 @end

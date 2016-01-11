@@ -24,7 +24,7 @@
     [imageUser loadInBackground];
     self.labelName.text = user[PF_USER_FULLNAME];
     self.labelStatus.text = self.status;
-    if ([self.status isEqualToString:@"coming"]) self.labelStatus.textColor = [UIColor greenColor];
+    if ([self.status isEqualToString:@"coming"]) self.labelStatus.textColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
     if ([self.status isEqualToString:@"invited"]) self.labelStatus.textColor = [UIColor blueColor];
     if ([self.status isEqualToString:@"requested"]) self.labelStatus.textColor = [UIColor orangeColor];
 }

@@ -238,7 +238,7 @@
         self.leaveButton.enabled = NO;
     } else {
         [self.leaveButton setTitle:@"Join Event" forState:UIControlStateNormal];
-        [self.leaveButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        [self.leaveButton setTitleColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forState:UIControlStateNormal];
     }
     if (group[@"LocationString"]){
         self.locationLabel.text =group[@"LocationString"];

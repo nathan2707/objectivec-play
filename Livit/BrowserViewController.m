@@ -70,14 +70,14 @@
 
 -(void)actionSearch{
     self.tableView.tableHeaderView = self.headerView;
-    [self.tableView scrollsToTop];
+    self.tableView.scrollsToTop = YES;
 }
 
 -(void)loadEvents:(NSInteger)selected{
     oneFinished = NO;
     [events removeAllObjects];
     PFQuery *query = [PFQuery queryWithClassName:@"Events"];
-    [query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
+    //[query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
     
     if (selected == 0){
         PFUser *user = [PFUser currentUser];
@@ -91,7 +91,7 @@
     }
     
     [query orderByDescending:@"timeInterval"];
-    [query setLimit:3];
+    [query setLimit:5];
     [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error) {
         if (!error){
             [events addObjectsFromArray:objects];
@@ -105,7 +105,7 @@
     for (NSString *house in myHouses){
         oneFinished = NO;
         PFQuery *query = [PFQuery queryWithClassName:@"Events"];
-        [query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
+        //[query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
         [query whereKey:@"Houses" equalTo:house];
         [query orderByDescending:@"timeInterval"];
         [query setLimit:3];
@@ -124,7 +124,7 @@
     for (NSString *friend in friends){
         oneFinished = NO;
         PFQuery *query = [PFQuery queryWithClassName:@"Events"];
-        [query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
+        //[query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
         [query whereKey:@"Identities" equalTo:friend];
         [query orderByDescending:@"timeInterval"];
         [query setLimit:3];
@@ -184,7 +184,6 @@
             }
         }
     }
-    
     // Step 2: making the query
     PFQuery *query = [PFQuery queryWithClassName:@"Houses"];
     [query whereKey:@"objectId" containedIn:array];
@@ -279,16 +278,11 @@
             [cell.mainView loadInBackground];
         } else {
             GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:cell.mainView.frame];
+            [panoView setAllGesturesEnabled:NO];
             CGFloat nearestLat = floorf([[cell.event[@"Location"] objectForKey:@"lat"] doubleValue] * 1000 + 0.5) / 1000;
             CGFloat nearestLong = floorf([[cell.event[@"Location"] objectForKey:@"long"] doubleValue] * 1000 + 0.5) / 1000;
             [panoView moveNearCoordinate:CLLocationCoordinate2DMake(nearestLat,nearestLong)];
             [cell addSubview:panoView];
-            //        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[[cell.event[@"Location"] objectForKey:@"lat"] intValue]
-            //                                                                longitude:[[cell.event[@"Location"] objectForKey:@"long"] intValue]
-            //                                                                    zoom:16];
-            //        GMSMapView *mv = [GMSMapView mapWithFrame:cell.mainView.frame camera:camera];
-            //        mv.myLocationEnabled = YES;
-            //        [cell addSubview:mv];
         }
         PFUser *user = [PFUser currentUser];
         CLLocation *startLocation = [[CLLocation alloc] initWithLatitude:[[[[events objectAtIndex:indexPath.section] objectForKey:@"Location"] objectForKey:@"lat"] doubleValue] longitude:[[[[events objectAtIndex:indexPath.section] objectForKey:@"Location"] objectForKey:@"lat"] doubleValue]];
@@ -299,7 +293,7 @@
         [cell.requestButton setTag:indexPath.row];
         if ([[cell.event objectForKey:@"Identities"] containsObject:user.objectId]){
             [cell.requestButton setTitle:@"Going" forState:UIControlStateNormal];
-            [cell.requestButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+            [cell.requestButton setTitleColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1]forState:UIControlStateNormal];
             cell.requestButton.enabled = NO;
         } else if ([[cell.event objectForKey:@"Requests"] containsObject:user.objectId]){
             [cell.requestButton setTitle:@"Cancel Request" forState:UIControlStateNormal];
@@ -338,7 +332,12 @@
         
         int i = 0;
         while (i < array5.count){
-            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 42 -i*33, 336, 25, 25)];
+            myButton *button;
+            if (array5.count >= 4){
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*33, cell.frame.size.height - 77, 25, 25)];
+            } else {
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*33, cell.frame.size.height - 77, 25, 25)];
+            }
             PFFile *file = [[array5 objectAtIndex:i] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
             button.layer.cornerRadius = button.frame.size.width/2;
@@ -349,7 +348,12 @@
             i = i+1;
         }
         while ((i < 3) && (i < array.count)){
-            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 42 -i*33, 336, 25, 25)];
+            myButton *button;
+            if (array.count >= 4){
+            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*33, cell.frame.size.height - 77, 25, 25)];
+            } else {
+            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*33, cell.frame.size.height - 77, 25, 25)];
+            }
             PFFile *file = [[array objectAtIndex:i] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
             button.layer.cornerRadius = button.frame.size.width/2;
@@ -363,15 +367,15 @@
         NSMutableArray *array7 = [[NSMutableArray alloc]init];
         for (int i = 0; i<houses.count;i++){
             for (int j = 0; j<array6.count;j++){
-                if ([[array6 objectAtIndex:j]isEqualToString:[[houses objectAtIndex:i] objectForKey:@"objectId"]]){
+                if ([[array6 objectAtIndex:j]isEqualToString:[[houses objectAtIndex:i] objectId]]){
                     [array7 addObject:[houses objectAtIndex:i]];
                 }
             }
         }
         int j = 0;
         while (j < array7.count){
-            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 56 -j*33, 309, 25, 25)];
-            PFFile *file = [[array7 objectAtIndex:j] objectForKey:@"thumbnail"];
+            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -j*33, cell.frame.size.height - 26, 25, 25)];
+            PFFile *file = [[array7 objectAtIndex:j] objectForKey:@"Thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
             button.layer.cornerRadius = button.frame.size.width/2;
             button.layer.masksToBounds = YES;
@@ -380,6 +384,10 @@
             [cell addSubview:button];
             j = j+1;
         }
+        NSString *plural;
+        if (array7.count != 1) plural = @"s";
+        else plural = @"";
+        cell.houseLabel.text = [NSString stringWithFormat:@"%lu house%@ sponsoring.",(unsigned long)array7.count,plural ];
     }
     return cell;
 }
@@ -438,7 +446,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 445;
+    return 435;
 }
 
 @end

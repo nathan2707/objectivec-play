@@ -47,7 +47,9 @@
 }
 
 -(void)actionShare{
+    self.event[@"Date"] = self.datePicker.date;
     PFUser *user = [PFUser currentUser];
+    self.event[@"Creator"] = user.objectId;
     if ([self.friendsSwitch isOn]){
         self.event[@"Facebook"] = @(YES);
     } else {

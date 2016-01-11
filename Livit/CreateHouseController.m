@@ -154,6 +154,7 @@ PFFile *fileThumbnail;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1) && (indexPath.row != 0)) return 80;
+    if ((indexPath.section == 0) && (indexPath.row == 1)) return 60;
     else return 50;
 }
 

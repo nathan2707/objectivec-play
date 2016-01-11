@@ -17,7 +17,7 @@
     NSMutableArray *houses;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *headerView;
+
 
 @end
 
@@ -50,7 +50,9 @@ int sel;
         self.navigationItem.rightBarButtonItem = barButton;
     
     } else {
-        self.tableView.tableHeaderView = self.headerView;
+        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createHouse)];
+        [barButton setTintColor:[UIColor whiteColor]];
+        self.navigationItem.rightBarButtonItem = barButton;
         self.refreshControl = [[UIRefreshControl alloc] init];
         [self.refreshControl addTarget:self action:@selector(loadHouses) forControlEvents:UIControlEventValueChanged];
     }
@@ -113,7 +115,7 @@ int sel;
 
     return 1;
 }
-- (IBAction)createHouse:(id)sender {
+-(void)createHouse {
     CreateHouseController *chc = [[CreateHouseController alloc]init];
     [self.navigationController pushViewController:chc animated:YES];
 }

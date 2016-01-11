@@ -20,14 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *inviteLabel;
 @property (strong, nonatomic) IBOutlet UILabel *moreHousesLabel;
 @property (strong, nonatomic) IBOutlet UILabel *morePeopleLabel;
-@property (strong, nonatomic) IBOutlet PFImageView *imageHouse1;
-@property (strong, nonatomic) IBOutlet PFImageView *imageHouse2;
-@property (strong, nonatomic) IBOutlet PFImageView *imageHouse3;
-@property (strong, nonatomic) IBOutlet PFImageView *imageHouse4;
-@property (strong, nonatomic) IBOutlet PFImageView *imageUser1;
-@property (strong, nonatomic) IBOutlet PFImageView *imageUser2;
-@property (strong, nonatomic) IBOutlet PFImageView *imageUser3;
-@property (strong, nonatomic) IBOutlet PFImageView *imageUser4;
 @property (strong, nonatomic) IBOutlet myButton *requestButton;
+@property (strong, nonatomic) IBOutlet UILabel *houseLabel;
 
 @end
