@@ -22,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *morePeopleLabel;
 @property (strong, nonatomic) IBOutlet myButton *requestButton;
 @property (strong, nonatomic) IBOutlet UILabel *houseLabel;
+@property (strong, nonatomic) IBOutlet myButton *nameButton;
 
 @end

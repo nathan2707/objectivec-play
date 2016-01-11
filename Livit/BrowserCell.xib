@@ -32,6 +32,16 @@
                             <color key="titleColor" red="0.12941177189350128" green="0.57254904508590698" blue="0.15686275064945221" alpha="1" colorSpace="deviceRGB"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 going, 2 that you know." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKJ-5u-aH6">
+                        <rect key="frame" x="7" y="358" width="192" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="192" id="Bn2-YA-Mt2"/>
+                            <constraint firstAttribute="height" constant="21" id="jvJ-aH-qt6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.1294117719" green="0.57254904510000004" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 invites, 230 requests." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipg-jt-BK6">
                         <rect key="frame" x="7" y="383.5" width="187" height="21"/>
                         <constraints>
@@ -60,15 +70,6 @@
                         <rect key="frame" x="6" y="355" width="400" height="0.5"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="The time of your life is about to happen if you join us little cunt." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9Xq-yA-KML">
-                        <rect key="frame" x="7" y="310" width="398" height="41"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="41" id="N5f-Yk-dQT"/>
-                        </constraints>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qu-yR-fIU">
                         <rect key="frame" x="8" y="277" width="130" height="21"/>
                         <constraints>
@@ -95,16 +96,20 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 going, 2 that you know." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKJ-5u-aH6">
-                        <rect key="frame" x="7" y="358" width="192" height="21"/>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZy-7s-6Hh" customClass="myButton">
+                        <rect key="frame" x="5" y="310" width="122" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="nathan topolanski"/>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="                                The time of your life is about to happen if you join us little cunt." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9Xq-yA-KML">
+                        <rect key="frame" x="7" y="304" width="392" height="47.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="192" id="Bn2-YA-Mt2"/>
-                            <constraint firstAttribute="height" constant="21" id="jvJ-aH-qt6"/>
+                            <constraint firstAttribute="height" constant="47.5" id="N5f-Yk-dQT"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.1294117719" green="0.57254904510000004" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -115,8 +120,8 @@
                     <constraint firstItem="ipg-jt-BK6" firstAttribute="top" secondItem="PKJ-5u-aH6" secondAttribute="bottom" constant="4.5" id="HoY-ek-b0q"/>
                     <constraint firstAttribute="bottomMargin" secondItem="ipg-jt-BK6" secondAttribute="bottom" constant="2.5" id="IEg-Ft-Cuc"/>
                     <constraint firstItem="HSJ-zE-AkS" firstAttribute="top" secondItem="ijU-8Q-HCE" secondAttribute="bottom" constant="5" id="OoA-EX-FgQ"/>
-                    <constraint firstItem="9Xq-yA-KML" firstAttribute="top" secondItem="JA9-gD-eYy" secondAttribute="bottom" constant="7" id="P2I-od-VCp"/>
-                    <constraint firstItem="9Xq-yA-KML" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-1" id="R1v-Gr-iEw"/>
+                    <constraint firstItem="9Xq-yA-KML" firstAttribute="top" secondItem="JA9-gD-eYy" secondAttribute="bottom" constant="1" id="P2I-od-VCp"/>
+                    <constraint firstItem="9Xq-yA-KML" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-7" id="R1v-Gr-iEw"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ijU-8Q-HCE" secondAttribute="trailing" constant="-3" id="S9d-U2-d0u"/>
                     <constraint firstItem="JA9-gD-eYy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="265" id="Stf-r2-WOG"/>
                     <constraint firstItem="PKm-Ek-N9T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="UXo-nl-xh6"/>
@@ -143,6 +148,7 @@
                 <outlet property="mainView" destination="PKm-Ek-N9T" id="vtt-un-Tgk"/>
                 <outlet property="moreHousesLabel" destination="ijU-8Q-HCE" id="U7B-uV-Oy0"/>
                 <outlet property="morePeopleLabel" destination="HSJ-zE-AkS" id="Wb4-Op-jE0"/>
+                <outlet property="nameButton" destination="fZy-7s-6Hh" id="AQl-sX-3RT"/>
                 <outlet property="peopleLabel" destination="PKJ-5u-aH6" id="WLC-jR-Dae"/>
                 <outlet property="requestButton" destination="JA9-gD-eYy" id="8al-UJ-Yh8"/>
             </connections>

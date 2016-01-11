@@ -11,8 +11,7 @@
 @implementation TableHeader
 
 -(void)drawHeader{
-    self.logoView.image = [UIImage imageNamed:self.event[@"Category"]];
-    self.nameView.text = self.event[@"Name"];
+    [self.nameButton setTitle:self.event[@"Name"] forState:UIControlStateNormal];
     self.adressLabel.text = self.event[@"LocationString"];
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"eeee, HH:mm a"];

@@ -15,6 +15,8 @@
 #import "GroupsView.h"
 #import "AppConstant.h"
 #import "myButton.h"
+#import "GroupSettingsView.h"
+
 @import GoogleMaps;
 
 @interface BrowserViewController ()
@@ -23,6 +25,9 @@
     NSMutableArray *houses;
     NSMutableArray *connectionsPerEvent;
     NSMutableArray *usersPerEvent;
+    NSMutableArray *usersInvitedOrRequesting;
+    UIRefreshControl *refreshControl;
+    NSInteger numero;
     BOOL oneFinished;
     
     NSMutableArray *myHouses;
@@ -54,6 +59,7 @@
     self.tableView.dataSource = self;
     self.searchBar.showsScopeBar = YES;
     events = [[NSMutableArray alloc]init];
+    usersInvitedOrRequesting = [[NSMutableArray alloc]init];
     connectionsPerEvent = [[NSMutableArray alloc]init];
     usersPerEvent = [[NSMutableArray alloc]init];
     houses = [[NSMutableArray alloc]init];
@@ -66,6 +72,29 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"BrowserCell" bundle:nil] forCellReuseIdentifier:@"BrowserCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"TableHeader" bundle:nil] forHeaderFooterViewReuseIdentifier:@"TableHeader"];
     
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(decideWhatToLoad) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+    
+}
+
+-(void)decideWhatToLoad{
+    switch (numero) {
+        case 0:
+            [self loadEvents:numero];
+            break;
+        case 1:
+            [self loadEvents:numero];
+            break;
+        case 2:
+            [self loadEventsWithHouses];
+            break;
+        case 3:
+            [self loadEventsWithFriends];
+            break;
+        default:
+            break;
+    }
 }
 
 -(void)actionSearch{
@@ -95,9 +124,25 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error) {
         if (!error){
             [events addObjectsFromArray:objects];
-            [self loadUsers];
+            [self loadUsersInvitedOrRequesting];
         }
     }];
+}
+
+-(void)loadEventsWithCategory:(myButton*)sender{
+    [events removeAllObjects];
+        oneFinished = NO;
+        PFQuery *query = [PFQuery queryWithClassName:@"Events"];
+        //[query whereKey:@"timeInterval" greaterThan:@([[NSDate date] timeIntervalSinceDate:[[NSDate date] dateByAddingTimeInterval: -1209600.0]])];
+        [query whereKey:@"Category" equalTo:sender.userId];
+        [query orderByDescending:@"timeInterval"];
+        [query setLimit:5];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error) {
+            if (!error){
+                [events addObjectsFromArray:objects];
+                [self loadUsersInvitedOrRequesting];
+            }
+        }];
 }
 
 -(void)loadEventsWithHouses{
@@ -112,7 +157,7 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error) {
             if (!error){
                 [events addObjectsFromArray:objects];
-                [self loadUsers];
+                [self loadUsersInvitedOrRequesting];
             }
         }];
     }
@@ -131,7 +176,7 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error) {
             if (!error){
                 [events addObjectsFromArray:objects];
-                [self loadUsers];
+                [self loadUsersInvitedOrRequesting];
             }
         }];
     }
@@ -166,6 +211,26 @@
                  if ([events indexOfObject:event] == events.count - 1){
                      [self loadHouses];
                  }
+             }
+             else [ProgressHUD showError:@"Network error."];
+         }];
+    }
+
+}
+
+-(void)loadUsersInvitedOrRequesting{
+    [usersInvitedOrRequesting removeAllObjects];
+    for (PFObject *event in events){
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:event[@"Requests"]];
+        [array addObjectsFromArray:event[@"Invites"]];
+        PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+        [query whereKey:@"objectId" containedIn:array];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+         {
+             if (error == nil)
+             {
+                 [usersInvitedOrRequesting addObject:objects];
+                 [self loadUsers];
              }
              else [ProgressHUD showError:@"Network error."];
          }];
@@ -236,6 +301,7 @@
 }
 
 -(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope{
+    numero = selectedScope;
     if (selectedScope == 3){
         [self loadEventsWithFriends];
     } else if (selectedScope == 2){
@@ -250,10 +316,23 @@
 {
     TableHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"TableHeader"];
     header.event = [events objectAtIndex:section];
-    //    [header.contentView setBackgroundColor:[UIColor whiteColor]];
-    //    [header.contentView setOpaque:YES];
+    NSString *category = [header.event objectForKey:@"Category"];
+    [header.buttonCategory addTarget:self action:@selector(loadEventsWithCategory:) forControlEvents:UIControlEventTouchUpInside];
+    header.buttonCategory.userId = category;
+    [header.buttonCategory setImage:[UIImage imageNamed:category] forState:UIControlStateNormal];
+    header.nameButton.tag = section;
+    [header.nameButton addTarget:self action:@selector(actionGroupSettings:) forControlEvents:UIControlEventTouchUpInside];
     [header drawHeader];
     return header;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 50;
+}
+
+-(void)actionGroupSettings:(UIButton*)sender{
+    GroupSettingsView *gsv = [[GroupSettingsView alloc]initWith:[events objectAtIndex:sender.tag]];
+    gsv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:gsv animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -271,9 +350,9 @@
     BrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BrowserCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (oneFinished){
+        [refreshControl endRefreshing];
         cell.event = [events objectAtIndex:indexPath.section];
-        
-        if ([[events objectAtIndex:indexPath.section] objectForKey:@"Picture"] != nil){
+            if ([[events objectAtIndex:indexPath.section] objectForKey:@"Picture"] != nil){
             [cell.mainView setFile:[[events objectAtIndex:indexPath.section] objectForKey:@"Picture"]];
             [cell.mainView loadInBackground];
         } else {
@@ -304,7 +383,6 @@
             [cell.requestButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
             [cell.requestButton addTarget:self action:@selector(actionRequest:) forControlEvents:UIControlEventTouchUpInside];
         }
-        cell.descriptionTextView.text = [[events objectAtIndex:indexPath.section]objectForKey:@"Description"];
         
         NSArray *array = [usersPerEvent objectAtIndex:indexPath.section];
         NSArray *array2 = [connectionsPerEvent objectAtIndex:indexPath.section];
@@ -330,13 +408,34 @@
             cell.moreHousesLabel.text = [NSString stringWithFormat:@"+%lu",array6.count - 4 ];
         }else [cell.moreHousesLabel setHidden:YES];
         
+        
+        NSArray *arrayInvites = [usersInvitedOrRequesting objectAtIndex:indexPath.section];
+        int k = 0;
+        while (k < arrayInvites.count){
+            myButton *button;
+            if (arrayInvites.count >= 4){
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -k*20, cell.frame.size.height - 53, 25, 25)];
+            } else {
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -k*20, cell.frame.size.height - 53, 25, 25)];
+            }
+            PFFile *file = [[arrayInvites objectAtIndex:k] objectForKey:@"thumbnail"];
+            [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
+            button.layer.cornerRadius = button.frame.size.width/2;
+            button.layer.masksToBounds = YES;
+            button.userId = [[arrayInvites objectAtIndex:k]objectId];
+            [button addTarget:self action:@selector(actionProfile:) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:button];
+            k = k+1;
+        }
+        
+        
         int i = 0;
         while (i < array5.count){
             myButton *button;
             if (array5.count >= 4){
-                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*33, cell.frame.size.height - 77, 25, 25)];
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*20, cell.frame.size.height - 79, 25, 25)];
             } else {
-                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*33, cell.frame.size.height - 77, 25, 25)];
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*20, cell.frame.size.height - 79, 25, 25)];
             }
             PFFile *file = [[array5 objectAtIndex:i] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
@@ -350,9 +449,9 @@
         while ((i < 3) && (i < array.count)){
             myButton *button;
             if (array.count >= 4){
-            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*33, cell.frame.size.height - 77, 25, 25)];
+            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*20, cell.frame.size.height - 79, 25, 25)];
             } else {
-            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*33, cell.frame.size.height - 77, 25, 25)];
+            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*20, cell.frame.size.height - 79, 25, 25)];
             }
             PFFile *file = [[array objectAtIndex:i] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
@@ -364,6 +463,27 @@
             i = i+1;
         }
         
+        
+        [cell.nameButton setTitle:[[array objectAtIndex:0]objectForKey:@"fullname_lower"] forState:UIControlStateNormal];
+        if (cell.event[@"Creator"]){
+        cell.nameButton.userId = cell.event[@"Creator"];
+        } else {
+           cell.nameButton.userId = [cell.event[@"Identities"] objectAtIndex:0];
+        }
+        [cell.nameButton addTarget:self action:@selector(actionProfile:) forControlEvents:UIControlEventTouchUpInside];
+        NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"Helvetica Neue" size:13]};
+        CGSize stringsize = [cell.nameButton.titleLabel.text sizeWithAttributes:attributes];
+        [cell.nameButton setFrame:CGRectMake(5,310,stringsize.width, 21)];
+        cell.descriptionTextView.text = @"   ";
+        CGSize stringsize2 = [cell.descriptionTextView.text sizeWithAttributes:attributes];
+        while (stringsize.width >= stringsize2.width - 10){
+            cell.descriptionTextView.text = [cell.descriptionTextView.text stringByAppendingString:@" "];
+            stringsize2 = [cell.descriptionTextView.text sizeWithAttributes:attributes];
+        }
+        cell.descriptionTextView.text = [cell.descriptionTextView.text stringByAppendingString:[[events objectAtIndex:indexPath.section]objectForKey:@"Description"]];
+        
+        
+        
         NSMutableArray *array7 = [[NSMutableArray alloc]init];
         for (int i = 0; i<houses.count;i++){
             for (int j = 0; j<array6.count;j++){
@@ -374,7 +494,7 @@
         }
         int j = 0;
         while (j < array7.count){
-            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -j*33, cell.frame.size.height - 26, 25, 25)];
+            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -j*20, cell.frame.size.height - 26, 25, 25)];
             PFFile *file = [[array7 objectAtIndex:j] objectForKey:@"Thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
             button.layer.cornerRadius = button.frame.size.width/2;
