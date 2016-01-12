@@ -15,6 +15,7 @@
 #import "NavigationController.h"
 #import "common.h"
 #import <Bolts/Bolts.h>
+#import "Foursquare2.h"
 
 @implementation AppDelegate
 static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3lJGcL8JsgYvl-8WquhmRd4f0k";
@@ -27,6 +28,10 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     // Initialize Parse.
     [Parse setApplicationId:@"FKI3nzOow23ImzVMiK86hLuXS6FDLrxQsIpudWpc"
                   clientKey:@"d18LPzTxzuAAzQM56LaRWZzZWKHtC2BiJuNXyaes"];
+    
+    [Foursquare2 setupFoursquareWithClientId:@"W24T3GRWEDKEYYIBNAS4US35HKVOAE2DGMGUWIJ0OJZWRLD0"
+                                      secret:@"CIP5GCEBKLZSSOBHQ0L4SURY2WOKJUYUUBECRQJ5A4S2GOB5"
+                                 callbackURL:@"livit-sample-applink://"];
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -60,7 +65,7 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     NavigationController *navController4 = [[NavigationController alloc] initWithRootViewController:self.browserView];
     NavigationController *navController5 = [[NavigationController alloc] initWithRootViewController:self.housesView];
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController4,navController1, navController3,navController5,navController2, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController4,navController2, navController3,navController5,navController1, nil];
     self.tabBarController.tabBar.translucent = NO;
     self.tabBarController.selectedIndex = DEFAULT_TAB;
     
@@ -81,6 +86,21 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     [navController3.navigationBar setTintColor:[UIColor whiteColor]];
     [navController4.navigationBar setTintColor:[UIColor whiteColor]];
     [navController5.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    UIColor *backgroundColor = [UIColor colorWithRed:102/255.0 green:107/255.0 blue:102/255.0 alpha:1];
+    
+    // set the bar background color
+    [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(414, 51) withCornerRadius:0]];
+    
+    // set the text color for selected state
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    // set the text color for unselected state
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    
+    // set the selected icon color
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    // Set the dark color to selected tab (the dimmed background)
+    [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forSize:CGSizeMake(414/5, 51) withCornerRadius:0]];
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
@@ -119,6 +139,8 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     // Follow tutorials to create an applink url and register it on facebook.
     // Particularly: check if the invited facebook user is able to install the app.
     // Additional feature: use referal components in the URL to invite the user to join specific events.
+    
+    //return [Foursquare2 handleURL:url];
     
     if (url == [NSURL URLWithString:@"https://fb.me/392279564302271"]){
     
@@ -241,7 +263,35 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
++ (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Begin a new image that will be the new image with the rounded corners
+    // (here with the size of an UIImageView)
+    UIGraphicsBeginImageContext(size);
+    
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
+    // Draw your image
+    [image drawInRect:rect];
+    
+    // Get the image, here setting the UIImageView image
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 
 

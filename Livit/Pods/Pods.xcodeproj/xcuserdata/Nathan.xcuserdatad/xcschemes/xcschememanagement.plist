@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Foursquare-iOS-API.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HNKGooglePlacesAutocomplete.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,11 +117,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>06B13931A2134527B896A4BCFBB1AA00</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2EFEDBB649146422B0A076290AB959DE</key>
 		<dict>
 			<key>primary</key>
@@ -162,6 +162,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A045D39503C3722B346BCA1F54A7CD57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A48601FEE4437A924848DB48369BA809</key>
 		<dict>
 			<key>primary</key>
@@ -178,6 +183,11 @@
 			<true/>
 		</dict>
 		<key>B53DF583949C0313F8655A28EF6EB07D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9499AB93FDEA9564CC8EF0AF255E5CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

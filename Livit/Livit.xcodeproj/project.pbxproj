@@ -102,6 +102,14 @@
 		D84D7F251BAE1A12000E9C8F /* defaultPrefsFile.plist in Resources */ = {isa = PBXBuildFile; fileRef = D84D7F241BAE1A12000E9C8F /* defaultPrefsFile.plist */; };
 		D84D7F531BAF5EF8000E9C8F /* TermsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D7F511BAF5EF8000E9C8F /* TermsView.m */; };
 		D84D7F541BAF5EF8000E9C8F /* TermsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D84D7F521BAF5EF8000E9C8F /* TermsView.xib */; };
+		D856C3471C4487C500FBD385 /* Foursquare2.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C33C1C4487C500FBD385 /* Foursquare2.m */; settings = {ASSET_TAGS = (); }; };
+		D856C3481C4487C500FBD385 /* FSConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C33E1C4487C500FBD385 /* FSConverter.m */; settings = {ASSET_TAGS = (); }; };
+		D856C3491C4487C500FBD385 /* FSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C3401C4487C500FBD385 /* FSKeychain.m */; settings = {ASSET_TAGS = (); }; };
+		D856C34A1C4487C500FBD385 /* FSOAuthNoAppStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C3421C4487C500FBD385 /* FSOAuthNoAppStore.m */; settings = {ASSET_TAGS = (); }; };
+		D856C34B1C4487C500FBD385 /* FSOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C3441C4487C500FBD385 /* FSOperation.m */; settings = {ASSET_TAGS = (); }; };
+		D856C34C1C4487C500FBD385 /* FSVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C3461C4487C500FBD385 /* FSVenue.m */; settings = {ASSET_TAGS = (); }; };
+		D856C3511C448D9600FBD385 /* FSWebLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D856C34F1C448D9600FBD385 /* FSWebLogin.m */; settings = {ASSET_TAGS = (); }; };
+		D856C3521C448D9600FBD385 /* FSWebLogin.xib in Resources */ = {isa = PBXBuildFile; fileRef = D856C3501C448D9600FBD385 /* FSWebLogin.xib */; settings = {ASSET_TAGS = (); }; };
 		D857F16E1BAFB68D0004CF01 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D857F16D1BAFB68D0004CF01 /* libz.1.1.3.tbd */; };
 		D857F1701BAFB6AE0004CF01 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D857F16F1BAFB6AE0004CF01 /* libsqlite3.tbd */; };
 		D88A22FA1C045B5B00A66263 /* chat_audio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D88A22D11C045B5B00A66263 /* chat_audio@2x.png */; };
@@ -191,6 +199,10 @@
 		D8A957E11C3A86FB005601D9 /* TableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8A957E01C3A86FB005601D9 /* TableHeader.xib */; };
 		D8A957E41C3A8DF7005601D9 /* MyBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A957E31C3A8DF7005601D9 /* MyBar.m */; };
 		D8BD9F151C439C2100D4E2D2 /* myButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BD9F141C439C2100D4E2D2 /* myButton.m */; settings = {ASSET_TAGS = (); }; };
+		D8BD9F1A1C447D1200D4E2D2 /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F161C447D1200D4E2D2 /* dog.png */; settings = {ASSET_TAGS = (); }; };
+		D8BD9F1B1C447D1200D4E2D2 /* plan.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F171C447D1200D4E2D2 /* plan.png */; settings = {ASSET_TAGS = (); }; };
+		D8BD9F1C1C447D1200D4E2D2 /* sent.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F181C447D1200D4E2D2 /* sent.png */; settings = {ASSET_TAGS = (); }; };
+		D8BD9F1D1C447D1200D4E2D2 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F191C447D1200D4E2D2 /* user.png */; settings = {ASSET_TAGS = (); }; };
 		D8F0E7BD1BADF4FA00D09294 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F0E7BC1BADF4FA00D09294 /* main.m */; };
 		D8F0E7C01BADF4FA00D09294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F0E7BF1BADF4FA00D09294 /* AppDelegate.m */; };
 		D8F0E7C81BADF4FA00D09294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8F0E7C71BADF4FA00D09294 /* Images.xcassets */; };
@@ -385,6 +397,21 @@
 		D84D7F501BAF5EF8000E9C8F /* TermsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TermsView.h; path = ../Tabs/04_Settings/03_Terms/TermsView.h; sourceTree = "<group>"; };
 		D84D7F511BAF5EF8000E9C8F /* TermsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TermsView.m; path = ../Tabs/04_Settings/03_Terms/TermsView.m; sourceTree = "<group>"; };
 		D84D7F521BAF5EF8000E9C8F /* TermsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsView.xib; path = ../Tabs/04_Settings/03_Terms/TermsView.xib; sourceTree = "<group>"; };
+		D856C33B1C4487C500FBD385 /* Foursquare2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Foursquare2.h; path = "../Vendors/foursquare resources/Foursquare2.h"; sourceTree = "<group>"; };
+		D856C33C1C4487C500FBD385 /* Foursquare2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Foursquare2.m; path = "../Vendors/foursquare resources/Foursquare2.m"; sourceTree = "<group>"; };
+		D856C33D1C4487C500FBD385 /* FSConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSConverter.h; path = "../Vendors/foursquare resources/FSConverter.h"; sourceTree = "<group>"; };
+		D856C33E1C4487C500FBD385 /* FSConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSConverter.m; path = "../Vendors/foursquare resources/FSConverter.m"; sourceTree = "<group>"; };
+		D856C33F1C4487C500FBD385 /* FSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSKeychain.h; path = "../Vendors/foursquare resources/FSKeychain.h"; sourceTree = "<group>"; };
+		D856C3401C4487C500FBD385 /* FSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSKeychain.m; path = "../Vendors/foursquare resources/FSKeychain.m"; sourceTree = "<group>"; };
+		D856C3411C4487C500FBD385 /* FSOAuthNoAppStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSOAuthNoAppStore.h; path = "../Vendors/foursquare resources/FSOAuthNoAppStore.h"; sourceTree = "<group>"; };
+		D856C3421C4487C500FBD385 /* FSOAuthNoAppStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSOAuthNoAppStore.m; path = "../Vendors/foursquare resources/FSOAuthNoAppStore.m"; sourceTree = "<group>"; };
+		D856C3431C4487C500FBD385 /* FSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSOperation.h; path = "../Vendors/foursquare resources/FSOperation.h"; sourceTree = "<group>"; };
+		D856C3441C4487C500FBD385 /* FSOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSOperation.m; path = "../Vendors/foursquare resources/FSOperation.m"; sourceTree = "<group>"; };
+		D856C3451C4487C500FBD385 /* FSVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSVenue.h; path = "../Vendors/foursquare resources/FSVenue.h"; sourceTree = "<group>"; };
+		D856C3461C4487C500FBD385 /* FSVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSVenue.m; path = "../Vendors/foursquare resources/FSVenue.m"; sourceTree = "<group>"; };
+		D856C34E1C448D9600FBD385 /* FSWebLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSWebLogin.h; path = "../Vendors/foursquare resources/FSWebLogin.h"; sourceTree = "<group>"; };
+		D856C34F1C448D9600FBD385 /* FSWebLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSWebLogin.m; path = "../Vendors/foursquare resources/FSWebLogin.m"; sourceTree = "<group>"; };
+		D856C3501C448D9600FBD385 /* FSWebLogin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSWebLogin.xib; path = "../Vendors/foursquare resources/FSWebLogin.xib"; sourceTree = "<group>"; };
 		D857F16D1BAFB68D0004CF01 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		D857F16F1BAFB6AE0004CF01 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D88A22D11C045B5B00A66263 /* chat_audio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_audio@2x.png"; path = "../../Images/chat_audio@2x.png"; sourceTree = "<group>"; };
@@ -491,6 +518,10 @@
 		D8A957E31C3A8DF7005601D9 /* MyBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBar.m; sourceTree = "<group>"; };
 		D8BD9F131C439C2100D4E2D2 /* myButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myButton.h; sourceTree = "<group>"; };
 		D8BD9F141C439C2100D4E2D2 /* myButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myButton.m; sourceTree = "<group>"; };
+		D8BD9F161C447D1200D4E2D2 /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dog.png; path = ../../Images/dog.png; sourceTree = "<group>"; };
+		D8BD9F171C447D1200D4E2D2 /* plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plan.png; path = ../../Images/plan.png; sourceTree = "<group>"; };
+		D8BD9F181C447D1200D4E2D2 /* sent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sent.png; path = ../../Images/sent.png; sourceTree = "<group>"; };
+		D8BD9F191C447D1200D4E2D2 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = ../../Images/user.png; sourceTree = "<group>"; };
 		D8F0E7B71BADF4FA00D09294 /* Livit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Livit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F0E7BB1BADF4FA00D09294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8F0E7BC1BADF4FA00D09294 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -611,6 +642,10 @@
 				5CE596BF1C42639A004A635C /* Mountains.png */,
 				D83D301E1C39E04900BAC2A1 /* search.png */,
 				D83D30111C38514200BAC2A1 /* delete.png */,
+				D8BD9F161C447D1200D4E2D2 /* dog.png */,
+				D8BD9F171C447D1200D4E2D2 /* plan.png */,
+				D8BD9F181C447D1200D4E2D2 /* sent.png */,
+				D8BD9F191C447D1200D4E2D2 /* user.png */,
 				D83D30051C3040FB00BAC2A1 /* Right-32.png */,
 				D83D2FBC1C2C5F9800BAC2A1 /* like.png */,
 				D83D2FBD1C2C5F9800BAC2A1 /* liked.png */,
@@ -903,6 +938,28 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		D856C34D1C4487D600FBD385 /* 4square */ = {
+			isa = PBXGroup;
+			children = (
+				D856C34E1C448D9600FBD385 /* FSWebLogin.h */,
+				D856C34F1C448D9600FBD385 /* FSWebLogin.m */,
+				D856C3501C448D9600FBD385 /* FSWebLogin.xib */,
+				D856C33B1C4487C500FBD385 /* Foursquare2.h */,
+				D856C33C1C4487C500FBD385 /* Foursquare2.m */,
+				D856C33D1C4487C500FBD385 /* FSConverter.h */,
+				D856C33E1C4487C500FBD385 /* FSConverter.m */,
+				D856C33F1C4487C500FBD385 /* FSKeychain.h */,
+				D856C3401C4487C500FBD385 /* FSKeychain.m */,
+				D856C3411C4487C500FBD385 /* FSOAuthNoAppStore.h */,
+				D856C3421C4487C500FBD385 /* FSOAuthNoAppStore.m */,
+				D856C3431C4487C500FBD385 /* FSOperation.h */,
+				D856C3441C4487C500FBD385 /* FSOperation.m */,
+				D856C3451C4487C500FBD385 /* FSVenue.h */,
+				D856C3461C4487C500FBD385 /* FSVenue.m */,
+			);
+			name = 4square;
+			sourceTree = "<group>";
+		};
 		D8A376181C2692B300058027 /* 05_House */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,6 +1059,7 @@
 		D8F0E80C1BADF6F100D09294 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D856C34D1C4487D600FBD385 /* 4square */,
 				D857F16F1BAFB6AE0004CF01 /* libsqlite3.tbd */,
 				D857F16D1BAFB68D0004CF01 /* libz.1.1.3.tbd */,
 				D8F0E8821BADF7C000D09294 /* IDMPhotoBrowser */,
@@ -1168,6 +1226,7 @@
 				5CE596BC1C425D17004A635C /* LaunchScreen.png in Resources */,
 				D88A23931C196B8F00A66263 /* camera.png in Resources */,
 				D83D30171C3951CA00BAC2A1 /* PeopleCell.xib in Resources */,
+				D856C3521C448D9600FBD385 /* FSWebLogin.xib in Resources */,
 				D8A3760D1C1CAD0400058027 /* HouseCell.xib in Resources */,
 				D88A23371C04610400A66263 /* GroupSettingsView.xib in Resources */,
 				5C44D7211BD59F590003436B /* RecentCell.xib in Resources */,
@@ -1192,6 +1251,7 @@
 				D88A23951C196BE100A66263 /* comment.png in Resources */,
 				D88A238C1C13EF1900A66263 /* InvitesController.xib in Resources */,
 				D84D7EDF1BADFFD7000E9C8F /* LoginView.xib in Resources */,
+				D8BD9F1C1C447D1200D4E2D2 /* sent.png in Resources */,
 				D88A23101C045B5B00A66263 /* premium08@2x.png in Resources */,
 				D88A231A1C045B5B00A66263 /* schedule_image_moon-high@2x.png in Resources */,
 				D88A22FA1C045B5B00A66263 /* chat_audio@2x.png in Resources */,
@@ -1203,6 +1263,7 @@
 				D88A23111C045B5B00A66263 /* premium09@2x.png in Resources */,
 				D88A231C1C045B5B00A66263 /* schedule_image_sun-high@2x.png in Resources */,
 				D88A237F1C0ED6BF00A66263 /* Checked-32.png in Resources */,
+				D8BD9F1A1C447D1200D4E2D2 /* dog.png in Resources */,
 				D88A23741C0466A400A66263 /* Travel.png in Resources */,
 				D83D2FC91C2EA9EB00BAC2A1 /* CategoryChoiceController.xib in Resources */,
 				D88A23121C045B5B00A66263 /* premium10@2x.png in Resources */,
@@ -1211,6 +1272,7 @@
 				D88A236B1C0466A400A66263 /* Culture.png in Resources */,
 				D83D30041C30390100BAC2A1 /* FinishController.xib in Resources */,
 				5CE596C01C42639A004A635C /* Mountains@2x.png in Resources */,
+				D8BD9F1B1C447D1200D4E2D2 /* plan.png in Resources */,
 				D88A23161C045B5B00A66263 /* round_backarrow_big-high@2x.png in Resources */,
 				D88A23051C045B5B00A66263 /* facebook.png in Resources */,
 				5C865EA21C434F6900AAAC52 /* MountainsIcon58.png in Resources */,
@@ -1242,6 +1304,7 @@
 				D88A231F1C045B5B00A66263 /* tab_groups@2x.png in Resources */,
 				D88A23211C045B5B00A66263 /* tab_recent@2x.png in Resources */,
 				D88A23911C14CCB400A66263 /* SearchController.xib in Resources */,
+				D8BD9F1D1C447D1200D4E2D2 /* user.png in Resources */,
 				D84D7E971BADFF00000E9C8F /* PrivacyView.xib in Resources */,
 				D83D301D1C39DF7B00BAC2A1 /* BrowserViewController.xib in Resources */,
 				D8F0E7C81BADF4FA00D09294 /* Images.xcassets in Resources */,
@@ -1346,14 +1409,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				D84D7EC21BADFF7C000E9C8F /* fileutil.m in Sources */,
+				D856C34C1C4487C500FBD385 /* FSVenue.m in Sources */,
 				D83D2FC81C2EA9EB00BAC2A1 /* CategoryChoiceController.m in Sources */,
 				D8F0E9FE1BADF7C100D09294 /* IDMTapDetectingImageView.m in Sources */,
 				D8F0EA911BADF7C100D09294 /* RNGridMenu.m in Sources */,
 				D83D30251C39E6F500BAC2A1 /* BrowserCell.m in Sources */,
+				D856C34A1C4487C500FBD385 /* FSOAuthNoAppStore.m in Sources */,
 				D83D301C1C39DF7B00BAC2A1 /* BrowserViewController.m in Sources */,
 				D88A235A1C04641200A66263 /* SearchCell.m in Sources */,
 				D84D7E911BADFEF4000E9C8F /* BlockedView.m in Sources */,
+				D856C3491C4487C500FBD385 /* FSKeychain.m in Sources */,
+				D856C34B1C4487C500FBD385 /* FSOperation.m in Sources */,
 				D8BD9F151C439C2100D4E2D2 /* myButton.m in Sources */,
+				D856C3511C448D9600FBD385 /* FSWebLogin.m in Sources */,
 				D84D7EDE1BADFFD7000E9C8F /* LoginView.m in Sources */,
 				D8A957DF1C3A86A7005601D9 /* TableHeader.m in Sources */,
 				D84D7E961BADFF00000E9C8F /* PrivacyView.m in Sources */,
@@ -1405,9 +1473,11 @@
 				D84D7E8B1BADFECF000E9C8F /* PeopleView.m in Sources */,
 				D88A238B1C13EF1900A66263 /* InvitesController.m in Sources */,
 				D8F0E7C01BADF4FA00D09294 /* AppDelegate.m in Sources */,
+				D856C3481C4487C500FBD385 /* FSConverter.m in Sources */,
 				D8F0EA8E1BADF7C100D09294 /* ProgressHUD.m in Sources */,
 				D84D7F531BAF5EF8000E9C8F /* TermsView.m in Sources */,
 				D84D7F021BAE0BE7000E9C8F /* DiscoveryView.m in Sources */,
+				D856C3471C4487C500FBD385 /* Foursquare2.m in Sources */,
 				5C44D7201BD59F590003436B /* RecentView.m in Sources */,
 				D84D7ED11BADFF89000E9C8F /* PFUser+Util.m in Sources */,
 				D8F0E7BD1BADF4FA00D09294 /* main.m in Sources */,

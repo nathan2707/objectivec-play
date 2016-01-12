@@ -20,7 +20,10 @@
     [super setSelected:selected animated:animated];
     self.eventImage.image = [UIImage imageNamed:group[@"Category"]];
     self.nameLabel.text = group[@"Name"];
-    self.nameLabel.text = [self.nameLabel.text stringByAppendingString:[NSString stringWithFormat:@", %@", group[@"Date"]]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"eeee, HH:mm a"];
+    NSString *dateInString = [dateFormatter stringFromDate:group[@"Date"]];
+    self.nameLabel.text = [self.nameLabel.text stringByAppendingString:[NSString stringWithFormat:@", %@", dateInString]];
     self.placeLabel.text = group[@"LocationString"];
     self.relationLabel.text = self.number;
     self.relationLabel.text = [self.relationLabel.text stringByAppendingString:@" people that you know"];

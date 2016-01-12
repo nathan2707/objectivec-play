@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="65" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="j9l-be-sFR">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="65" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="j9l-be-sFR">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="621"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" red="0.46613202586813629" green="1" blue="0.4794865153637109" alpha="1" colorSpace="calibratedRGB"/>

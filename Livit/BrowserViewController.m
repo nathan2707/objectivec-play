@@ -16,7 +16,7 @@
 #import "AppConstant.h"
 #import "myButton.h"
 #import "GroupSettingsView.h"
-
+#import "AppDelegate.h"
 @import GoogleMaps;
 
 @interface BrowserViewController ()
@@ -46,14 +46,13 @@
     {
         [self.tabBarItem setImage:[UIImage imageNamed:@"Mountains"]];
         self.tabBarItem.title = @"Explore";
-
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [GMSServices provideAPIKey:@"AIzaSyCMdkKlurqOvobVq2GHf5iXmTi4eliXVac"];
-    self.title = @"Browser";
+    self.title = @"Explore";
     self.searchBar.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -230,7 +229,9 @@
              if (error == nil)
              {
                  [usersInvitedOrRequesting addObject:objects];
-                 [self loadUsers];
+                 if ([events indexOfObject:event] == events.count - 1){
+                     [self loadUsers];
+                 }
              }
              else [ProgressHUD showError:@"Network error."];
          }];
@@ -414,9 +415,9 @@
         while (k < arrayInvites.count){
             myButton *button;
             if (arrayInvites.count >= 4){
-                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -k*20, cell.frame.size.height - 53, 25, 25)];
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -k*28, cell.frame.size.height - 53, 25, 25)];
             } else {
-                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -k*20, cell.frame.size.height - 53, 25, 25)];
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -k*28, cell.frame.size.height - 53, 25, 25)];
             }
             PFFile *file = [[arrayInvites objectAtIndex:k] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
@@ -433,9 +434,9 @@
         while (i < array5.count){
             myButton *button;
             if (array5.count >= 4){
-                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*20, cell.frame.size.height - 79, 25, 25)];
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*28, cell.frame.size.height - 79, 25, 25)];
             } else {
-                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*20, cell.frame.size.height - 79, 25, 25)];
+                button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*28, cell.frame.size.height - 79, 25, 25)];
             }
             PFFile *file = [[array5 objectAtIndex:i] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
@@ -449,9 +450,9 @@
         while ((i < 3) && (i < array.count)){
             myButton *button;
             if (array.count >= 4){
-            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*20, cell.frame.size.height - 79, 25, 25)];
+            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 57 -i*28, cell.frame.size.height - 79, 25, 25)];
             } else {
-            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*20, cell.frame.size.height - 79, 25, 25)];
+            button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -i*28, cell.frame.size.height - 79, 25, 25)];
             }
             PFFile *file = [[array objectAtIndex:i] objectForKey:@"thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
@@ -494,7 +495,7 @@
         }
         int j = 0;
         while (j < array7.count){
-            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -j*20, cell.frame.size.height - 26, 25, 25)];
+            myButton *button = [[myButton alloc]initWithFrame:CGRectMake(cell.frame.size.width - 30 -j*28, cell.frame.size.height - 26, 25, 25)];
             PFFile *file = [[array7 objectAtIndex:j] objectForKey:@"Thumbnail"];
             [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:file.url]]] forState:UIControlStateNormal];
             button.layer.cornerRadius = button.frame.size.width/2;

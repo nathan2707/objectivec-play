@@ -15,6 +15,11 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "CLPlacemark+HNKAdditions.h"
 #import "HousesController.h"
+#import "AppConstant.h"
+#import "FSVenue.h"
+#import "Foursquare2.h"
+#import "FSConverter.h"
+
 
 static NSString *const SearchResultsCellIdentifier = @"SearchResultsCellIdentifier";
 
@@ -26,7 +31,8 @@ static NSString *const SearchResultsCellIdentifier = @"SearchResultsCellIdentifi
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
-
+@property (nonatomic, weak) NSOperation *lastSearchOperation;
+@property (strong, nonatomic) NSArray *venues;
 
 @end
 
@@ -68,8 +74,8 @@ int sel;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.searchResults.count != 0){
-    return self.searchResults.count;
+    if (self.venues != 0){
+    return self.venues.count;
     } else {
         if ([self.searchBar.text isEqualToString:@""]){
             return 0;
@@ -79,9 +85,39 @@ int sel;
     }
 }
 
+
+- (void)startSearchWithString:(NSString *)string {
+    PFUser *user = [PFUser currentUser];
+    [self.lastSearchOperation cancel];
+    self.lastSearchOperation = [Foursquare2
+                                venueSearchNearByLatitude:[NSNumber numberWithDouble:[[user[PF_USER_POSITION] objectForKey:@"lat"] doubleValue]]
+                                longitude:[NSNumber numberWithDouble:[[user[PF_USER_POSITION] objectForKey:@"long"] doubleValue]]
+                                query:string
+                                limit:nil
+                                intent:intentCheckin
+                                radius:@(50000)
+                                categoryId:nil
+                                callback:^(BOOL success, id result){
+                                    if (success) {
+                                        NSDictionary *dic = result;
+                                        NSArray *venues = [dic valueForKeyPath:@"response.venues"];
+                                        FSConverter *converter = [[FSConverter alloc] init];
+                                        self.venues = [converter convertToObjects:venues];
+                                        if (self.venues.count < 5) [self resizeTable];
+                                        [self.tableView reloadData];
+                                    } else {
+                                        NSLog(@"%@",result);
+                                    }
+                                }];
+}
+
+-(void)resizeTable{
+    [self.tableView setFrame:CGRectMake(0, self.searchBar.frame.size.height, self.view.frame.size.width, 44*self.venues.count)];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( self.searchResults.count == 0)
+    if ( self.venues.count == 0)
     {
         SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
         cell.locationLabel.text = self.searchBar.text;
@@ -95,24 +131,16 @@ int sel;
         return cell;
         
     } else {
-        
-    HNKGooglePlacesAutocompletePlace *thisPlace = self.searchResults[indexPath.row];
-    SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-    cell.locationLabel.text = thisPlace.name;
-    
-    HNKGooglePlacesAutocompletePlace *selectedPlace = self.searchResults[indexPath.row];
-    
-    [CLPlacemark hnk_placemarkFromGooglePlace: selectedPlace
-                                       apiKey: self.searchQuery.apiKey
-                                   completion:^(CLPlacemark *placemark, NSString *addressString, NSError *error) {
-                                       if (placemark) {
-                                           NSNumber *lat = [NSNumber numberWithDouble:placemark.location.coordinate.latitude];
-                                           NSNumber *lon = [NSNumber numberWithDouble:placemark.location.coordinate.longitude];
-
-                                          cell.location = @{@"lat":lat,@"long":lon,@"string":thisPlace.name};
-                                           NSLog(@"%@",cell.location);
-                                       }
-                                   }];
+        SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+        cell.locationLabel.text = [self.venues[indexPath.row] name];
+        FSVenue *venue = self.venues[indexPath.row];
+        NSNumber *lat = [NSNumber numberWithDouble:venue.location.coordinate.latitude];
+        NSNumber *lon = [NSNumber numberWithDouble:venue.location.coordinate.longitude];
+        if (venue.location.address != nil){
+        cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":venue.location.address};
+        } else {
+        cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":@"somewhere"};
+        }
             if (indexPath.row == sel){
             cell.selectedView.image = [UIImage imageNamed:@"Ok-32"];
             cell.userInteractionEnabled = NO;
@@ -130,7 +158,6 @@ int sel;
             cell.selectedView.image = [UIImage imageNamed:@"Full Moon Filled-32"];
             cell.userInteractionEnabled = YES;
         }
-
         return cell;
     }
 }
@@ -141,26 +168,21 @@ int sel;
 {
     [self.searchBar setShowsCancelButton:NO animated:YES];
     [self.searchBar resignFirstResponder];
+    FSVenue *venue = self.venues[indexPath.row];
+    MKPlacemark *placemark;
+    if (venue.location.address !=nil){
+    placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(venue.location.coordinate.latitude,venue.location.coordinate.longitude) addressDictionary:@{@"Name":venue.name, @"Address":venue.location.address}];
+    }else {
+       placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(venue.location.coordinate.latitude,venue.location.coordinate.longitude) addressDictionary:@{@"Name":venue.name, @"Address":@"somewhere"}];
+    }
+    [self addPlacemarkAnnotationToMap:placemark addressString:venue.name];
+    [self recenterMapToPlacemark:placemark];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    HNKGooglePlacesAutocompletePlace *selectedPlace = self.searchResults[indexPath.row];
-    
-    [CLPlacemark hnk_placemarkFromGooglePlace: selectedPlace
-                                       apiKey: self.searchQuery.apiKey
-                                   completion:^(CLPlacemark *placemark, NSString *addressString, NSError *error) {
-                                       if (placemark) {
-                                           //[self.tableView setHidden: YES];
-                                           [self addPlacemarkAnnotationToMap:placemark addressString:addressString];
-                                           [self recenterMapToPlacemark:placemark];
-                                           [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-                                       }
-                                   }];
-    SearchCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    self.searchBar.text = cell.locationLabel.text;
+    self.searchBar.text = venue.name;
     sel = indexPath.row;
     [self.tableView setHidden:YES];
-    [self.tableView reloadData];
-    
-
+    //[self.tableView reloadData];pp
 }
 
 
@@ -175,25 +197,14 @@ int sel;
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if(searchText.length > 0)
-    {
-        [self.tableView setHidden:NO];
-        
-        [self.searchQuery fetchPlacesForSearchQuery: searchText
-                                         completion:^(NSArray *places, NSError *error) {
-                                             if (error) {
-                                                 NSLog(@"ERROR: %@", error);
-                                                 [self handleSearchError:error];
-                                             } else {
-                                                 self.searchResults = places;
-                                                 [self.tableView reloadData];
-                                             }
-                                         }];
-    }
-    else{
-        
-        [self.tableView setHidden:YES];
-    }
+if(searchText.length > 0)
+{
+    [self.tableView setHidden:NO];
+}
+else{
+    [self.tableView setHidden:YES];
+}
+    [self startSearchWithString:searchText];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -213,8 +224,6 @@ int sel;
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.coordinate = placemark.location.coordinate;
     annotation.title = address;
-    
-    
     [self.mapView addAnnotation:annotation];
 }
 
@@ -247,29 +256,7 @@ didChangeDragState:(MKAnnotationViewDragState)newState
     if (newState == MKAnnotationViewDragStateEnding)
     {
         CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
-        NSLog(@"dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
-        
-//        [GMSServices provideAPIKey:@"AIzaSyCMdkKlurqOvobVq2GHf5iXmTi4eliXVac"];
-//        [[GMSGeocoder geocoder] reverseGeocodeCoordinate:CLLocationCoordinate2DMake(droppedAt.latitude, droppedAt.longitude) completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
-//            NSLog(@"reverse geocoding results:");
-//            for(GMSAddress* addressObj in [response results])
-//            {
-//                NSLog(@"coordinate.latitude=%f", addressObj.coordinate.latitude);
-//                NSLog(@"coordinate.longitude=%f", addressObj.coordinate.longitude);
-//                NSLog(@"thoroughfare=%@", addressObj.thoroughfare);
-//                NSLog(@"locality=%@", addressObj.locality);
-//                NSLog(@"subLocality=%@", addressObj.subLocality);
-//                NSLog(@"administrativeArea=%@", addressObj.administrativeArea);
-//                NSLog(@"postalCode=%@", addressObj.postalCode);
-//                NSLog(@"country=%@", addressObj.country);
-//                NSLog(@"lines=%@", addressObj.lines);
-//            }
-//        }];
-        
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        
-        
-        //CLLocation *userLocation = self.mapView.userLocation.location;
         CLLocation *userLocation = [[CLLocation alloc]initWithLatitude:droppedAt.latitude longitude:droppedAt.longitude];
         [geocoder reverseGeocodeLocation:userLocation completionHandler:^(NSArray *placemarks, NSError *error) {
             if (error) {
@@ -278,9 +265,36 @@ didChangeDragState:(MKAnnotationViewDragState)newState
             CLPlacemark *firstPlacemark = [placemarks firstObject];
             NSDictionary *addressDictionary = firstPlacemark.addressDictionary;
             NSString *street = addressDictionary[@"Street"];
-            NSLog(@"%@",street);
-            self.searchBar.text = street;
-            [self searchBar:self.searchBar textDidChange:street];
+            
+            [self.lastSearchOperation cancel];
+            self.lastSearchOperation = [Foursquare2
+                                        venueSearchNearByLatitude:@(droppedAt.latitude)
+                                        longitude:@(droppedAt.longitude)
+                                        query:@""
+                                        limit:nil
+                                        intent:intentCheckin
+                                        radius:@(25)
+                                        categoryId:nil
+                                        callback:^(BOOL success, id result){
+                                            if (success) {
+                                                NSDictionary *dic = result;
+                                                NSArray *venues = [dic valueForKeyPath:@"response.venues"];
+                                                FSConverter *converter = [[FSConverter alloc] init];
+                                                self.venues = [converter convertToObjects:venues];
+                                                self.searchBar.text = street;
+                                                FSVenue *venue = [self.venues firstObject];
+                                                 [self addPlacemarkAnnotationToMap:firstPlacemark addressString:venue.name];
+                                                NSNumber *lat = [NSNumber numberWithDouble:venue.location.coordinate.latitude];
+                                                NSNumber *lon = [NSNumber numberWithDouble:venue.location.coordinate.longitude];
+                                                if (venue.location.address != nil){
+                                                    self.event[@"Location"] = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":venue.location.address};
+                                                } else {
+                                                    self.event[@"Location"] = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":@"somewhere"};
+                                                }
+                                            } else {
+                                                NSLog(@"%@",result);
+                                            }
+                                        }];
         }];
         
     }

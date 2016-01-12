@@ -17,6 +17,7 @@ pod 'ParseUI','1.1.7'
 pod 'Parse','1.10.0'
 pod 'GoogleMaps', '1.11.0'
 pod 'MWPhotoBrowser', '2.1.1'
+pod 'Foursquare-iOS-API', '~> 2.0'
 end
 
 target 'LivitTests' do
