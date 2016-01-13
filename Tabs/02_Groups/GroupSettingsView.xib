@@ -26,6 +26,7 @@
                 <outlet property="locationCell" destination="v20-vO-Bzy" id="G5D-T6-mSK"/>
                 <outlet property="locationLabel" destination="MpF-Ls-DGX" id="NIt-mQ-lqA"/>
                 <outlet property="mapView" destination="wfI-Zn-1aS" id="38z-Mg-zYm"/>
+                <outlet property="numberRequestsLabel" destination="1T2-xi-K0o" id="3jf-MI-AoH"/>
                 <outlet property="picker" destination="3pi-VJ-Kpe" id="8Pl-5X-I8a"/>
                 <outlet property="requestTableView" destination="Kn5-Dn-PSA" id="zIC-A1-RRp"/>
                 <outlet property="timeView" destination="LCI-oZ-1ra" id="IwQ-4R-0QL"/>
@@ -75,13 +76,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfH-cy-ld2">
-                    <rect key="frame" x="346" y="207" width="30" height="28"/>
-                    <state key="normal" image="pen.png"/>
-                    <connections>
-                        <action selector="commentAction:" destination="-1" eventType="touchUpInside" id="DE5-Sx-7ED"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6y-Yj-nbn">
                     <rect key="frame" x="0.0" y="207" width="94" height="30"/>
                     <state key="normal" title="leave event">
@@ -91,13 +85,6 @@
                         <action selector="leaveEvent:" destination="-1" eventType="touchUpInside" id="V0B-Wy-VvZ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5O-Vz-8kO">
-                    <rect key="frame" x="313" y="209" width="25" height="25"/>
-                    <state key="normal" title="Button" image="comment.png"/>
-                    <connections>
-                        <action selector="actionChat:" destination="-1" eventType="touchUpInside" id="dkB-K0-Gqp"/>
-                    </connections>
-                </button>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wfI-Zn-1aS">
                     <rect key="frame" x="0.0" y="240" width="420" height="180"/>
                     <connections>
@@ -105,10 +92,17 @@
                     </connections>
                 </mapView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvr-WY-bTx">
-                    <rect key="frame" x="384" y="204" width="28" height="35"/>
+                    <rect key="frame" x="371" y="205" width="28" height="35"/>
                     <state key="normal" image="camera.png"/>
                     <connections>
                         <action selector="actionPhoto:" destination="-1" eventType="touchUpInside" id="IPg-7I-QQy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="px1-Bv-Kwr">
+                    <rect key="frame" x="330" y="206" width="32" height="32"/>
+                    <state key="normal" title="Button" image="add.png"/>
+                    <connections>
+                        <action selector="inviteFriends:" destination="-1" eventType="touchUpInside" id="lCY-cC-YoX"/>
                     </connections>
                 </button>
             </subviews>
@@ -146,16 +140,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="367" height="115.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="People" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSE-rB-MEV">
-                        <rect key="frame" x="148" y="16" width="53" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Going" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSE-rB-MEV">
+                        <rect key="frame" x="148" y="16" width="46" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.12549020349979401" green="0.51764708757400513" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvT-jH-1gT">
                         <rect key="frame" x="299" y="16" width="18" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.29573169900000001" green="0.73333333329999995" blue="0.2201306062" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.12549020350000001" green="0.5176470876" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LCI-oZ-1ra">
@@ -182,39 +176,34 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5m-Yv-sug">
-                        <rect key="frame" x="148" y="49" width="52" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x4O-jy-q5Y">
                         <rect key="frame" x="122" y="-6" width="0.5" height="128"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laK-UZ-WIw">
-                        <rect key="frame" x="299" y="49" width="18" height="21"/>
+                        <rect key="frame" x="299" y="51" width="18" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.1764705882" green="0.1843137255" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upc-xX-11d">
-                        <rect key="frame" x="147" y="78" width="98" height="30"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal" title="Invite friends">
-                            <color key="titleColor" red="0.1764705882" green="0.1843137255" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="inviteFriends:" destination="-1" eventType="touchUpInside" id="2wk-iG-t2I"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hM4-Zx-vmD">
-                        <rect key="frame" x="292" y="80" width="32" height="26"/>
-                        <state key="normal" title="Button" image="add.png"/>
-                        <connections>
-                            <action selector="addFriends:" destination="-1" eventType="touchUpInside" id="YTn-M4-xA7"/>
-                        </connections>
-                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requesting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcQ-r5-sME">
+                        <rect key="frame" x="148" y="85" width="87" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.64478824010000002" green="0.33393297700000002" blue="0.20798211350000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1T2-xi-K0o">
+                        <rect key="frame" x="299" y="85" width="18" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.64478824010000002" green="0.33393297700000002" blue="0.20798211350000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5m-Yv-sug">
+                        <rect key="frame" x="148" y="51" width="52" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.1764705882" green="0.1843137255" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <point key="canvasLocation" x="136" y="437"/>
@@ -289,8 +278,6 @@
     <resources>
         <image name="add.png" width="32" height="32"/>
         <image name="camera.png" width="32" height="32"/>
-        <image name="comment.png" width="32" height="32"/>
         <image name="geotag.png" width="352" height="392"/>
-        <image name="pen.png" width="32" height="32"/>
     </resources>
 </document>

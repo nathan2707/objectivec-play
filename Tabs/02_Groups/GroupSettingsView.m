@@ -47,6 +47,7 @@
     BOOL oneFinished;
     BOOL galleryOrMain;
     BOOL pickerCalled;
+    BOOL cameraOrKeyboard;
 }
 @property (strong, nonatomic) IBOutlet UITableView *requestTableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *cellGallery;
@@ -56,6 +57,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *locationCell;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numberRequestsLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *leaveButton;
 @property (nonatomic, strong) NSMutableArray *sampleDataArray;
@@ -122,14 +124,6 @@
     }
 }
 
-- (IBAction)addFriends:(id)sender {
-    if ([group[@"Identities"] containsObject:[[PFUser currentUser] objectId]]){
-        FriendsController *facebookFriendsView = [[FriendsController alloc] init];
-        facebookFriendsView.delegate = self;
-        [self.navigationController pushViewController:facebookFriendsView animated:YES];
-    }
-}
-
 - (id)initWith:(PFObject *)group_
 {
     self = [super init];
@@ -142,7 +136,7 @@
     self.textView.textColor = [UIColor blackColor];
     return YES;
 }
-- (IBAction)actionChat:(id)sender {
+- (void)actionChat {
     if ([group[@"Identities"] containsObject:[[PFUser currentUser] objectId]]){
         ChatView *chatView = [[ChatView alloc] initWith:self.recent[PF_RECENT_GROUPID]];
         chatView.hidesBottomBarWhenPushed = YES;
@@ -151,7 +145,10 @@
 }
 
 -(void)changeInformation {
-    self.labelAffluence.text = [group[@"Affluence"] stringValue];
+    NSArray *array = group[@"Identities"];
+    self.labelAffluence.text = [NSString stringWithFormat:@"%lu",(unsigned long)array.count];
+    NSArray *array2 = group[@"Requests"];
+    self.numberRequestsLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)array2.count];
     NSDate *date = group[@"Date"];
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"MMMM"];
@@ -200,6 +197,7 @@
     } else {
         pickerCalled = NO;
         group[@"Date"] = self.picker.date;
+        group[@"timeInterval"] = @([self.picker.date timeIntervalSince1970]);
         [self changeInformation];
         [group saveInBackgroundWithBlock :^(BOOL succeeded, NSError *error)
          {
@@ -218,6 +216,9 @@
     CGFloat nearestLong = floorf([[group[@"Location"] objectForKey:@"long"] doubleValue] * 1000 + 0.5) / 1000;
     [panoView moveNearCoordinate:CLLocationCoordinate2DMake(nearestLat,nearestLong)];
     [viewHeader addSubview:panoView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takeMainPicture)];
+    [viewHeader addGestureRecognizer:tap];
 }
 
 
@@ -249,6 +250,8 @@
     } else {
         [eventImage setFile:group[@"Picture"]];
         [eventImage loadInBackground];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takeMainPicture)];
+        [eventImage addGestureRecognizer:tap];
     }
     fileBank = [[NSMutableArray alloc]init];
     [fileBank addObjectsFromArray:group[@"pictureFiles"]];
@@ -312,7 +315,7 @@
                  [self.tableView reloadData];
                  self.requestTableView.delegate = self;
                  [self.requestTableView reloadData];
-                 self.requestTableView.frame = CGRectMake(0,10,self.view.frame.size.width, usersRequest.count * 50);
+                 self.requestTableView.frame = CGRectMake(0,0,self.view.frame.size.width, usersRequest.count * 50);
                  [self.view addSubview:self.requestTableView];
                  [self updateMapWithOthers];
              }
@@ -369,7 +372,7 @@
 
 
 
-- (IBAction)commentAction:(id)sender {
+- (void)commentAction{
     
     if ([group[@"Identities"] containsObject:[[PFUser currentUser] objectId]]){
         if ([commenters containsObject:[PFUser currentUser].objectId] == 0){
@@ -393,7 +396,7 @@
             self.textView.layer.cornerRadius = 5.0f;
             self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             [self.textView setKeyboardAppearance:UIKeyboardAppearanceAlert];
-            self.textView.text = @"Comment";
+            self.textView.text = @"Give advice...";
             self.textView.textColor = [UIColor lightGrayColor];
             [self.textView setDelegate:self];
             
@@ -524,8 +527,12 @@ static inline CGFloat textViewHeight(UITextView *textView) {
     
     self.tableView.tableHeaderView = viewHeader;
     
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(actionWrite)];
+    [barButton setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = barButton;
     
-    self.title = @"Event Settings";
+    
+    self.title = group[@"Name"];
     [self.mapView setMapType:MKMapTypeSatellite];
     users = [[NSMutableArray alloc] init];
     usersRequest = [[NSMutableArray alloc] init];
@@ -550,12 +557,7 @@ static inline CGFloat textViewHeight(UITextView *textView) {
     self.timePicker.minimumDate = [self.timePicker.pickingDate dateAtStartOfDay];
     self.timePicker.maximumDate = [[[self.timePicker.pickingDate dateByAddingMinutes:(60*24)] dateAtStartOfDay] dateBySubtractingMinutes:5];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takeMainPicture)];
-    [eventImage addGestureRecognizer:tap];
-    
-    
-    
-}
+  }
 
 #pragma mark - custom delegate for toolbar actions
 
@@ -760,7 +762,7 @@ static inline CGFloat textViewHeight(UITextView *textView) {
 -(void)actionAccept:(PFUser*)user_{
     [usersRequest removeObject:user_.objectId];
     [pfusersRequest removeObject:user_];
-    self.requestTableView.frame = CGRectMake(0,10,self.view.frame.size.width, usersRequest.count * 50);
+    self.requestTableView.frame = CGRectMake(0,0,self.view.frame.size.width, usersRequest.count * 50);
     NSLog(@"%@",group[@"Requests"]);
     group[@"Requests"] = usersRequest;
     NSLog(@"%@",group[@"Requests"]);
@@ -944,16 +946,21 @@ static inline CGFloat textViewHeight(UITextView *textView) {
 
 {
     if ([group[@"Identities"] containsObject:[[PFUser currentUser] objectId]]){
-        PresentPhotoLibrary(self, YES);
-        galleryOrMain = YES;
+        cameraOrKeyboard = YES;
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                                               otherButtonTitles:@"Select the new cover photo", @"Share a moment", nil];
+    [action showFromTabBar:[[self tabBarController] tabBar]];
     }
 }
 
+-(void)takeNormalPicture{
+        PresentPhotoLibrary(self, YES);
+        galleryOrMain = YES;
+}
+
 -(void)takeMainPicture{
-    if ([group[@"Identities"] containsObject:[[PFUser currentUser] objectId]]){
         PresentPhotoLibrary(self, YES);
         galleryOrMain = NO;
-    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -1016,6 +1023,49 @@ static inline CGFloat textViewHeight(UITextView *textView) {
          if (error != nil) [ProgressHUD showError:@"Network error."];
      }];
 }
+
+
+- (void)actionWrite
+
+{
+    cameraOrKeyboard = NO;
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                                               otherButtonTitles:@"Chat", @"Advise", nil];
+    [action showFromTabBar:[[self tabBarController] tabBar]];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+
+{
+    if (cameraOrKeyboard){
+        if (buttonIndex != actionSheet.cancelButtonIndex){
+            if (buttonIndex == 0)
+            {
+                [self takeMainPicture];
+            }
+            if (buttonIndex == 1)
+            {
+                [self takeNormalPicture];
+            }
+        }
+
+    } else{
+        if (buttonIndex != actionSheet.cancelButtonIndex){
+            if (buttonIndex == 1)
+            {
+                [self commentAction];
+            }
+            if (buttonIndex == 0)
+            {
+                [self actionChat];
+            }
+        }
+    }
+}
+
 
 
 

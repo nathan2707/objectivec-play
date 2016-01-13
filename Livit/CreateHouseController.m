@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *mottoTextview;
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
+@property (strong, nonatomic) IBOutlet UITableViewCell *cellPrivacy;
+@property (strong, nonatomic) IBOutlet UISwitch *switchPrivacy;
 
 
 @end
@@ -64,6 +66,11 @@ PFFile *fileThumbnail;
     house[@"Picture"] = filePicture;
     house[@"Thumbnail"] = fileThumbnail;
     house[@"Members"] = users;
+    if (self.switchPrivacy.isOn){
+    house[@"Privacy"] = @"yes";
+    } else {
+    house[@"Privacy"] = @"no";
+    }
     [house saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
           {
               if (error != nil){
@@ -113,7 +120,7 @@ PFFile *fileThumbnail;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0){
-    return 2;
+    return 3;
     }else if (section == 1){
         return usersForTView.count + 1;
     } else {
@@ -125,6 +132,7 @@ PFFile *fileThumbnail;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ((indexPath.section == 0) && (indexPath.row == 0)) return self.cellName;
     if ((indexPath.section == 0) && (indexPath.row == 1)) return self.cellMotto;
+    if ((indexPath.section == 0) && (indexPath.row == 2)) return self.cellPrivacy;
     if (indexPath.section == 1){
         if (indexPath.row == 0) return self.cellFriends;
         else {

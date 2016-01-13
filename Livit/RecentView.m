@@ -15,7 +15,7 @@
 #import "AppConstant.h"
 #import "common.h"
 #import "recent.h"
-
+#import "CategoryChoiceController.h"
 #import "RecentView.h"
 #import "RecentCell.h"
 #import "ChatView.h"
@@ -30,21 +30,19 @@
 {
 	NSMutableArray *recents;
     NSArray *events;
+    BOOL finished;
 }
 @end
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 
 @implementation RecentView
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	{
 		[self.tabBarItem setImage:[UIImage imageNamed:@"tab_recent"]];
 		self.tabBarItem.title = @"Events";
-		//-----------------------------------------------------------------------------------------------------------------------------------------
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actionCleanup) name:NOTIFICATION_USER_LOGGED_OUT object:nil];
 	}
 	return self;
@@ -57,7 +55,7 @@
 	[super viewDidLoad];
 	self.title = @"Events";
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self
 																						   action:@selector(actionCompose)];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	[self.tableView registerNib:[UINib nibWithNibName:@"RecentCell" bundle:nil] forCellReuseIdentifier:@"RecentCell"];
@@ -88,6 +86,7 @@
 - (void)loadRecents
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
+    finished = NO;
 	PFQuery *query = [PFQuery queryWithClassName:PF_RECENT_CLASS_NAME];
 	[query whereKey:PF_RECENT_USER equalTo:[PFUser currentUser]];
 	[query includeKey:PF_RECENT_LASTUSER];
@@ -108,6 +107,7 @@
 }
 
 -(void)loadEvents{
+    
     NSMutableArray *ids = [[NSMutableArray alloc] init];
     for (int i =0;i<recents.count;i++){
         [ids addObject:[[recents objectAtIndex:i] objectForKey:PF_RECENT_GROUPID]];
@@ -120,7 +120,8 @@
          if (error == nil)
          {
              events = objects;
-             
+             finished = YES;
+             [self.tableView reloadData];
          }
          else [ProgressHUD showError:@"Network error."];
      }];
@@ -129,9 +130,9 @@
 
 #pragma mark - Helper methods
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 - (void)updateTabCounter
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 {
 	int total = 0;
 	for (PFObject *recent in recents)
@@ -144,7 +145,6 @@
 
 #pragma mark - User actions
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)actionChat:(NSString *)groupId
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
@@ -162,95 +162,11 @@
 	[self updateTabCounter];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)actionCompose
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-			   otherButtonTitles:@"Single recipient", @"Multiple recipients", @"Address Book", @"Facebook Friends", nil];
-	[action showFromTabBar:[[self tabBarController] tabBar]];
-}
-
-#pragma mark - UIActionSheetDelegate
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	if (buttonIndex != actionSheet.cancelButtonIndex)
-	{
-		if (buttonIndex == 0)
-		{
-			SelectSingleView *selectSingleView = [[SelectSingleView alloc] init];
-			selectSingleView.delegate = self;
-			NavigationController *navController = [[NavigationController alloc] initWithRootViewController:selectSingleView];
-			[self presentViewController:navController animated:YES completion:nil];
-		}
-		if (buttonIndex == 1)
-		{
-			SelectMultipleView *selectMultipleView = [[SelectMultipleView alloc] init];
-			selectMultipleView.delegate = self;
-			NavigationController *navController = [[NavigationController alloc] initWithRootViewController:selectMultipleView];
-			[self presentViewController:navController animated:YES completion:nil];
-		}
-		if (buttonIndex == 2)
-		{
-			AddressBookView *addressBookView = [[AddressBookView alloc] init];
-			addressBookView.delegate = self;
-			NavigationController *navController = [[NavigationController alloc] initWithRootViewController:addressBookView];
-			[self presentViewController:navController animated:YES completion:nil];
-		}
-		if (buttonIndex == 3)
-		{
-			FacebookFriendsView *facebookFriendsView = [[FacebookFriendsView alloc] init];
-			facebookFriendsView.delegate = self;
-			NavigationController *navController = [[NavigationController alloc] initWithRootViewController:facebookFriendsView];
-			[self presentViewController:navController animated:YES completion:nil];
-		}
-	}
-}
-
-#pragma mark - SelectSingleDelegate
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)didSelectSingleUser:(PFUser *)user2
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	PFUser *user1 = [PFUser currentUser];
-	NSString *groupId = StartPrivateChat(user1, user2);
-	[self actionChat:groupId];
-}
-
-#pragma mark - SelectMultipleDelegate
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)didSelectMultipleUsers:(NSMutableArray *)users
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	NSString *groupId = StartMultipleChat(users);
-	[self actionChat:groupId];
-}
-
-#pragma mark - AddressBookDelegate
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)didSelectAddressBookUser:(PFUser *)user2
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	PFUser *user1 = [PFUser currentUser];
-	NSString *groupId = StartPrivateChat(user1, user2);
-	[self actionChat:groupId];
-}
-
-#pragma mark - FacebookFriendsDelegate
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)didSelectFacebookUser:(PFUser *)user2
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	PFUser *user1 = [PFUser currentUser];
-	NSString *groupId = StartPrivateChat(user1, user2);
-	[self actionChat:groupId];
+    int index = 2;
+    self.tabBarController.selectedIndex = index;
+    [self.tabBarController.viewControllers[index] popToRootViewControllerAnimated:NO];
 }
 
 #pragma mark - Table view data source
@@ -274,7 +190,15 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	RecentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell" forIndexPath:indexPath];
+    if (finished){
 	[cell bindData:recents[indexPath.row]];
+    
+    if (events.count > indexPath.row){
+        PFObject *event = [events objectAtIndex:indexPath.row];
+        cell.address = [event[@"Location"] objectForKey:@"adress"];
+        cell.date = event[@"Date"];
+    }
+    }
 	return cell;
 }
 

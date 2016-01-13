@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupsView">
@@ -11,8 +11,11 @@
                 <outlet property="headerView" destination="hG9-Mk-sWa" id="esK-xC-Fo0"/>
                 <outlet property="houseImage" destination="6AQ-XR-ucH" id="gzA-aI-gcz"/>
                 <outlet property="labelMotto" destination="UTQ-JG-2wE" id="YLU-p4-zJ6"/>
+                <outlet property="leaveHouseButton" destination="auG-lW-laG" id="7Of-aJ-grP"/>
                 <outlet property="nameLabel" destination="Net-l9-WbQ" id="TrB-Zg-7eE"/>
-                <outlet property="numberLabel" destination="Jyd-Rp-Ugf" id="HTg-XW-8lg"/>
+                <outlet property="numberEventsLabel" destination="q0L-fb-xgT" id="aUR-qy-A6V"/>
+                <outlet property="numberLabel" destination="HsB-Ue-fcB" id="vda-8z-ZQ2"/>
+                <outlet property="requestTableView" destination="WT9-aI-KIy" id="bQx-iG-m0r"/>
                 <outlet property="textView" destination="ANs-3H-CIy" id="Ijd-gf-qv0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,46 +30,65 @@
                 <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
                 <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
             </connections>
-            <point key="canvasLocation" x="357" y="296"/>
+            <point key="canvasLocation" x="348" y="425"/>
         </tableView>
         <view contentMode="scaleToFill" id="hG9-Mk-sWa">
-            <rect key="frame" x="0.0" y="0.0" width="416" height="243"/>
+            <rect key="frame" x="0.0" y="0.0" width="416" height="158"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kappa Alpha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Net-l9-WbQ">
-                    <rect key="frame" x="160" y="169" width="97" height="21"/>
+                    <rect key="frame" x="17" y="94" width="97" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6AQ-XR-ucH" customClass="PFImageView">
+                    <rect key="frame" x="14" y="14" width="70" height="70"/>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Description" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANs-3H-CIy">
+                    <rect key="frame" x="13" y="116" width="396" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsB-Ue-fcB">
+                    <rect key="frame" x="324" y="14" width="10" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cc-fC-Cff">
+                    <rect key="frame" x="247" y="34" width="43" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.6616210938" green="0.64476254109999998" blue="0.6713867188" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yS-sl-Nvt">
+                    <rect key="frame" x="304" y="34" width="73" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.6616210938" green="0.64476254109999998" blue="0.6713867188" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="auG-lW-laG">
-                    <rect key="frame" x="320" y="164" width="88" height="30"/>
+                    <rect key="frame" x="236" y="63" width="137" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="Leave House">
-                        <color key="titleColor" red="0.85490196080000003" green="0.17254901959999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="leaveHouse:" destination="-1" eventType="touchUpInside" id="O41-j2-slp"/>
+                        <action selector="leaveHouse:" destination="-1" eventType="touchUpInside" id="xhx-Jf-x6w"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6AQ-XR-ucH" customClass="PFImageView">
-                    <rect key="frame" x="0.0" y="0.0" width="416" height="160"/>
-                </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Description" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANs-3H-CIy">
-                    <rect key="frame" x="8" y="193" width="396" height="42"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="81 members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jyd-Rp-Ugf">
-                    <rect key="frame" x="8" y="169" width="95" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0L-fb-xgT">
+                    <rect key="frame" x="264" y="14" width="10" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.29573169900000001" green="0.73333333329999995" blue="0.2201306062" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="65" y="55.5"/>
+            <point key="canvasLocation" x="310" y="48"/>
         </view>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="q2D-Zk-6ln">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -85,5 +107,16 @@
             </tableViewCellContentView>
             <point key="canvasLocation" x="358" y="655"/>
         </tableViewCell>
+        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WT9-aI-KIy">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="Nyr-Mj-tgI"/>
+                <outlet property="delegate" destination="-1" id="94k-wa-5Yd"/>
+            </connections>
+            <point key="canvasLocation" x="155" y="378"/>
+        </tableView>
     </objects>
 </document>

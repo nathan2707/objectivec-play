@@ -31,7 +31,7 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     
     [Foursquare2 setupFoursquareWithClientId:@"W24T3GRWEDKEYYIBNAS4US35HKVOAE2DGMGUWIJ0OJZWRLD0"
                                       secret:@"CIP5GCEBKLZSSOBHQ0L4SURY2WOKJUYUUBECRQJ5A4S2GOB5"
-                                 callbackURL:@"livit-sample-applink://"];
+                                 callbackURL:@"livit://"];
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -146,7 +146,6 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     
     BFURL *parsedUrl = [BFURL URLWithInboundURL:url sourceApplication:sourceApplication];
     if ([parsedUrl appLinkData]) {
-        // this is an applink url, handle it here
         NSURL *targetUrl = [parsedUrl targetURL];
         [[[UIAlertView alloc] initWithTitle:@"Received link:"
                                     message:[targetUrl absoluteString]

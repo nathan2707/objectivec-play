@@ -11,10 +11,12 @@
                 <outlet property="cellFriends" destination="H4R-kk-aCv" id="hDw-au-dru"/>
                 <outlet property="cellMotto" destination="OX5-EJ-QoD" id="Ync-7f-HLC"/>
                 <outlet property="cellName" destination="4es-PA-Php" id="YOf-cn-IZD"/>
+                <outlet property="cellPrivacy" destination="ODo-c8-OeU" id="6Rh-VP-Oiv"/>
                 <outlet property="headerView" destination="TAr-80-Bi8" id="ZUW-uy-Gnt"/>
                 <outlet property="houseImage" destination="LPd-QF-eQk" id="Ae8-D9-yan"/>
                 <outlet property="mottoTextview" destination="Mkw-Po-916" id="wR0-jB-Jns"/>
                 <outlet property="nameField" destination="JHk-Mm-cM1" id="Lss-eD-NxU"/>
+                <outlet property="switchPrivacy" destination="QWg-dh-jKg" id="8xj-Jq-QQU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -139,7 +141,27 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="233" y="793"/>
+            <point key="canvasLocation" x="252" y="841"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ODo-c8-OeU">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ODo-c8-OeU" id="pZM-6m-4a5">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rax-jZ-znQ">
+                        <rect key="frame" x="19" y="11" width="56" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWg-dh-jKg">
+                        <rect key="frame" x="339" y="6" width="51" height="31"/>
+                    </switch>
+                </subviews>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="250" y="747"/>
         </tableViewCell>
     </objects>
     <resources>

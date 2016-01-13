@@ -38,6 +38,7 @@ static NSString *const SearchResultsCellIdentifier = @"SearchResultsCellIdentifi
 
 @implementation SearchController
 int sel;
+NSString *street;
 
 -(void)actionNext{
     HousesController *hc = [[HousesController alloc]init];
@@ -66,7 +67,6 @@ int sel;
     self.navigationItem.rightBarButtonItem = barButton;
     sel = 30;
     [self.tableView setHidden:YES];
-    
 }
 
 
@@ -75,12 +75,12 @@ int sel;
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.venues != 0){
-    return self.venues.count;
+        return self.venues.count;
     } else {
         if ([self.searchBar.text isEqualToString:@""]){
             return 0;
         } else {
-        return 1;
+            return 1;
         }
     }
 }
@@ -123,7 +123,7 @@ int sel;
         cell.locationLabel.text = self.searchBar.text;
         PFUser *user = [PFUser currentUser];
         cell.location = @{@"lat":[user[PF_USER_POSITION] objectForKey:@"lat"],@"long":[user[PF_USER_POSITION] objectForKey:@"long"],@"string":self.searchBar.text};
-
+        
         MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([[user[PF_USER_POSITION] objectForKey:@"lat"] intValue], [[user[PF_USER_POSITION] objectForKey:@"long"] intValue]) addressDictionary:cell.location];
         [self addPlacemarkAnnotationToMap:placemark addressString:self.searchBar.text];
         [self recenterMapToPlacemark:placemark];
@@ -137,23 +137,25 @@ int sel;
         NSNumber *lat = [NSNumber numberWithDouble:venue.location.coordinate.latitude];
         NSNumber *lon = [NSNumber numberWithDouble:venue.location.coordinate.longitude];
         if (venue.location.address != nil){
-        cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":venue.location.address};
+            cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":venue.location.address};
+        } else if (self.searchBar.text != nil){
+            cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":self.searchBar.text};
         } else {
-        cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":@"somewhere"};
+            cell.location = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":@"somewhere"};
         }
-            if (indexPath.row == sel){
+        if (indexPath.row == sel){
             cell.selectedView.image = [UIImage imageNamed:@"Ok-32"];
             cell.userInteractionEnabled = NO;
-                if (cell.location) {
-                    self.event[@"Location"] = cell.location;
-                    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:[[cell.location objectForKey:@"lat"] doubleValue] longitude:[[cell.location objectForKey:@"long"] doubleValue]];
-                    self.event[@"Geopoint"] = point;
-                }
-                if (cell.locationLabel.text) {
-                    self.event[@"LocationString"] = cell.locationLabel.text;
-                }
-                
-                
+            if (cell.location) {
+                self.event[@"Location"] = cell.location;
+                PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:[[cell.location objectForKey:@"lat"] doubleValue] longitude:[[cell.location objectForKey:@"long"] doubleValue]];
+                self.event[@"Geopoint"] = point;
+            }
+            if (cell.locationLabel.text) {
+                self.event[@"LocationString"] = cell.locationLabel.text;
+            }
+            
+            
         } else {
             cell.selectedView.image = [UIImage imageNamed:@"Full Moon Filled-32"];
             cell.userInteractionEnabled = YES;
@@ -171,18 +173,32 @@ int sel;
     FSVenue *venue = self.venues[indexPath.row];
     MKPlacemark *placemark;
     if (venue.location.address !=nil){
-    placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(venue.location.coordinate.latitude,venue.location.coordinate.longitude) addressDictionary:@{@"Name":venue.name, @"Address":venue.location.address}];
+        placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(venue.location.coordinate.latitude,venue.location.coordinate.longitude) addressDictionary:@{@"Name":venue.name, @"Address":venue.location.address}];
+        self.searchBar.text = venue.location.address;
     }else {
-       placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(venue.location.coordinate.latitude,venue.location.coordinate.longitude) addressDictionary:@{@"Name":venue.name, @"Address":@"somewhere"}];
+        placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(venue.location.coordinate.latitude,venue.location.coordinate.longitude) addressDictionary:@{@"Name":venue.name, @"Address":@"somewhere"}];
+        CLLocationCoordinate2D droppedAt = placemark.location.coordinate;
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        CLLocation *userLocation = [[CLLocation alloc]initWithLatitude:droppedAt.latitude longitude:droppedAt.longitude];
+        [geocoder reverseGeocodeLocation:userLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (error) {
+                return;
+            }else{
+                CLPlacemark *firstPlacemark = [placemarks firstObject];
+                NSDictionary *addressDictionary = firstPlacemark.addressDictionary;
+                street = addressDictionary[@"Street"];
+                self.searchBar.text = street;
+            }
+        }
+         ];
     }
     [self addPlacemarkAnnotationToMap:placemark addressString:venue.name];
     [self recenterMapToPlacemark:placemark];
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    self.searchBar.text = venue.name;
     sel = indexPath.row;
     [self.tableView setHidden:YES];
-    //[self.tableView reloadData];pp
+    [self.tableView reloadData];
 }
 
 
@@ -197,13 +213,13 @@ int sel;
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-if(searchText.length > 0)
-{
-    [self.tableView setHidden:NO];
-}
-else{
-    [self.tableView setHidden:YES];
-}
+    if(searchText.length > 0)
+    {
+        [self.tableView setHidden:NO];
+    }
+    else{
+        [self.tableView setHidden:YES];
+    }
     [self startSearchWithString:searchText];
 }
 
@@ -283,13 +299,13 @@ didChangeDragState:(MKAnnotationViewDragState)newState
                                                 self.venues = [converter convertToObjects:venues];
                                                 self.searchBar.text = street;
                                                 FSVenue *venue = [self.venues firstObject];
-                                                 [self addPlacemarkAnnotationToMap:firstPlacemark addressString:venue.name];
+                                                [self addPlacemarkAnnotationToMap:firstPlacemark addressString:venue.name];
                                                 NSNumber *lat = [NSNumber numberWithDouble:venue.location.coordinate.latitude];
                                                 NSNumber *lon = [NSNumber numberWithDouble:venue.location.coordinate.longitude];
                                                 if (venue.location.address != nil){
                                                     self.event[@"Location"] = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":venue.location.address};
                                                 } else {
-                                                    self.event[@"Location"] = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":@"somewhere"};
+                                                    self.event[@"Location"] = @{@"lat":lat,@"long":lon,@"string":venue.name,@"adress":street};
                                                 }
                                             } else {
                                                 NSLog(@"%@",result);

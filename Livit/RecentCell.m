@@ -35,7 +35,7 @@
 @implementation RecentCell
 
 @synthesize imageUser;
-@synthesize labelDescription, labelLastMessage;
+@synthesize labelDescription;
 @synthesize labelElapsed, labelCounter;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,24 +43,41 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     recent = recent_;
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    //	imageUser.layer.cornerRadius = imageUser.frame.size.width/2;
-    //	imageUser.layer.masksToBounds = YES;
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    //	PFUser *lastUser = recent[PF_RECENT_LASTUSER];
-    //	[imageUser setFile:lastUser[PF_USER_PICTURE]];
-    //	[imageUser loadInBackground];
+    
+    NSString *timeString = @"";
+    NSTimeInterval timeSince = [[NSDate date] timeIntervalSinceDate:self.date];
+    double absoluteTime = fabs(timeSince);
+    
+    if (absoluteTime/60 < 1) {
+        timeString = [NSString stringWithFormat:@"%is",(int)absoluteTime];
+    }
+    else if (absoluteTime/3600 < 1) {
+        timeString = [NSString stringWithFormat:@"%im",(int)absoluteTime/60];
+    }
+    else if (absoluteTime/(3600*24) < 1) {
+        timeString = [NSString stringWithFormat:@"%ih",(int)absoluteTime/3600];
+    }
+    else{
+        timeString = [NSString stringWithFormat:@"%id",(int)absoluteTime/(3600*24)];
+    }
+    if (timeSince < 0){
+        self.labelElapsed.text = [NSString stringWithFormat:@"in %@",timeString];
+    } else {
+        self.labelElapsed.text = [NSString stringWithFormat:@"%@ ago",timeString];
+    }
+
     
     imageUser.image = [UIImage imageNamed:recent[@"Category"]];
     //---------------------------------------------------------------------------------------------------------------------------------------------
     labelDescription.text = recent[PF_RECENT_DESCRIPTION];
-    labelLastMessage.text = recent[PF_RECENT_LASTMESSAGE];
+    NSLog(@"%@",self.address);
+    self.labelLastMessage.text = self.address;
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:recent[PF_RECENT_UPDATEDACTION]];
-    labelElapsed.text = TimeElapsed(seconds);
+//    NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:recent[PF_RECENT_UPDATEDACTION]];
+//    labelElapsed.text = TimeElapsed(seconds);
     //---------------------------------------------------------------------------------------------------------------------------------------------
     int counter = [recent[PF_RECENT_COUNTER] intValue];
-    labelCounter.text = (counter == 0) ? @"" : [NSString stringWithFormat:@"%d new", counter];
+    labelCounter.text = (counter == 0) ? @"" : [NSString stringWithFormat:@"%d new messages", counter];
 }
 
 

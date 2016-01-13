@@ -28,15 +28,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCl-zV-J5y">
-                        <rect key="frame" x="260" y="13" width="50" height="21"/>
+                        <rect key="frame" x="240" y="13" width="70" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                         <color key="textColor" red="0.47843137250000001" green="0.7843137255" blue="0.18039215689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 new" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-wA-gQI">
-                        <rect key="frame" x="260" y="32" width="50" height="21"/>
+                        <rect key="frame" x="230" y="32" width="80" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="q07-FI-wF8"/>
+                            <constraint firstAttribute="width" constant="80" id="q07-FI-wF8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,7 +54,7 @@
                     <constraint firstItem="Ois-e3-M4I" firstAttribute="top" secondItem="1Bu-wA-gQI" secondAttribute="top" id="Cwg-Sy-f7o"/>
                     <constraint firstItem="Ois-e3-M4I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="62" id="OLG-Wa-mgo"/>
                     <constraint firstItem="aCl-zV-J5y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Oeo-66-fhj"/>
-                    <constraint firstItem="1Bu-wA-gQI" firstAttribute="leading" secondItem="aCl-zV-J5y" secondAttribute="leading" id="T20-sG-voT"/>
+                    <constraint firstItem="1Bu-wA-gQI" firstAttribute="leading" secondItem="aCl-zV-J5y" secondAttribute="leading" constant="-10" id="T20-sG-voT"/>
                     <constraint firstItem="Ois-e3-M4I" firstAttribute="baseline" secondItem="1Bu-wA-gQI" secondAttribute="baseline" id="VVm-kJ-lJ7"/>
                     <constraint firstAttribute="bottomMargin" secondItem="1Bu-wA-gQI" secondAttribute="bottom" constant="8" id="ZxN-Dn-gzi"/>
                     <constraint firstItem="aCl-zV-J5y" firstAttribute="top" secondItem="uxG-h3-jPt" secondAttribute="top" id="bY1-BP-yVp"/>
@@ -63,7 +63,7 @@
                     <constraint firstItem="Ifk-Hu-PIe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="cx3-Bc-neE"/>
                     <constraint firstAttribute="trailingMargin" secondItem="1Bu-wA-gQI" secondAttribute="trailing" constant="2" id="dyJ-iJ-LkL"/>
                     <constraint firstItem="aCl-zV-J5y" firstAttribute="bottom" secondItem="uxG-h3-jPt" secondAttribute="bottom" id="gJh-rz-4Bu"/>
-                    <constraint firstItem="aCl-zV-J5y" firstAttribute="leading" secondItem="uxG-h3-jPt" secondAttribute="trailing" id="iyA-WT-nK3"/>
+                    <constraint firstItem="aCl-zV-J5y" firstAttribute="leading" secondItem="uxG-h3-jPt" secondAttribute="trailing" constant="-20" id="iyA-WT-nK3"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aCl-zV-J5y" secondAttribute="trailing" constant="2" id="jg5-Rs-31l"/>
                     <constraint firstItem="Ois-e3-M4I" firstAttribute="trailing" secondItem="uxG-h3-jPt" secondAttribute="trailing" id="rut-pS-0r2"/>
                     <constraint firstAttribute="bottomMargin" secondItem="aCl-zV-J5y" secondAttribute="bottom" constant="27" id="v7T-vd-5dO"/>

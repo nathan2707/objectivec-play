@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchController">
             <connections>
                 <outlet property="mapView" destination="U0A-Ld-LIE" id="NdO-eS-yHZ"/>
-                <outlet property="searchBar" destination="ejA-VS-9Pj" id="pRA-Dq-IOt"/>
+                <outlet property="searchBar" destination="ejA-VS-9Pj" id="9mf-7r-5VG"/>
                 <outlet property="tableView" destination="gFu-5j-068" id="uH4-sC-Knv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

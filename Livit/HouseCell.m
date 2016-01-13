@@ -32,7 +32,7 @@
     
     NSArray *members = [[NSArray alloc]initWithArray:[house objectForKey:@"Members"]];
     NSString *string2 = [NSString stringWithFormat:@"%li",members.count];
-    string2 = [string2 stringByAppendingString:@" members in the house"];
+    string2 = [string2 stringByAppendingString:@" members"];
     self.numberMembers.text = string2;
    
     self.nameHouse.text = [house objectForKey:@"Name"];

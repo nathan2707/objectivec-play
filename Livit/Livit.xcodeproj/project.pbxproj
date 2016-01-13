@@ -181,8 +181,6 @@
 		D88A23871C13D8C700A66263 /* Full Moon Filled-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D88A23861C13D8C700A66263 /* Full Moon Filled-32.png */; };
 		D88A238B1C13EF1900A66263 /* InvitesController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A23891C13EF1900A66263 /* InvitesController.m */; };
 		D88A238C1C13EF1900A66263 /* InvitesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88A238A1C13EF1900A66263 /* InvitesController.xib */; };
-		D88A23901C14CCB400A66263 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88A238E1C14CCB400A66263 /* SearchController.m */; };
-		D88A23911C14CCB400A66263 /* SearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88A238F1C14CCB400A66263 /* SearchController.xib */; };
 		D88A23931C196B8F00A66263 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = D88A23921C196B8F00A66263 /* camera.png */; };
 		D88A23951C196BE100A66263 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D88A23941C196BE100A66263 /* comment.png */; };
 		D88A23971C196D9300A66263 /* pen.png in Resources */ = {isa = PBXBuildFile; fileRef = D88A23961C196D9300A66263 /* pen.png */; };
@@ -203,6 +201,8 @@
 		D8BD9F1B1C447D1200D4E2D2 /* plan.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F171C447D1200D4E2D2 /* plan.png */; settings = {ASSET_TAGS = (); }; };
 		D8BD9F1C1C447D1200D4E2D2 /* sent.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F181C447D1200D4E2D2 /* sent.png */; settings = {ASSET_TAGS = (); }; };
 		D8BD9F1D1C447D1200D4E2D2 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = D8BD9F191C447D1200D4E2D2 /* user.png */; settings = {ASSET_TAGS = (); }; };
+		D8DE1D7D1C45F2D000538ADA /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DE1D7B1C45F2D000538ADA /* SearchController.m */; settings = {ASSET_TAGS = (); }; };
+		D8DE1D7E1C45F2D000538ADA /* SearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8DE1D7C1C45F2D000538ADA /* SearchController.xib */; settings = {ASSET_TAGS = (); }; };
 		D8F0E7BD1BADF4FA00D09294 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F0E7BC1BADF4FA00D09294 /* main.m */; };
 		D8F0E7C01BADF4FA00D09294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F0E7BF1BADF4FA00D09294 /* AppDelegate.m */; };
 		D8F0E7C81BADF4FA00D09294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8F0E7C71BADF4FA00D09294 /* Images.xcassets */; };
@@ -492,9 +492,6 @@
 		D88A23881C13EF1900A66263 /* InvitesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitesController.h; sourceTree = "<group>"; };
 		D88A23891C13EF1900A66263 /* InvitesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitesController.m; sourceTree = "<group>"; };
 		D88A238A1C13EF1900A66263 /* InvitesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitesController.xib; sourceTree = "<group>"; };
-		D88A238D1C14CCB400A66263 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchController.h; path = ../SearchController.h; sourceTree = "<group>"; };
-		D88A238E1C14CCB400A66263 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = ../SearchController.m; sourceTree = "<group>"; };
-		D88A238F1C14CCB400A66263 /* SearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchController.xib; path = ../SearchController.xib; sourceTree = "<group>"; };
 		D88A23921C196B8F00A66263 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = ../../Images/camera.png; sourceTree = "<group>"; };
 		D88A23941C196BE100A66263 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comment.png; path = ../../Images/comment.png; sourceTree = "<group>"; };
 		D88A23961C196D9300A66263 /* pen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pen.png; path = ../../Images/pen.png; sourceTree = "<group>"; };
@@ -522,6 +519,9 @@
 		D8BD9F171C447D1200D4E2D2 /* plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plan.png; path = ../../Images/plan.png; sourceTree = "<group>"; };
 		D8BD9F181C447D1200D4E2D2 /* sent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sent.png; path = ../../Images/sent.png; sourceTree = "<group>"; };
 		D8BD9F191C447D1200D4E2D2 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = ../../Images/user.png; sourceTree = "<group>"; };
+		D8DE1D7A1C45F2D000538ADA /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchController.h; path = ../SearchController.h; sourceTree = "<group>"; };
+		D8DE1D7B1C45F2D000538ADA /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchController.m; path = ../SearchController.m; sourceTree = "<group>"; };
+		D8DE1D7C1C45F2D000538ADA /* SearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchController.xib; path = ../SearchController.xib; sourceTree = "<group>"; };
 		D8F0E7B71BADF4FA00D09294 /* Livit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Livit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F0E7BB1BADF4FA00D09294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8F0E7BC1BADF4FA00D09294 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -765,7 +765,6 @@
 		D84D7E771BADFE65000E9C8F /* 02_Groups */ = {
 			isa = PBXGroup;
 			children = (
-				D84D7E871BADFEC0000E9C8F /* People */,
 				D88A23231C04610400A66263 /* Categories.h */,
 				D88A23241C04610400A66263 /* Categories.m */,
 				D88A23251C04610400A66263 /* CommentCell.h */,
@@ -786,19 +785,6 @@
 				5C44D7391BD5A0390003436B /* CreateGroupView.h */,
 			);
 			name = 02_Groups;
-			sourceTree = "<group>";
-		};
-		D84D7E871BADFEC0000E9C8F /* People */ = {
-			isa = PBXGroup;
-			children = (
-				D84D7E881BADFECF000E9C8F /* PeopleView.h */,
-				D84D7E891BADFECF000E9C8F /* PeopleView.m */,
-				D84D7E8A1BADFECF000E9C8F /* PeopleView.xib */,
-				D83D30131C3951CA00BAC2A1 /* PeopleCell.h */,
-				D83D30141C3951CA00BAC2A1 /* PeopleCell.m */,
-				D83D30151C3951CA00BAC2A1 /* PeopleCell.xib */,
-			);
-			name = People;
 			sourceTree = "<group>";
 		};
 		D84D7E8D1BADFEE0000E9C8F /* 03_Settings */ = {
@@ -834,6 +820,12 @@
 		D84D7E9D1BADFF2D000E9C8F /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				D84D7E881BADFECF000E9C8F /* PeopleView.h */,
+				D84D7E891BADFECF000E9C8F /* PeopleView.m */,
+				D84D7E8A1BADFECF000E9C8F /* PeopleView.xib */,
+				D83D30131C3951CA00BAC2A1 /* PeopleCell.h */,
+				D83D30141C3951CA00BAC2A1 /* PeopleCell.m */,
+				D83D30151C3951CA00BAC2A1 /* PeopleCell.xib */,
 				D84D7EE41BAE0001000E9C8F /* privacy.html */,
 				D84D7EE51BAE0001000E9C8F /* terms.html */,
 				D84D7E9E1BADFF3A000E9C8F /* SelectSingleView.h */,
@@ -919,9 +911,9 @@
 		D84D7EF71BAE010A000E9C8F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				D88A238D1C14CCB400A66263 /* SearchController.h */,
-				D88A238E1C14CCB400A66263 /* SearchController.m */,
-				D88A238F1C14CCB400A66263 /* SearchController.xib */,
+				D8DE1D7A1C45F2D000538ADA /* SearchController.h */,
+				D8DE1D7B1C45F2D000538ADA /* SearchController.m */,
+				D8DE1D7C1C45F2D000538ADA /* SearchController.xib */,
 				D88A234A1C04641200A66263 /* SearchCell.h */,
 				D88A234B1C04641200A66263 /* SearchCell.m */,
 				D88A234C1C04641200A66263 /* SearchCell.xib */,
@@ -1303,7 +1295,6 @@
 				D83D2FAC1C2BF76D00BAC2A1 /* PhotoCell.xib in Resources */,
 				D88A231F1C045B5B00A66263 /* tab_groups@2x.png in Resources */,
 				D88A23211C045B5B00A66263 /* tab_recent@2x.png in Resources */,
-				D88A23911C14CCB400A66263 /* SearchController.xib in Resources */,
 				D8BD9F1D1C447D1200D4E2D2 /* user.png in Resources */,
 				D84D7E971BADFF00000E9C8F /* PrivacyView.xib in Resources */,
 				D83D301D1C39DF7B00BAC2A1 /* BrowserViewController.xib in Resources */,
@@ -1315,6 +1306,7 @@
 				D88A22FC1C045B5B00A66263 /* chat_camera@2x.png in Resources */,
 				D83D30261C39E6F500BAC2A1 /* BrowserCell.xib in Resources */,
 				D88A23731C0466A400A66263 /* study.png in Resources */,
+				D8DE1D7E1C45F2D000538ADA /* SearchController.xib in Resources */,
 				D88A23081C045B5B00A66263 /* picker_wheel@2x.png in Resources */,
 				5C865E9E1C434F6900AAAC52 /* MountainsIcon80.png in Resources */,
 				D8A957E11C3A86FB005601D9 /* TableHeader.xib in Resources */,
@@ -1417,6 +1409,7 @@
 				D856C34A1C4487C500FBD385 /* FSOAuthNoAppStore.m in Sources */,
 				D83D301C1C39DF7B00BAC2A1 /* BrowserViewController.m in Sources */,
 				D88A235A1C04641200A66263 /* SearchCell.m in Sources */,
+				D8DE1D7D1C45F2D000538ADA /* SearchController.m in Sources */,
 				D84D7E911BADFEF4000E9C8F /* BlockedView.m in Sources */,
 				D856C3491C4487C500FBD385 /* FSKeychain.m in Sources */,
 				D856C34B1C4487C500FBD385 /* FSOperation.m in Sources */,
@@ -1458,7 +1451,6 @@
 				D88A23331C04610400A66263 /* CommentCell.m in Sources */,
 				5C44D74F1BD5A0930003436B /* ChatView.m in Sources */,
 				D8F0EA001BADF7C100D09294 /* IDMZoomingScrollView.m in Sources */,
-				D88A23901C14CCB400A66263 /* SearchController.m in Sources */,
 				D88A23391C04610400A66263 /* UserCell.m in Sources */,
 				D83D300F1C36C5F500BAC2A1 /* TableViewCell.m in Sources */,
 				D88A23321C04610400A66263 /* Categories.m in Sources */,

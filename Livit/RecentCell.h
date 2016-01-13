@@ -16,5 +16,6 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 - (void)bindData:(PFObject *)recent_;
-
+@property(nonatomic,strong)NSString *address;
+@property(nonatomic,strong)NSDate *date;
 @end

@@ -14,5 +14,5 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface GroupsView : UITableViewController
 @property (strong, nonatomic) PFObject *house;
-@property (strong, nonatomic) NSArray *users;
+@property (strong, nonatomic) NSMutableArray *users;
 @end
