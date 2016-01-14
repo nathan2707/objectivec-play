@@ -22,6 +22,7 @@
 #import "image.h"
 #import "GroupSettingsView.h"
 #import "GroupsView.h"
+#import "myButton.h"
 
 @interface ProfileView() <UITextViewDelegate>
 {
@@ -275,12 +276,108 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         //cell.delegate = self;
         cell.group = [events objectAtIndex:indexPath.row];
+        
+        myButton *joinButton = [[myButton alloc]initWithFrame:CGRectMake(325, 20, 75, 20)];
+        [joinButton addTarget:self action:@selector(actionJoin:) forControlEvents:UIControlEventTouchUpInside];
+        joinButton.tag = indexPath.row;
+        joinButton.titleLabel.font = [UIFont systemFontOfSize: 13];
+        
+        if ([[cell.group objectForKey:@"Identities"] containsObject:[PFUser currentUser].objectId]){
+            [joinButton setTitle:@"Going" forState:UIControlStateNormal];
+            [joinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [joinButton setBackgroundColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1]];
+            joinButton.layer.cornerRadius = 3;
+            [[joinButton layer] setBorderWidth:0.5f];
+            [[joinButton layer] setBorderColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1].CGColor];
+            joinButton.userId = @"leave";
+        } else if ([[cell.group objectForKey:@"Requests"] containsObject:[PFUser currentUser].objectId]) {
+            [joinButton setTitle:@"Requested" forState:UIControlStateNormal];
+            [joinButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            [joinButton setBackgroundColor:[UIColor lightGrayColor]];
+            joinButton.layer.cornerRadius = 3;
+            [[joinButton layer] setBorderWidth:0.5f];
+            [[joinButton layer] setBorderColor:[UIColor lightGrayColor].CGColor];
+            joinButton.userId = @"cancel request";
+        } else {
+            [joinButton setTitle:@"Join" forState:UIControlStateNormal];
+            [joinButton setTitleColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forState:UIControlStateNormal];
+            [joinButton setBackgroundColor:[UIColor whiteColor]];
+            joinButton.layer.cornerRadius = 3;
+            [[joinButton layer] setBorderWidth:0.5f];
+            [[joinButton layer] setBorderColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1].CGColor];
+            joinButton.userId = @"join";
+        }
+        
+        [cell addSubview:joinButton];
+        
         return cell;
         
     }
 
 	return nil;
 }
+
+-(void)actionJoin:(myButton*)sender{
+    PFObject *event = [events objectAtIndex:sender.tag];
+    if ([sender.userId isEqualToString:@"leave"]){
+        
+        [sender setTitle:@"Join" forState:UIControlStateNormal];
+        [sender setTitleColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        sender.layer.cornerRadius = 3;
+        [[sender layer] setBorderWidth:0.5f];
+        [[sender layer] setBorderColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1].CGColor];
+        sender.userId = @"join";
+        
+        NSMutableArray *handle = [[NSMutableArray alloc]initWithArray:event[@"Identities"]];
+        [handle removeObject:[PFUser currentUser].objectId];
+        event[@"Identities"] = handle;
+        [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (error){
+                NSLog(@"error");
+            }
+        }];
+        
+    } else if ([sender.userId isEqualToString:@"cancel request"]){
+        
+        [sender setTitle:@"Join" forState:UIControlStateNormal];
+        [sender setTitleColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        sender.layer.cornerRadius = 3;
+        [[sender layer] setBorderWidth:0.5f];
+        [[sender layer] setBorderColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1].CGColor];
+        sender.userId = @"join";
+        
+        NSMutableArray *handle = [[NSMutableArray alloc]initWithArray:event[@"Requests"]];
+        [handle removeObject:[PFUser currentUser].objectId];
+        event[@"Requests"] = handle;
+        [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (error){
+                NSLog(@"error");
+            }
+        }];
+        
+    } else {
+        
+            [sender setTitle:@"Requested" forState:UIControlStateNormal];
+            [sender setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            [sender setBackgroundColor:[UIColor lightGrayColor]];
+            sender.layer.cornerRadius = 3;
+            [[sender layer] setBorderWidth:0.5f];
+            [[sender layer] setBorderColor:[UIColor lightGrayColor].CGColor];
+            sender.userId = @"cancel request";
+            
+            NSMutableArray *handle = [[NSMutableArray alloc]initWithArray:event[@"Requests"]];
+            [handle addObject:[PFUser currentUser].objectId];
+            event[@"Requests"] = handle;
+            [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                if (error){
+                    NSLog(@"error");
+                }
+            }];
+        }
+}
+
 
 #pragma mark - Table view delegate
 

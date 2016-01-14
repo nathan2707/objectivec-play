@@ -25,7 +25,7 @@
 #import "FacebookFriendsView.h"
 #import "NavigationController.h"
 #import "GroupSettingsView.h"
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 @interface RecentView()
 {
 	NSMutableArray *recents;
@@ -191,18 +191,18 @@
 {
 	RecentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell" forIndexPath:indexPath];
     if (finished){
-	[cell bindData:recents[indexPath.row]];
-    
     if (events.count > indexPath.row){
         PFObject *event = [events objectAtIndex:indexPath.row];
         cell.address = [event[@"Location"] objectForKey:@"adress"];
         cell.date = event[@"Date"];
+        NSArray *array = [[NSArray alloc]initWithArray:event[@"Identities"]];
+        cell.labelPeople.text = [NSString stringWithFormat:@"%lu people going",(unsigned long)array.count];
     }
+        [cell bindData:recents[indexPath.row]];
     }
 	return cell;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {

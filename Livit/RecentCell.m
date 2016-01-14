@@ -29,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelElapsed;
 @property (strong, nonatomic) IBOutlet UILabel *labelCounter;
 
+
 @end
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -64,6 +65,7 @@
         self.labelElapsed.text = [NSString stringWithFormat:@"in %@",timeString];
     } else {
         self.labelElapsed.text = [NSString stringWithFormat:@"%@ ago",timeString];
+        [self.labelElapsed setTextColor:[UIColor redColor]];
     }
 
     
@@ -72,7 +74,7 @@
     labelDescription.text = recent[PF_RECENT_DESCRIPTION];
     NSLog(@"%@",self.address);
     self.labelLastMessage.text = self.address;
-    //---------------------------------------------------------------------------------------------------------------------------------------------
+
 //    NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:recent[PF_RECENT_UPDATEDACTION]];
 //    labelElapsed.text = TimeElapsed(seconds);
     //---------------------------------------------------------------------------------------------------------------------------------------------

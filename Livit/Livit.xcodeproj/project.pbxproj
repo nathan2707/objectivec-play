@@ -47,10 +47,6 @@
 		D83D30031C30390100BAC2A1 /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D30011C30390100BAC2A1 /* FinishController.m */; };
 		D83D30041C30390100BAC2A1 /* FinishController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83D30021C30390100BAC2A1 /* FinishController.xib */; };
 		D83D30061C3040FB00BAC2A1 /* Right-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D83D30051C3040FB00BAC2A1 /* Right-32.png */; };
-		D83D300A1C36C5A300BAC2A1 /* ChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D30081C36C5A300BAC2A1 /* ChatTableView.m */; };
-		D83D300B1C36C5A300BAC2A1 /* ChatTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83D30091C36C5A300BAC2A1 /* ChatTableView.xib */; };
-		D83D300F1C36C5F500BAC2A1 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D300D1C36C5F500BAC2A1 /* TableViewCell.m */; };
-		D83D30101C36C5F500BAC2A1 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83D300E1C36C5F500BAC2A1 /* TableViewCell.xib */; };
 		D83D30121C38514200BAC2A1 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D83D30111C38514200BAC2A1 /* delete.png */; };
 		D83D30161C3951CA00BAC2A1 /* PeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D83D30141C3951CA00BAC2A1 /* PeopleCell.m */; };
 		D83D30171C3951CA00BAC2A1 /* PeopleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83D30151C3951CA00BAC2A1 /* PeopleCell.xib */; };
@@ -310,12 +306,6 @@
 		D83D30011C30390100BAC2A1 /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
 		D83D30021C30390100BAC2A1 /* FinishController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinishController.xib; sourceTree = "<group>"; };
 		D83D30051C3040FB00BAC2A1 /* Right-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Right-32.png"; path = "../../Images/Right-32.png"; sourceTree = "<group>"; };
-		D83D30071C36C5A300BAC2A1 /* ChatTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableView.h; sourceTree = "<group>"; };
-		D83D30081C36C5A300BAC2A1 /* ChatTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableView.m; sourceTree = "<group>"; };
-		D83D30091C36C5A300BAC2A1 /* ChatTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableView.xib; sourceTree = "<group>"; };
-		D83D300C1C36C5F500BAC2A1 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
-		D83D300D1C36C5F500BAC2A1 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
-		D83D300E1C36C5F500BAC2A1 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		D83D30111C38514200BAC2A1 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete.png; path = ../../Images/delete.png; sourceTree = "<group>"; };
 		D83D30131C3951CA00BAC2A1 /* PeopleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleCell.h; sourceTree = "<group>"; };
 		D83D30141C3951CA00BAC2A1 /* PeopleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleCell.m; sourceTree = "<group>"; };
@@ -615,7 +605,7 @@
 			path = "../../Code-2/Livit";
 			sourceTree = "<group>";
 		};
-		D83D30181C39DED600BAC2A1 /* 04_Browser */ = {
+		D83D30181C39DED600BAC2A1 /* 05_Browser */ = {
 			isa = PBXGroup;
 			children = (
 				D83D30191C39DF7B00BAC2A1 /* BrowserViewController.h */,
@@ -632,7 +622,7 @@
 				D8BD9F131C439C2100D4E2D2 /* myButton.h */,
 				D8BD9F141C439C2100D4E2D2 /* myButton.m */,
 			);
-			name = 04_Browser;
+			name = 05_Browser;
 			sourceTree = "<group>";
 		};
 		D84D7E201BADFC83000E9C8F /* Images */ = {
@@ -734,39 +724,20 @@
 		D84D7E6B1BADFE27000E9C8F /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				D8A376181C2692B300058027 /* 05_House */,
-				D83D30181C39DED600BAC2A1 /* 04_Browser */,
-				D84D7E8D1BADFEE0000E9C8F /* 03_Settings */,
-				D84D7E771BADFE65000E9C8F /* 02_Groups */,
-				D84D7E761BADFE54000E9C8F /* 01_Recent */,
+				D8A376181C2692B300058027 /* 03_Create */,
+				D83D30181C39DED600BAC2A1 /* 05_Browser */,
+				D84D7E8D1BADFEE0000E9C8F /* 04_Settings */,
+				D84D7E771BADFE65000E9C8F /* 02_Houses */,
+				D84D7E761BADFE54000E9C8F /* 01_Events */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
 		};
-		D84D7E761BADFE54000E9C8F /* 01_Recent */ = {
+		D84D7E761BADFE54000E9C8F /* 01_Events */ = {
 			isa = PBXGroup;
 			children = (
-				5C44D71A1BD59F590003436B /* RecentView.m */,
-				5C44D71B1BD59F590003436B /* RecentCell.xib */,
-				5C44D71C1BD59F590003436B /* RecentCell.m */,
-				5C44D71D1BD59F590003436B /* RecentView.xib */,
-				5C44D71E1BD59F590003436B /* RecentView.h */,
-				5C44D71F1BD59F590003436B /* RecentCell.h */,
-				D83D30071C36C5A300BAC2A1 /* ChatTableView.h */,
-				D83D30081C36C5A300BAC2A1 /* ChatTableView.m */,
-				D83D30091C36C5A300BAC2A1 /* ChatTableView.xib */,
-				D83D300C1C36C5F500BAC2A1 /* TableViewCell.h */,
-				D83D300D1C36C5F500BAC2A1 /* TableViewCell.m */,
-				D83D300E1C36C5F500BAC2A1 /* TableViewCell.xib */,
-			);
-			name = 01_Recent;
-			sourceTree = "<group>";
-		};
-		D84D7E771BADFE65000E9C8F /* 02_Groups */ = {
-			isa = PBXGroup;
-			children = (
-				D88A23231C04610400A66263 /* Categories.h */,
-				D88A23241C04610400A66263 /* Categories.m */,
+				D88A232D1C04610400A66263 /* KPTimePicker.h */,
+				D88A232E1C04610400A66263 /* KPTimePicker.m */,
 				D88A23251C04610400A66263 /* CommentCell.h */,
 				D88A23261C04610400A66263 /* CommentCell.m */,
 				D88A23271C04610400A66263 /* CommentCell.xib */,
@@ -775,22 +746,54 @@
 				D88A232A1C04610400A66263 /* GroupSettingsView.h */,
 				D88A232B1C04610400A66263 /* GroupSettingsView.m */,
 				D88A232C1C04610400A66263 /* GroupSettingsView.xib */,
-				D88A232D1C04610400A66263 /* KPTimePicker.h */,
-				D88A232E1C04610400A66263 /* KPTimePicker.m */,
-				D88A232F1C04610400A66263 /* UserCell.h */,
-				D88A23301C04610400A66263 /* UserCell.m */,
-				D88A23311C04610400A66263 /* UserCell.xib */,
+				D84D7EE81BAE0078000E9C8F /* Chat */,
+				5C44D71A1BD59F590003436B /* RecentView.m */,
+				5C44D71B1BD59F590003436B /* RecentCell.xib */,
+				5C44D71C1BD59F590003436B /* RecentCell.m */,
+				5C44D71D1BD59F590003436B /* RecentView.xib */,
+				5C44D71E1BD59F590003436B /* RecentView.h */,
+				5C44D71F1BD59F590003436B /* RecentCell.h */,
+			);
+			name = 01_Events;
+			sourceTree = "<group>";
+		};
+		D84D7E771BADFE65000E9C8F /* 02_Houses */ = {
+			isa = PBXGroup;
+			children = (
+				D8A375FF1C1BDB6100058027 /* EventCell.h */,
+				D8A376001C1BDB6100058027 /* EventCell.m */,
+				D8A376011C1BDB6100058027 /* EventCell.xib */,
+				5CECB0B71BDDEC510081A76D /* GroupsView.h */,
+				5CECB0B41BDDEC510081A76D /* GroupsView.m */,
+				5C44D73B1BD5A0390003436B /* GroupsView.xib */,
+				D83D2FAD1C2C21F200BAC2A1 /* GalleryView.h */,
+				D83D2FAE1C2C21F200BAC2A1 /* GalleryView.m */,
+				D83D2FAF1C2C21F200BAC2A1 /* GalleryView.xib */,
+				D83D2FC01C2DA2A100BAC2A1 /* ImageController.h */,
+				D83D2FC11C2DA2A100BAC2A1 /* ImageController.m */,
+				D83D2FC21C2DA2A100BAC2A1 /* ImageController.xib */,
+				D83D2FA81C2BF76D00BAC2A1 /* PhotoCell.h */,
+				D83D2FA91C2BF76D00BAC2A1 /* PhotoCell.m */,
+				D83D2FAA1C2BF76D00BAC2A1 /* PhotoCell.xib */,
+				D8A376041C1CAC6E00058027 /* HousesController.h */,
+				D8A376051C1CAC6E00058027 /* HousesController.m */,
+				D8A376061C1CAC6E00058027 /* HousesController.xib */,
+				D8A376091C1CAD0400058027 /* HouseCell.h */,
+				D8A3760A1C1CAD0400058027 /* HouseCell.m */,
+				D8A3760B1C1CAD0400058027 /* HouseCell.xib */,
+				D8A376131C1CB5EA00058027 /* CreateHouseController.h */,
+				D8A376141C1CB5EA00058027 /* CreateHouseController.m */,
+				D8A376151C1CB5EA00058027 /* CreateHouseController.xib */,
 				5C44D7371BD5A0390003436B /* CreateGroupView.m */,
 				5C44D7381BD5A0390003436B /* CreateGroupView.xib */,
 				5C44D7391BD5A0390003436B /* CreateGroupView.h */,
 			);
-			name = 02_Groups;
+			name = 02_Houses;
 			sourceTree = "<group>";
 		};
-		D84D7E8D1BADFEE0000E9C8F /* 03_Settings */ = {
+		D84D7E8D1BADFEE0000E9C8F /* 04_Settings */ = {
 			isa = PBXGroup;
 			children = (
-				D84D7EF71BAE010A000E9C8F /* Categories */,
 				D84D7E8E1BADFEF4000E9C8F /* BlockedView.h */,
 				D84D7E8F1BADFEF4000E9C8F /* BlockedView.m */,
 				D84D7E901BADFEF4000E9C8F /* BlockedView.xib */,
@@ -803,9 +806,6 @@
 				D88A23881C13EF1900A66263 /* InvitesController.h */,
 				D88A23891C13EF1900A66263 /* InvitesController.m */,
 				D88A238A1C13EF1900A66263 /* InvitesController.xib */,
-				D8A375FF1C1BDB6100058027 /* EventCell.h */,
-				D8A376001C1BDB6100058027 /* EventCell.m */,
-				D8A376011C1BDB6100058027 /* EventCell.xib */,
 				D84D7EF91BAE0BE7000E9C8F /* DiscoveryView.h */,
 				D84D7EFA1BAE0BE7000E9C8F /* DiscoveryView.m */,
 				D84D7EFB1BAE0BE7000E9C8F /* DiscoveryView.xib */,
@@ -814,12 +814,15 @@
 				D84D7F521BAF5EF8000E9C8F /* TermsView.xib */,
 				D84D7F241BAE1A12000E9C8F /* defaultPrefsFile.plist */,
 			);
-			name = 03_Settings;
+			name = 04_Settings;
 			sourceTree = "<group>";
 		};
 		D84D7E9D1BADFF2D000E9C8F /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				D88A232F1C04610400A66263 /* UserCell.h */,
+				D88A23301C04610400A66263 /* UserCell.m */,
+				D88A23311C04610400A66263 /* UserCell.xib */,
 				D84D7E881BADFECF000E9C8F /* PeopleView.h */,
 				D84D7E891BADFECF000E9C8F /* PeopleView.m */,
 				D84D7E8A1BADFECF000E9C8F /* PeopleView.xib */,
@@ -850,6 +853,8 @@
 		D84D7EB21BADFF6C000E9C8F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D88A23231C04610400A66263 /* Categories.h */,
+				D88A23241C04610400A66263 /* Categories.m */,
 				D84D7EC51BADFF89000E9C8F /* group.h */,
 				D84D7EC61BADFF89000E9C8F /* group.m */,
 				D84D7EC71BADFF89000E9C8F /* people.h */,
@@ -908,28 +913,6 @@
 			name = Chat;
 			sourceTree = "<group>";
 		};
-		D84D7EF71BAE010A000E9C8F /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				D8DE1D7A1C45F2D000538ADA /* SearchController.h */,
-				D8DE1D7B1C45F2D000538ADA /* SearchController.m */,
-				D8DE1D7C1C45F2D000538ADA /* SearchController.xib */,
-				D88A234A1C04641200A66263 /* SearchCell.h */,
-				D88A234B1C04641200A66263 /* SearchCell.m */,
-				D88A234C1C04641200A66263 /* SearchCell.xib */,
-				D83D2FC51C2EA9EB00BAC2A1 /* CategoryChoiceController.h */,
-				D83D2FC61C2EA9EB00BAC2A1 /* CategoryChoiceController.m */,
-				D83D2FC71C2EA9EB00BAC2A1 /* CategoryChoiceController.xib */,
-				D83D2FCA1C2EB0D300BAC2A1 /* CatCell.h */,
-				D83D2FCB1C2EB0D300BAC2A1 /* CatCell.m */,
-				D83D2FCC1C2EB0D300BAC2A1 /* CatCell.xib */,
-				D83D30001C30390100BAC2A1 /* FinishController.h */,
-				D83D30011C30390100BAC2A1 /* FinishController.m */,
-				D83D30021C30390100BAC2A1 /* FinishController.xib */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
 		D856C34D1C4487D600FBD385 /* 4square */ = {
 			isa = PBXGroup;
 			children = (
@@ -952,32 +935,26 @@
 			name = 4square;
 			sourceTree = "<group>";
 		};
-		D8A376181C2692B300058027 /* 05_House */ = {
+		D8A376181C2692B300058027 /* 03_Create */ = {
 			isa = PBXGroup;
 			children = (
-				5CECB0B71BDDEC510081A76D /* GroupsView.h */,
-				5CECB0B41BDDEC510081A76D /* GroupsView.m */,
-				5C44D73B1BD5A0390003436B /* GroupsView.xib */,
-				D83D2FAD1C2C21F200BAC2A1 /* GalleryView.h */,
-				D83D2FAE1C2C21F200BAC2A1 /* GalleryView.m */,
-				D83D2FAF1C2C21F200BAC2A1 /* GalleryView.xib */,
-				D83D2FC01C2DA2A100BAC2A1 /* ImageController.h */,
-				D83D2FC11C2DA2A100BAC2A1 /* ImageController.m */,
-				D83D2FC21C2DA2A100BAC2A1 /* ImageController.xib */,
-				D83D2FA81C2BF76D00BAC2A1 /* PhotoCell.h */,
-				D83D2FA91C2BF76D00BAC2A1 /* PhotoCell.m */,
-				D83D2FAA1C2BF76D00BAC2A1 /* PhotoCell.xib */,
-				D8A376041C1CAC6E00058027 /* HousesController.h */,
-				D8A376051C1CAC6E00058027 /* HousesController.m */,
-				D8A376061C1CAC6E00058027 /* HousesController.xib */,
-				D8A376091C1CAD0400058027 /* HouseCell.h */,
-				D8A3760A1C1CAD0400058027 /* HouseCell.m */,
-				D8A3760B1C1CAD0400058027 /* HouseCell.xib */,
-				D8A376131C1CB5EA00058027 /* CreateHouseController.h */,
-				D8A376141C1CB5EA00058027 /* CreateHouseController.m */,
-				D8A376151C1CB5EA00058027 /* CreateHouseController.xib */,
+				D8DE1D7A1C45F2D000538ADA /* SearchController.h */,
+				D8DE1D7B1C45F2D000538ADA /* SearchController.m */,
+				D8DE1D7C1C45F2D000538ADA /* SearchController.xib */,
+				D88A234A1C04641200A66263 /* SearchCell.h */,
+				D88A234B1C04641200A66263 /* SearchCell.m */,
+				D88A234C1C04641200A66263 /* SearchCell.xib */,
+				D83D2FC51C2EA9EB00BAC2A1 /* CategoryChoiceController.h */,
+				D83D2FC61C2EA9EB00BAC2A1 /* CategoryChoiceController.m */,
+				D83D2FC71C2EA9EB00BAC2A1 /* CategoryChoiceController.xib */,
+				D83D2FCA1C2EB0D300BAC2A1 /* CatCell.h */,
+				D83D2FCB1C2EB0D300BAC2A1 /* CatCell.m */,
+				D83D2FCC1C2EB0D300BAC2A1 /* CatCell.xib */,
+				D83D30001C30390100BAC2A1 /* FinishController.h */,
+				D83D30011C30390100BAC2A1 /* FinishController.m */,
+				D83D30021C30390100BAC2A1 /* FinishController.xib */,
 			);
-			name = 05_House;
+			name = 03_Create;
 			sourceTree = "<group>";
 		};
 		D8F0E7AE1BADF4FA00D09294 = {
@@ -987,7 +964,6 @@
 				D84D7E6B1BADFE27000E9C8F /* Tabs */,
 				D84D7ED41BADFFB8000E9C8F /* Welcome */,
 				D84D7EB21BADFF6C000E9C8F /* Utilities */,
-				D84D7EE81BAE0078000E9C8F /* Chat */,
 				D84D7E9D1BADFF2D000E9C8F /* Users */,
 				D8F0E7D31BADF4FA00D09294 /* LivitTests */,
 				D8F0E7B81BADF4FA00D09294 /* Products */,
@@ -1214,7 +1190,6 @@
 				D88A23341C04610400A66263 /* CommentCell.xib in Resources */,
 				D8A375FE1C1A652D00058027 /* add.png in Resources */,
 				D84D7F031BAE0BE7000E9C8F /* DiscoveryView.xib in Resources */,
-				D83D300B1C36C5A300BAC2A1 /* ChatTableView.xib in Resources */,
 				5CE596BC1C425D17004A635C /* LaunchScreen.png in Resources */,
 				D88A23931C196B8F00A66263 /* camera.png in Resources */,
 				D83D30171C3951CA00BAC2A1 /* PeopleCell.xib in Resources */,
@@ -1223,7 +1198,6 @@
 				D88A23371C04610400A66263 /* GroupSettingsView.xib in Resources */,
 				5C44D7211BD59F590003436B /* RecentCell.xib in Resources */,
 				5C44D7531BD5A0930003436B /* ProfileView.xib in Resources */,
-				D83D30101C36C5F500BAC2A1 /* TableViewCell.xib in Resources */,
 				D88A235B1C04641200A66263 /* SearchCell.xib in Resources */,
 				D83D2FBE1C2C5F9800BAC2A1 /* like.png in Resources */,
 				D88A22FD1C045B5B00A66263 /* chat_location@2x.png in Resources */,
@@ -1452,7 +1426,6 @@
 				5C44D74F1BD5A0930003436B /* ChatView.m in Sources */,
 				D8F0EA001BADF7C100D09294 /* IDMZoomingScrollView.m in Sources */,
 				D88A23391C04610400A66263 /* UserCell.m in Sources */,
-				D83D300F1C36C5F500BAC2A1 /* TableViewCell.m in Sources */,
 				D88A23321C04610400A66263 /* Categories.m in Sources */,
 				D84D7EE01BADFFD7000E9C8F /* RegisterView.m in Sources */,
 				D84D7EBF1BADFF7C000E9C8F /* camera.m in Sources */,
@@ -1460,7 +1433,6 @@
 				D8F0E9FD1BADF7C100D09294 /* IDMPhotoBrowser.m in Sources */,
 				5C44D7221BD59F590003436B /* RecentCell.m in Sources */,
 				D8A3760C1C1CAD0400058027 /* HouseCell.m in Sources */,
-				D83D300A1C36C5A300BAC2A1 /* ChatTableView.m in Sources */,
 				D88A23351C04610400A66263 /* DAKeyboardControl.m in Sources */,
 				D84D7E8B1BADFECF000E9C8F /* PeopleView.m in Sources */,
 				D88A238B1C13EF1900A66263 /* InvitesController.m in Sources */,

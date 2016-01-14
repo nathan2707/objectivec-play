@@ -89,13 +89,16 @@ NSMutableArray *houses;
             [ProgressHUD showError:@"Network error."];
         }else{
             self.groups = [[NSMutableArray alloc] initWithArray:objects];
-            NSUInteger Y = objects.count;
             PFUser *user = [PFUser currentUser];
-            NSUInteger X = Y - [user[@"invites_seen"] integerValue];
-            
-            self.labelNumberInvites.text = [NSString stringWithFormat:@"%li invites, %li unseen", Y,X ];
+            int X = objects.count - [user[@"invites_seen"] integerValue];
+            NSLog(@"%i",X);
+            if (X <= 0){
+            self.labelNumberInvites.text = [NSString stringWithFormat:@"" ];
+            } else {
+            self.labelNumberInvites.text = [NSString stringWithFormat:@"%i new", X ];
             self.labelNumberInvites.textColor = [UIColor redColor];
             [self.labelNumberInvites sizeToFit];
+            }
         }
     }];
     

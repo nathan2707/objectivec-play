@@ -15,7 +15,7 @@
 #import "ProgressHUD.h"
 #import "IDMPhotoBrowser.h"
 #import "RNGridMenu.h"
-
+#import "UIImage+JSQMessages.h"
 #import "AppConstant.h"
 #import "camera.h"
 #import "common.h"
@@ -30,7 +30,7 @@
 #import "ChatView.h"
 #import "ProfileView.h"
 #import "GroupSettingsView.h"
-
+//JSQMessagesBubbleImageFactory *bubbleFactoryOutline = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularStrokedImage] capInsets:UIEdgeInsetsZero];
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface ChatView()
 {
@@ -86,8 +86,8 @@
 //     }];
     
     self.showTypingIndicator = YES;
-    
-    self.showLoadEarlierMessagesHeader = YES;
+    self.title = @"Chat";
+    self.showLoadEarlierMessagesHeader = NO;
 	users = [[NSMutableArray alloc] init];
 	messages = [[NSMutableArray alloc] init];
 	avatars = [[NSMutableDictionary alloc] init];
@@ -96,8 +96,9 @@
 	self.senderId = user.objectId;
 	self.senderDisplayName = user[PF_USER_FULLNAME];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-	bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:COLOR_OUTGOING];
+    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularTaillessImage] capInsets:UIEdgeInsetsZero];
+    bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1]];
+    //bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:COLOR_OUTGOING];
 	bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:COLOR_INCOMING];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_blank"] diameter:30.0];
@@ -484,17 +485,18 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
+    
 	JSQMessage *message = messages[indexPath.item];
 	if (message.isMediaMessage)
 	{
-		if ([message.media isKindOfClass:[PhotoMediaItem class]])
+		if ([message.media isKindOfClass:[JSQPhotoMediaItem class]])
 		{
 			PhotoMediaItem *mediaItem = (PhotoMediaItem *)message.media;
 			NSArray *photos = [IDMPhoto photosWithImages:@[mediaItem.image]];
 			IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos];
 			[self presentViewController:browser animated:YES completion:nil];
 		}
-		if ([message.media isKindOfClass:[VideoMediaItem class]])
+		if ([message.media isKindOfClass:[JSQVideoMediaItem class]])
 		{
 			VideoMediaItem *mediaItem = (VideoMediaItem *)message.media;
 			MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:mediaItem.fileURL];

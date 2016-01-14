@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupSettingsView">
@@ -23,8 +24,8 @@
                 <outlet property="labelMonth" destination="d18-Hd-YNK" id="Ygn-dn-IVH"/>
                 <outlet property="labelName" destination="2en-HL-okw" id="91c-ey-bnQ"/>
                 <outlet property="leaveButton" destination="j6y-Yj-nbn" id="AKx-8z-Hll"/>
+                <outlet property="locationButton" destination="jhy-Ek-FGj" id="3a1-DS-CuE"/>
                 <outlet property="locationCell" destination="v20-vO-Bzy" id="G5D-T6-mSK"/>
-                <outlet property="locationLabel" destination="MpF-Ls-DGX" id="NIt-mQ-lqA"/>
                 <outlet property="mapView" destination="wfI-Zn-1aS" id="38z-Mg-zYm"/>
                 <outlet property="numberRequestsLabel" destination="1T2-xi-K0o" id="3jf-MI-AoH"/>
                 <outlet property="picker" destination="3pi-VJ-Kpe" id="8Pl-5X-I8a"/>
@@ -118,18 +119,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vzg-na-WO0">
-                        <rect key="frame" x="3" y="15" width="300" height="28.5"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsVerticalScrollIndicator="NO" text="Description" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vzg-na-WO0">
+                        <rect key="frame" x="8" y="21" width="300" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="acA-Xc-4aV"/>
+                        </connections>
                     </textView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btd-Wo-OWR">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btd-Wo-OWR">
                         <rect key="frame" x="8" y="2" width="88" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="88" id="zsx-sx-P4V"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Btd-Wo-OWR" firstAttribute="top" secondItem="oTy-zW-URM" secondAttribute="topMargin" constant="-6" id="92p-O5-fir"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="vzg-na-WO0" secondAttribute="bottom" constant="-3.5" id="F88-v1-Gq9"/>
+                    <constraint firstItem="vzg-na-WO0" firstAttribute="leading" secondItem="oTy-zW-URM" secondAttribute="leadingMargin" id="IYq-nx-K2b"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Btd-Wo-OWR" secondAttribute="bottom" constant="23.5" id="ikp-EG-d5i"/>
+                    <constraint firstItem="vzg-na-WO0" firstAttribute="leading" secondItem="Btd-Wo-OWR" secondAttribute="leading" id="o1c-wC-iK0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vzg-na-WO0" secondAttribute="trailing" constant="4" id="uac-0Z-LPm"/>
+                    <constraint firstItem="vzg-na-WO0" firstAttribute="top" secondItem="oTy-zW-URM" secondAttribute="topMargin" constant="13" id="ztY-Mv-TnD"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="123" y="276.5"/>
         </tableViewCell>
@@ -215,18 +231,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="420" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="geotag.png" translatesAutoresizingMaskIntoConstraints="NO" id="SFj-VZ-Lfi">
-                        <rect key="frame" x="6" y="4" width="30" height="35.5"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpF-Ls-DGX">
-                        <rect key="frame" x="46" y="11" width="319" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMa-JH-LkE">
+                        <rect key="frame" x="5" y="5" width="30" height="30"/>
+                        <state key="normal" title="Button" image="geotag.png"/>
+                        <connections>
+                            <action selector="actionLocation:" destination="-1" eventType="touchUpInside" id="Qjc-dh-YJ2"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhy-Ek-FGj">
+                        <rect key="frame" x="43" y="5" width="350" height="30"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.1764705882" green="0.1843137255" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="actionLocation:" destination="-1" eventType="touchUpInside" id="XOk-Bj-S6q"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="366" y="1103"/>
+            <point key="canvasLocation" x="237" y="689"/>
         </tableViewCell>
         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kn5-Dn-PSA">
             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>

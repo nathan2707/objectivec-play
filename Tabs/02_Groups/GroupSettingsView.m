@@ -30,10 +30,12 @@
 #import "GalleryView.h"
 #import "ImageController.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "SearchController.h"
+
 
 // Make a notification (not push, just on the app, just like a message was received, when a request is received.
 
-@interface GroupSettingsView() <CellDelegate, CellDelegate2 ,UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate,UIPopoverControllerDelegate, KPTimePickerDelegate, MKMapViewDelegate, FacebookFriendsDelegate, ImageDelegate>
+@interface GroupSettingsView() <CellDelegate, CellDelegate2 ,UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate,UIPopoverControllerDelegate, KPTimePickerDelegate, MKMapViewDelegate, FacebookFriendsDelegate, ImageDelegate, UITextViewDelegate, SearchLocationDelegate>
 {
 	PFObject *group;
 	NSMutableArray *users;
@@ -48,6 +50,7 @@
     BOOL galleryOrMain;
     BOOL pickerCalled;
     BOOL cameraOrKeyboard;
+    BOOL description;
 }
 @property (strong, nonatomic) IBOutlet UITableView *requestTableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *cellGallery;
@@ -56,8 +59,9 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *picker;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *locationCell;
-@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+
 @property (strong, nonatomic) IBOutlet UILabel *numberRequestsLabel;
+@property (strong, nonatomic) IBOutlet UIButton *locationButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *leaveButton;
 @property (nonatomic, strong) NSMutableArray *sampleDataArray;
@@ -96,6 +100,7 @@
 @synthesize eventImage;
 @synthesize eventLabel;
 @synthesize viewHeader;
+
 
 -(void)selectInvites:(NSMutableArray *)objectIds :(NSMutableArray *)names{
     [group[@"Invites"] addObjectsFromArray:objectIds];
@@ -160,7 +165,12 @@
     [df setDateFormat:@"d"];
     self.labelDay.text = [df stringFromDate:date];
     
+    if ([group[@"Description"]isEqualToString:@""]){
+        description = NO;
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
     self.descriptionTextview.text = group[@"Description"];
+    }
 }
 
 -(void)timePicker:(KPTimePicker*)timePicker selectedDate:(NSDate *)date{
@@ -188,22 +198,20 @@
 }
 
 -(void)callDP{
-    //    self.tableView.contentOffset = CGPointMake(0, 0 - self.tableView.contentInset.top);
-    //    self.tableView.scrollEnabled = NO;
-    //   [self show:YES timePickerAnimated:YES];
     if (pickerCalled == NO){
         pickerCalled = YES;
         [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     } else {
         pickerCalled = NO;
         group[@"Date"] = self.picker.date;
+         [self loadWhen];
         group[@"timeInterval"] = @([self.picker.date timeIntervalSince1970]);
         [self changeInformation];
         [group saveInBackgroundWithBlock :^(BOOL succeeded, NSError *error)
          {
              if (error != nil) [ProgressHUD showError:@"Network error."];
              [self.tableView reloadData];
-             //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
          }];
         
     }
@@ -221,15 +229,42 @@
     [viewHeader addGestureRecognizer:tap];
 }
 
+-(void)loadWhen{
+    NSString *timeString = @"";
+    NSTimeInterval timeSince = [[NSDate date] timeIntervalSinceDate:group[@"Date"]];
+    double absoluteTime = fabs(timeSince);
+    
+    if (absoluteTime/60 < 1) {
+        timeString = [NSString stringWithFormat:@"%i seconds",(int)absoluteTime];
+    }
+    else if (absoluteTime/3600 < 1) {
+        timeString = [NSString stringWithFormat:@"%i minutes",(int)absoluteTime/60];
+    }
+    else if (absoluteTime/(3600*24) < 1) {
+        timeString = [NSString stringWithFormat:@"%i hours",(int)absoluteTime/3600];
+    }
+    else{
+        timeString = [NSString stringWithFormat:@"%i days",(int)absoluteTime/(3600*24)];
+    }
+    if (timeSince < 0){
+        self.eventLabel.text = [NSString stringWithFormat:@"starts in %@",timeString];
+        self.eventLabel.textColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
+    } else {
+        self.eventLabel.text = [NSString stringWithFormat:@"happened %@ ago",timeString];
+        self.eventLabel.textColor = [UIColor redColor];
+    }
+
+}
 
 - (void)loadGroup
 
 {
-    eventLabel.text = group[@"Name"];
+    [self loadWhen];
     [self changeInformation];
     if ([group[@"Creator"] isEqualToString:[[PFUser currentUser]objectId]]){
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(callDP)];
         [self.timeView addGestureRecognizer:tap];
+        self.descriptionTextview.userInteractionEnabled = YES;
     }
     if (([group[@"Identities"] containsObject:[[PFUser currentUser] objectId]]) && ([group[@"Creator"] isEqualToString:[[PFUser currentUser] objectId]])){
         [self.leaveButton setTitle:@"Delete Event" forState:UIControlStateNormal];
@@ -242,7 +277,7 @@
         [self.leaveButton setTitleColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forState:UIControlStateNormal];
     }
     if (group[@"LocationString"]){
-        self.locationLabel.text =group[@"LocationString"];
+        [self.locationButton setTitle:group[@"LocationString"] forState:UIControlStateNormal];
     }
     
     if ( group[@"Picture"] == nil){
@@ -526,11 +561,11 @@ static inline CGFloat textViewHeight(UITextView *textView) {
     pickerCalled = NO;
     
     self.tableView.tableHeaderView = viewHeader;
-    
+    self.descriptionTextview.userInteractionEnabled = NO;
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(actionWrite)];
     [barButton setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = barButton;
-    
+    description = YES;
     
     self.title = group[@"Name"];
     [self.mapView setMapType:MKMapTypeSatellite];
@@ -619,14 +654,9 @@ static inline CGFloat textViewHeight(UITextView *textView) {
              else [ProgressHUD showError:@"Network error."];
          }];
         
-        
-        
         [group[@"Identities"] removeObject:[[PFUser currentUser]objectId]];
         [group[@"Users"] removeObject: [PFUser currentUser]];
         group[@"Affluence"] = @([group[@"Affluence"] integerValue]-1);
-        //    if ([group[@"Affluence"]integerValue] < [group[@"Capacity"]integerValue]) {
-        //        group[@"Full"]=@"NO";
-        //    }
         [group saveInBackgroundWithBlock :^(BOOL succeeded, NSError *error)
          {
              if (error != nil) [ProgressHUD showError:@"Network error."];
@@ -855,7 +885,7 @@ static inline CGFloat textViewHeight(UITextView *textView) {
             if (indexPath.section ==0 && indexPath.row ==3) return 70;
         } else {
             if (indexPath.section ==0 && indexPath.row ==3) return 100;
-            if (indexPath.section ==0 && indexPath.row ==0) return 50;
+            if (indexPath.section ==0 && indexPath.row ==0) return 40;
         }
         if (indexPath.section == 2) return 50;
         return 70;
@@ -1064,6 +1094,31 @@ static inline CGFloat textViewHeight(UITextView *textView) {
             }
         }
     }
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    group[@"Description"] = textView.text;
+    [group saveInBackground];
+}
+
+- (IBAction)actionLocation:(id)sender {
+    SearchController *search = [[SearchController alloc]init];
+    search.event = group;
+    search.delegate = self;
+    [self.navigationController pushViewController:search animated:YES];
+}
+
+-(void)choseNewLocation:(NSDictionary *)location{
+    group[@"Location"] = location;
+    group[@"LocationString"] = [location objectForKey:@"string"];
+    [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (error){
+        [ProgressHUD showError:@"Could not save new lieu"];
+        }else{
+    [self.locationButton setTitle:group[@"LocationString"] forState:UIControlStateNormal];
+    [self updateMapWithEvent];
+        }
+    }];
 }
 
 

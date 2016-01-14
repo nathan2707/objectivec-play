@@ -2,7 +2,7 @@
 
 #import <Parse/Parse.h>
 
-@interface GroupSettingsView : UITableViewController <UITextViewDelegate>
+@interface GroupSettingsView : UITableViewController
 
 - (id)initWith:(PFObject *)group_;
 @property (strong,nonatomic) PFObject *recent;

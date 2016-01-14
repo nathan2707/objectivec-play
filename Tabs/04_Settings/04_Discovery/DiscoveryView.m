@@ -82,8 +82,8 @@ NSMutableArray *selection;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section == 0) return @"Choose a category";
-    else return @"finder settings";
+    if (section == 0) return @"finder settings";
+    else return @"activity preferences";
 }
 
 

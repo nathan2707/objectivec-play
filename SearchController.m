@@ -39,6 +39,7 @@ static NSString *const SearchResultsCellIdentifier = @"SearchResultsCellIdentifi
 @implementation SearchController
 int sel;
 NSString *street;
+BOOL alreadyannoted;
 
 -(void)actionNext{
     HousesController *hc = [[HousesController alloc]init];
@@ -58,6 +59,8 @@ NSString *street;
     self.searchQuery = [HNKGooglePlacesAutocompleteQuery sharedQuery];
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchCell" bundle:nil] forCellReuseIdentifier:@"searchCell"];
     
+    if ([self.navigationController.viewControllers objectAtIndex:1] == self){
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(actionNext) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Next" forState:UIControlStateNormal];
@@ -65,6 +68,13 @@ NSString *street;
     button.frame = CGRectMake(0,0,50,35);
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
+    } else {
+        MKPlacemark *placemark = [[MKPlacemark alloc]initWithCoordinate:CLLocationCoordinate2DMake([[self.event[@"Location"] objectForKey:@"lat"] doubleValue],[[self.event[@"Location"] objectForKey:@"long"] doubleValue]) addressDictionary:@{@"Name":[self.event[@"Location"] objectForKey:@"string"], @"Address":[self.event[@"Location"] objectForKey:@"adress"]}];
+        [self addPlacemarkAnnotationToMap:placemark addressString:[self.event[@"Location"] objectForKey:@"string"]];
+        self.searchBar.text = [self.event[@"Location"] objectForKey:@"adress"];
+        [self recenterMapToPlacemark:placemark];
+        alreadyannoted = YES;
+    }
     sel = 30;
     [self.tableView setHidden:YES];
 }
@@ -74,6 +84,7 @@ NSString *street;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (alreadyannoted) return 0;
     if (self.venues != 0){
         return self.venues.count;
     } else {
@@ -117,6 +128,7 @@ NSString *street;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if ( self.venues.count == 0)
     {
         SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
@@ -201,14 +213,18 @@ NSString *street;
     [self.tableView reloadData];
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated{
+    if ([self.navigationController.viewControllers objectAtIndex:1] != self){
+        [self.delegate choseNewLocation:self.event[@"Location"]];
+    }
+}
 
 #pragma mark - UISearchBar Delegate
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
-    
+    alreadyannoted = NO;
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText

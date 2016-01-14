@@ -16,6 +16,7 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 - (void)bindData:(PFObject *)recent_;
+@property (strong, nonatomic) IBOutlet UILabel *labelPeople;
 @property(nonatomic,strong)NSString *address;
 @property(nonatomic,strong)NSDate *date;
 @end

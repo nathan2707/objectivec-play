@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+
+@protocol SearchLocationDelegate
+-(void)choseNewLocation:(NSDictionary*)location;
+@end
+
 @interface SearchController : UIViewController
 @property (nonatomic,strong) PFObject *event;
+@property (nonatomic, assign) NSObject <SearchLocationDelegate> *delegate;
 @end

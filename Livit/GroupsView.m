@@ -271,7 +271,7 @@ BOOL onefinished;
         [cell.button2 setHidden:YES];
         cell.button2.enabled = NO;
         
-        myButton *joinButton = [[myButton alloc]initWithFrame:CGRectMake(300, 20, 100, 20)];
+        myButton *joinButton = [[myButton alloc]initWithFrame:CGRectMake(325, 20, 75, 20)];
         [joinButton addTarget:self action:@selector(actionJoin:) forControlEvents:UIControlEventTouchUpInside];
         joinButton.tag = indexPath.row;
         joinButton.titleLabel.font = [UIFont systemFontOfSize: 13];
@@ -394,7 +394,7 @@ BOOL onefinished;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section ==2) return 70;
-    if (indexPath.section ==1) return 76;
+    if (indexPath.section ==1) return 60;
     return 50;
 }
 
