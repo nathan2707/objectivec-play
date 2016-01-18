@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7ECAAD6C9A2FB703E2524146'
+               BlueprintIdentifier = '2F786CE3EBFD11E87BD50752'
                BlueprintName = 'HNKServerFacade'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libHNKServerFacade.a'>

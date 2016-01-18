@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinishController">
@@ -61,7 +62,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="417" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write a caption..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6w3-LL-7Bv">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write a caption..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6w3-LL-7Bv">
                         <rect key="frame" x="8" y="0.0" width="401" height="43.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -70,6 +71,12 @@
                         </connections>
                     </textView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="6w3-LL-7Bv" firstAttribute="trailing" secondItem="4EU-bx-7Q7" secondAttribute="trailingMargin" id="KNP-KG-ftF"/>
+                    <constraint firstItem="6w3-LL-7Bv" firstAttribute="leading" secondItem="4EU-bx-7Q7" secondAttribute="leadingMargin" id="KzD-1L-beG"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="6w3-LL-7Bv" secondAttribute="bottom" constant="-8" id="LW8-UW-fdB"/>
+                    <constraint firstItem="6w3-LL-7Bv" firstAttribute="top" secondItem="4EU-bx-7Q7" secondAttribute="topMargin" constant="-8" id="PhK-Mw-MY0"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="315.5" y="936"/>
         </tableViewCell>
@@ -80,13 +87,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eE1-gj-klg">
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eE1-gj-klg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                         <date key="date" timeIntervalSinceReferenceDate="472922846.71915501">
                             <!--2015-12-27 15:27:26 +0000-->
                         </date>
                     </datePicker>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="eE1-gj-klg" secondAttribute="trailing" constant="-8" id="Hlr-n5-k7d"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eE1-gj-klg" secondAttribute="bottom" constant="-8.5" id="KJM-AC-23G"/>
+                    <constraint firstItem="eE1-gj-klg" firstAttribute="leading" secondItem="NhO-FD-3Bn" secondAttribute="leadingMargin" constant="-8" id="N5K-ZJ-VDS"/>
+                    <constraint firstItem="eE1-gj-klg" firstAttribute="top" secondItem="NhO-FD-3Bn" secondAttribute="topMargin" constant="-8" id="p0y-fo-L6A"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="314" y="1059.5"/>
         </tableViewCell>
@@ -103,10 +116,18 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmU-0E-oRv">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmU-0E-oRv">
                         <rect key="frame" x="349" y="6" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="NlQ-g6-FMd"/>
+                            <constraint firstAttribute="height" constant="31" id="Rpc-de-ZfI"/>
+                        </constraints>
                     </switch>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="jmU-0E-oRv" secondAttribute="trailing" constant="8" id="Lzn-c1-Npz"/>
+                    <constraint firstItem="jmU-0E-oRv" firstAttribute="top" secondItem="l0g-tB-Kh3" secondAttribute="topMargin" constant="-2" id="lo2-EQ-Ozv"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="303" y="1191"/>
         </tableViewCell>
@@ -123,10 +144,17 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70P-el-y1p">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70P-el-y1p">
                         <rect key="frame" x="349" y="6" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="kGK-pC-1al"/>
+                        </constraints>
                     </switch>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="70P-el-y1p" secondAttribute="trailing" constant="8" id="1vx-Zn-Q2z"/>
+                    <constraint firstItem="70P-el-y1p" firstAttribute="top" secondItem="YUC-AY-evL" secondAttribute="topMargin" constant="-2" id="t0T-mF-4YU"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="303" y="1284"/>
         </tableViewCell>

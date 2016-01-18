@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -38,21 +39,35 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="geotag.png" translatesAutoresizingMaskIntoConstraints="NO" id="jra-XP-6az">
                         <rect key="frame" x="72" y="28" width="20" height="20"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5E-nz-zlK">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5E-nz-zlK">
                         <rect key="frame" x="330" y="24" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="E3E-in-Xca"/>
+                            <constraint firstAttribute="height" constant="30" id="cs0-gK-cuF"/>
+                        </constraints>
                         <state key="normal" title="Button" image="noButton"/>
                         <connections>
                             <action selector="actionNon:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bb3-LR-EF9"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzL-5y-wD0">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzL-5y-wD0">
                         <rect key="frame" x="368" y="23" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="6Up-yi-Xm7"/>
+                            <constraint firstAttribute="width" constant="30" id="iDq-B8-uas"/>
+                        </constraints>
                         <state key="normal" title="Button" image="Ok-32.png"/>
                         <connections>
                             <action selector="actionOui:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nby-Bl-8cV"/>
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="FzL-5y-wD0" firstAttribute="leading" secondItem="x5E-nz-zlK" secondAttribute="trailing" constant="8" id="0ce-3x-ooE"/>
+                    <constraint firstItem="x5E-nz-zlK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="D0D-2G-uxv"/>
+                    <constraint firstItem="FzL-5y-wD0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="vry-vk-Smx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FzL-5y-wD0" secondAttribute="trailing" constant="7" id="x6e-Mw-I0S"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="button1" destination="FzL-5y-wD0" id="N6b-ll-0zF"/>

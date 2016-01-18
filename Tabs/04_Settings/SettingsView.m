@@ -60,7 +60,7 @@ NSMutableArray *houses;
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self)
 	{
-		[self.tabBarItem setImage:[UIImage imageNamed:@"tab_settings"]];
+		[self.tabBarItem setImage:[UIImage imageNamed:@"Settings"]];
 		self.tabBarItem.title = @"Settings";
 	}
 	return self;

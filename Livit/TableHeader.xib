@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,18 +11,25 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69H-hC-2T1">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69H-hC-2T1">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monday, 5th" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDv-bb-Oco">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday, 5th" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDv-bb-Oco">
                             <rect key="frame" x="264" y="9" width="142" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="h1F-ZX-lgF"/>
+                                <constraint firstAttribute="width" constant="142" id="l9c-Mk-WyR"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tw3-Tl-mpt">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tw3-Tl-mpt">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="eOy-hm-hfU"/>
+                            </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoT-dZ-vWd" customClass="myButton">
                             <rect key="frame" x="4" y="6" width="40" height="40"/>
@@ -43,9 +50,22 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Tw3-Tl-mpt" secondAttribute="trailing" id="N8e-VR-5Fp"/>
+                        <constraint firstAttribute="trailing" secondItem="gDv-bb-Oco" secondAttribute="trailing" constant="8" id="UAS-gL-9H3"/>
+                        <constraint firstItem="Tw3-Tl-mpt" firstAttribute="top" secondItem="69H-hC-2T1" secondAttribute="top" id="Xb4-Pd-xUk"/>
+                        <constraint firstItem="gDv-bb-Oco" firstAttribute="top" secondItem="Tw3-Tl-mpt" secondAttribute="bottom" constant="8" id="eNj-jm-80j"/>
+                        <constraint firstItem="Tw3-Tl-mpt" firstAttribute="leading" secondItem="69H-hC-2T1" secondAttribute="leading" id="soQ-lg-cil"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="69H-hC-2T1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5xe-Ii-MfL"/>
+                <constraint firstAttribute="trailing" secondItem="69H-hC-2T1" secondAttribute="trailing" id="CiS-HL-zR9"/>
+                <constraint firstItem="69H-hC-2T1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hAP-u4-l3r"/>
+                <constraint firstAttribute="bottom" secondItem="69H-hC-2T1" secondAttribute="bottom" constant="-9" id="lPL-xZ-hsy"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

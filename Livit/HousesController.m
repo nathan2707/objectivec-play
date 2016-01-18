@@ -28,7 +28,7 @@ int sel;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     {
-        [self.tabBarItem setImage:[UIImage imageNamed:@"home"]];
+        [self.tabBarItem setImage:[UIImage imageNamed:@"House"]];
         self.tabBarItem.title = @"Houses";
         
     }

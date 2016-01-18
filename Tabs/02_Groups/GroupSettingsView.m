@@ -24,7 +24,6 @@
 #import "DAKeyboardControl.h"
 #import "KPTimePicker.h"
 #import "Categories.h"
-#import "ChatTableView.h"
 #import <MapKit/MapKit.h>
 #import "PeopleView.h"
 #import "GalleryView.h"

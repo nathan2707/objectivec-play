@@ -183,6 +183,9 @@
 
 
 -(void)loadMyHouses{
+    if (![PFUser currentUser]) {
+        return;
+    }
     PFQuery *query = [PFQuery queryWithClassName:@"Houses"];
     [query whereKey:@"Members" equalTo:[PFUser currentUser].objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error) {

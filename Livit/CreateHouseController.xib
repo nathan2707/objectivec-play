@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateHouseController">
@@ -64,18 +65,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="383" height="53.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick a fancy name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JHk-Mm-cM1">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick a fancy name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JHk-Mm-cM1">
                         <rect key="frame" x="72" y="12" width="302" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pun-Nd-XPI">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pun-Nd-XPI">
                         <rect key="frame" x="13" y="17" width="45" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="PKv-xL-Ox9"/>
+                            <constraint firstAttribute="width" constant="45" id="oPj-dC-wl3"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="JHk-Mm-cM1" secondAttribute="trailing" constant="1" id="5vg-0S-MO6"/>
+                    <constraint firstItem="Pun-Nd-XPI" firstAttribute="leading" secondItem="LQb-zM-kaw" secondAttribute="leadingMargin" constant="5" id="FjG-eC-dTZ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="JHk-Mm-cM1" secondAttribute="bottom" constant="3.5" id="GPH-En-k0g"/>
+                    <constraint firstItem="Pun-Nd-XPI" firstAttribute="top" secondItem="LQb-zM-kaw" secondAttribute="topMargin" constant="9" id="JEX-gQ-b0r"/>
+                    <constraint firstItem="JHk-Mm-cM1" firstAttribute="leading" secondItem="Pun-Nd-XPI" secondAttribute="trailing" constant="14" id="LaC-qI-m6u"/>
+                    <constraint firstItem="JHk-Mm-cM1" firstAttribute="top" secondItem="LQb-zM-kaw" secondAttribute="topMargin" constant="4" id="LgK-cP-a1K"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="234.5" y="444"/>
         </tableViewCell>
@@ -86,12 +99,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="378" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="What is your motto?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mkw-Po-916">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What is your motto?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mkw-Po-916">
                         <rect key="frame" x="8" y="8" width="354" height="50.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Mkw-Po-916" firstAttribute="leading" secondItem="INN-Rw-CPq" secondAttribute="leadingMargin" id="M2P-qi-CfA"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Mkw-Po-916" secondAttribute="trailing" constant="8" id="Mpa-1w-c8T"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Mkw-Po-916" secondAttribute="bottom" constant="-7" id="jBl-LZ-TSg"/>
+                    <constraint firstItem="Mkw-Po-916" firstAttribute="top" secondItem="INN-Rw-CPq" secondAttribute="topMargin" id="vwb-10-J9J"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="232" y="542"/>
         </tableViewCell>
@@ -119,8 +138,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="386" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gN-TZ-p6M">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gN-TZ-p6M">
                         <rect key="frame" x="110" y="7" width="59" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="7pK-WK-BCx"/>
+                            <constraint firstAttribute="width" constant="59" id="WcZ-lo-E6z"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <state key="normal" title="Cancel">
                             <color key="titleColor" red="0.85490196080000003" green="0.17254901959999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -129,8 +152,12 @@
                             <action selector="actionCancel:" destination="-1" eventType="touchUpInside" id="fLk-nh-F7X"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsZ-BZ-ovG">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsZ-BZ-ovG">
                         <rect key="frame" x="217" y="7" width="66" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="66" id="WKF-fO-iax"/>
+                            <constraint firstAttribute="height" constant="30" id="aSJ-D6-NeL"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <state key="normal" title="Create">
                             <color key="titleColor" red="0.29573169900000001" green="0.73333333329999995" blue="0.2201306062" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,6 +167,12 @@
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="jsZ-BZ-ovG" firstAttribute="centerX" secondItem="GgW-Zd-gE8" secondAttribute="centerX" constant="57" id="SLo-rA-LWY"/>
+                    <constraint firstItem="jsZ-BZ-ovG" firstAttribute="top" secondItem="GgW-Zd-gE8" secondAttribute="topMargin" constant="-1" id="Utm-bx-BFn"/>
+                    <constraint firstItem="6gN-TZ-p6M" firstAttribute="top" secondItem="GgW-Zd-gE8" secondAttribute="topMargin" constant="-1" id="eNu-eA-NMq"/>
+                    <constraint firstItem="6gN-TZ-p6M" firstAttribute="centerX" secondItem="GgW-Zd-gE8" secondAttribute="centerX" constant="-53.5" id="rcd-Pi-omK"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="252" y="841"/>
         </tableViewCell>
@@ -156,10 +189,18 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWg-dh-jKg">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWg-dh-jKg">
                         <rect key="frame" x="339" y="6" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="exT-w8-8xs"/>
+                            <constraint firstAttribute="width" constant="49" id="l5b-F6-cZK"/>
+                        </constraints>
                     </switch>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="QWg-dh-jKg" secondAttribute="trailing" constant="18" id="6au-WG-2sq"/>
+                    <constraint firstItem="QWg-dh-jKg" firstAttribute="top" secondItem="pZM-6m-4a5" secondAttribute="topMargin" constant="-2" id="R5T-2F-vvX"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="250" y="747"/>
         </tableViewCell>

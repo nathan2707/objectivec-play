@@ -27,7 +27,7 @@ int sel;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     {
-        [self.tabBarItem setImage:[UIImage imageNamed:@"plus"]];
+        [self.tabBarItem setImage:[UIImage imageNamed:@"PostEvent"]];
         self.tabBarItem.title = @"Post";
        
     }
@@ -37,7 +37,7 @@ int sel;
 - (void)viewDidLoad {
     [super viewDidLoad];
     sel = 10;
-    cats = [[NSArray alloc]initWithObjects:@"Sport",@"Hang out",@"Culture",@"Food",@"Gaming",@"Travel",@"Shopping",@"Study",@"Starred" ,nil];
+    cats = [[NSArray alloc]initWithObjects:@"Sports",@"Hang Out",@"Culture",@"Food",@"Gaming",@"Travel",@"Shopping",@"Study",@"Starred" ,nil];
     self.title = @"Post";
     event = [[PFObject alloc]initWithClassName:@"Events"];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

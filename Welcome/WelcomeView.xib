@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeView">
@@ -72,10 +72,18 @@
                         <action selector="actionLogin:" destination="-1" eventType="touchUpInside" id="DaA-Zf-XSa"/>
                     </connections>
                 </button>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="WelcomeMountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="NFa-Qo-XuN">
+                    <rect key="frame" x="5" y="106" width="310" height="206"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="206" id="0sU-BY-AFt"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="oy6-uy-RRG" firstAttribute="top" secondItem="NFa-Qo-XuN" secondAttribute="bottom" constant="68" id="3Tl-eK-kWa"/>
                 <constraint firstItem="7Wf-8f-ELf" firstAttribute="top" secondItem="Rka-Wf-v14" secondAttribute="bottom" constant="10" id="8sm-f9-TbS"/>
+                <constraint firstItem="NFa-Qo-XuN" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="HxW-Th-Rm3"/>
                 <constraint firstItem="Rka-Wf-v14" firstAttribute="leading" secondItem="oy6-uy-RRG" secondAttribute="leading" id="IC2-ad-bVN"/>
                 <constraint firstItem="oy6-uy-RRG" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="N5T-4Y-mJ1"/>
                 <constraint firstItem="Rka-Wf-v14" firstAttribute="trailing" secondItem="7Wf-8f-ELf" secondAttribute="trailing" id="QX8-9D-Qae"/>
@@ -88,4 +96,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="WelcomeMountain.png" width="310" height="206"/>
+    </resources>
 </document>
