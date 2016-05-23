@@ -11,4 +11,5 @@
 @interface myButton : UIButton
 @property (nonatomic,strong) PFObject *house;
 @property (nonatomic, strong) NSString *userId;
+@property (nonatomic,strong) NSDictionary *coordinates1;
 @end

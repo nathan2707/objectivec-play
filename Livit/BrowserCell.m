@@ -16,8 +16,15 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    [self.likeView setHidden:YES];
     self.descriptionTextView.userInteractionEnabled = NO;
+}
+- (IBAction)liked:(id)sender {
+//    if ([sender imageForState:UIControlStateNormal] == [UIImage imageNamed:@"like"]){
+//        [sender setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
+//    } else {
+//        [sender setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+//    }
 }
 
 @end

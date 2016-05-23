@@ -16,7 +16,10 @@
 #import "ProgressHud.h"
 #import "FriendsController.h"
 #import "UserCell.h"
-@interface CreateHouseController () <FacebookFriendsDelegate>
+#import "AppConstant.h"
+#import "AddressBookView.h"
+
+@interface CreateHouseController () <FacebookFriendsDelegate, UITextViewDelegate, AddressBookDelegate>
 
 @property (nonatomic,assign) NSInteger members;
 @property (strong, nonatomic) IBOutlet PFImageView *houseImage;
@@ -28,9 +31,10 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *cellDecision;
 
 @property (strong, nonatomic) IBOutlet UITextView *mottoTextview;
-@property (strong, nonatomic) IBOutlet UITextField *nameField;
+
 @property (strong, nonatomic) IBOutlet UITableViewCell *cellPrivacy;
 @property (strong, nonatomic) IBOutlet UISwitch *switchPrivacy;
+@property (strong, nonatomic) IBOutlet UITextView *nameTextView;
 
 
 @end
@@ -41,12 +45,92 @@ NSMutableArray *usersForTView;
 PFFile *filePicture;
 PFFile *fileThumbnail;
 
+-(void)didSelectAddressBookUsers:(NSMutableArray *)array{
+    usersForTView = [[NSMutableArray alloc] initWithArray:array];
+    users = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser].objectId, nil];
+    NSMutableArray *handleIds = [[NSMutableArray alloc]init];
+    for (PFObject *user in array){
+        [handleIds addObject:user.objectId];
+    }
+    [users addObjectsFromArray:handleIds];
+    [self.tableView  reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
      [self.tableView registerNib:[UINib nibWithNibName:@"UserCell" bundle:nil] forCellReuseIdentifier:@"UserCell"];
     self.tableView.tableHeaderView = self.headerView;
+    self.headerView.backgroundColor = [UIColor colorWithWhite:.8 alpha:.5];
+    self.mottoTextview.delegate = self;
+    self.nameTextView.delegate = self;
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    textView.text = @"";
+    self.tableView.backgroundColor = [UIColor colorWithWhite:.9 alpha:1];
+    
+    
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        if ([cell isKindOfClass:[UITableViewCell class]]) {
+            BOOL check = NO;
+            NSLog(@"%@",textView.superview.superview);
+            if ((textView.superview.superview == self.cellMotto) && (cell == self.cellMotto)) {
+                check = YES;
+            } else if ((textView.superview.superview == self.cellName) && (cell == self.cellName)){
+                check = YES;
+            }
+            
+            if (!check) {
+                UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
+                bgView.backgroundColor = [UIColor colorWithWhite:.8 alpha:.5];
+                cell.backgroundView = bgView;
+            }
+            else{
+                UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
+                bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+                cell.backgroundView = bgView;
+            }
+            self.headerView.backgroundColor = [UIColor colorWithWhite:.8 alpha:.5];
+            
+            
+        }
+        
+    }
+    
     
 }
+
+- (BOOL) textView: (UITextView*) textView
+shouldChangeTextInRange: (NSRange) range
+  replacementText: (NSString*) text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    
+    [self.tableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        if ([cell isKindOfClass:[UITableViewCell class]]) {
+            UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
+            bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+            cell.backgroundView = bgView;
+            
+        }
+        
+    }
+    
+    if (([textView.text isEqualToString:@""]) && (textView == self.mottoTextview)) textView.text = @"What is your motto?";
+    if (([textView.text isEqualToString:@""]) && (textView == self.nameTextView)) textView.text = @"Name...";
+    [textView resignFirstResponder];
+    
+}
+
 
 -(void) selectInvites:(NSMutableArray*)objectIds :(NSMutableArray*)selection{
     NSLog(@"%li %li", objectIds.count, selection.count);
@@ -60,9 +144,10 @@ PFFile *fileThumbnail;
      [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)actionCreate:(id)sender {
+    PFUser *user = [PFUser currentUser];
     PFObject *house = [PFObject objectWithClassName:@"Houses"];
     house[@"Motto"] = self.mottoTextview.text;
-    house[@"Name"] = self.nameField.text;
+    house[@"Name"] = self.nameTextView.text;
     house[@"Picture"] = filePicture;
     house[@"Thumbnail"] = fileThumbnail;
     house[@"Members"] = users;
@@ -71,6 +156,24 @@ PFFile *fileThumbnail;
     } else {
     house[@"Privacy"] = @"no";
     }
+    
+
+            NSDictionary *data = @{
+                                   @"badge" : @"Increment",
+                                   @"info" : @"GroupsView",
+                                   @"alert":[NSString stringWithFormat:@"%@ created %@ and added %lu people to the house.",user[PF_USER_FULLNAME],house[@"Name"],(unsigned long)users.count]
+                                   };
+            PFPush *push = [[PFPush alloc] init];
+            NSLog(@"%@",house.objectId);
+            [push setChannel:[@"h" stringByAppendingString:house[@"Name"]]];
+            [push setData:data];
+            [push sendPushInBackground];
+           
+
+    
+    
+    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:[[user[PF_USER_POSITION] objectForKey:@"lat"] doubleValue] longitude:[[user[PF_USER_POSITION] objectForKey:@"long"] doubleValue]];
+    house[@"Geopoint"] = point;
     [house saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
           {
               if (error != nil){
@@ -152,10 +255,18 @@ PFFile *fileThumbnail;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ((indexPath.section == 1) && (indexPath.row == 0)){
+        PFUser *user = [PFUser currentUser];
+        if (user[@"PicURL"] != nil){
         FriendsController *fc = [[FriendsController alloc]init];
         fc.delegate = self;
         [self.navigationController pushViewController:fc animated:YES];
-        
+        } else {
+            AddressBookView *abv = [[AddressBookView alloc]init];
+            abv.delegate = self;
+            abv.needsToPushBack = YES;
+            abv.needsToPushForth = NO;
+            [self.navigationController pushViewController:abv animated:YES];
+        }
     }
     
 }

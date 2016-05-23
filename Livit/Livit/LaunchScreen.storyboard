@@ -17,20 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-3o-2hR">
-                                <rect key="frame" x="93" y="-68" width="414" height="736"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchMountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="16s-rh-41n">
+                                <rect key="frame" x="145" y="192" width="310" height="216"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="1cv-3E-cxn"/>
-                                    <constraint firstAttribute="width" constant="414" id="1gd-q1-nhc"/>
-                                    <constraint firstAttribute="height" constant="736" id="kuH-NH-MAP"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="736" id="nuL-IX-KcF"/>
+                                    <constraint firstAttribute="width" constant="310" id="RWD-RL-07h"/>
+                                    <constraint firstAttribute="height" constant="216" id="UAd-eI-pL8"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.802647860738255" blue="0.13467386744966442" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="mHu-3o-2hR" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hFk-7O-xV9"/>
-                            <constraint firstItem="mHu-3o-2hR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hg8-Qo-Pch"/>
+                            <constraint firstItem="16s-rh-41n" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="LpD-f5-acH"/>
+                            <constraint firstItem="16s-rh-41n" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="drb-Zw-KmP"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchScreen.png" width="414" height="736"/>
+        <image name="LaunchMountain.png" width="310" height="216"/>
     </resources>
 </document>

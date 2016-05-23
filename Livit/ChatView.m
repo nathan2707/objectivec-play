@@ -1,13 +1,10 @@
 //
-// Copyright (c) 2015 Related Code - http://relatedcode.com
+//  ChatView.m
+//  Livit
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+//  Created by Nathan on 11/2/15.
+//  Copyright © 2015 Nathan. All rights reserved.
+//
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -37,9 +34,7 @@
 	NSTimer *timer;
 	BOOL isLoading;
 	BOOL initialized;
-
 	NSString *groupId;
-    PFObject *event;
 	NSMutableArray *users;
 	NSMutableArray *messages;
 	NSMutableDictionary *avatars;
@@ -85,19 +80,19 @@
 //         else [ProgressHUD showError:@"Network error."];
 //     }];
     
-    self.showTypingIndicator = YES;
+    self.showTypingIndicator = NO;
     self.title = @"Chat";
     self.showLoadEarlierMessagesHeader = NO;
 	users = [[NSMutableArray alloc] init];
 	messages = [[NSMutableArray alloc] init];
 	avatars = [[NSMutableDictionary alloc] init];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
 	PFUser *user = [PFUser currentUser];
 	self.senderId = user.objectId;
 	self.senderDisplayName = user[PF_USER_FULLNAME];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularTaillessImage] capInsets:UIEdgeInsetsZero];
-    bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1]];
+    
+    bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:(81.f/255.f) green:(40.f/255.f) blue:(146.f/255.f) alpha:1]];
     //bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:COLOR_OUTGOING];
 	bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:COLOR_INCOMING];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,7 +125,10 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
 	[super viewWillDisappear:animated];
-	ClearRecentCounter(groupId);
+    PFObject *recent = self.event[@"Recent"];
+	recent[PF_RECENT_COUNTER] = @0;
+    self.event[@"Recent"] =recent;
+    [self.event saveInBackground];
 	[timer invalidate];
 }
 
@@ -162,6 +160,38 @@
 					JSQMessage *message = [self addMessage:object];
 					if ([self incoming:message]) incoming = YES;
 				}
+                
+                if (objects.count == 0 && messages.count == 0) {
+                    
+                    
+                    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"WelcomeMountain"]];
+                    logo.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2.5);
+                    //[self.view addSubview:logo];
+                    logo.tag = -4;
+                    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
+                    label.center = CGPointMake(self.view.frame.size.width/2, logo.frame.size.height+logo.frame.origin.y+30);
+                    //[self.view addSubview:label];
+                    
+                    label.text = @"Send the first message!";
+                    label.font = [UIFont fontWithName:@"Helvetica" size:18];
+                    
+                    label.textAlignment = NSTextAlignmentCenter;
+                    label.numberOfLines = 2;
+                    label.tag = -4;
+                    
+                }
+                else{
+                    for (UIView *view in self.view.subviews) {
+                        [view setHidden:NO];
+                        [view setUserInteractionEnabled:YES];
+                        if (view.tag == -4) {
+                            [view removeFromSuperview];
+                        }
+                    }
+                    
+                }
+                
+                
 				if ([objects count] != 0)
 				{
 					if (initialized && incoming)
@@ -217,14 +247,13 @@
 			}
 		}];
 	}
-	//---------------------------------------------------------------------------------------------------------------------------------------------
+
 	[users addObject:user];
 	[messages addObject:message];
-	//---------------------------------------------------------------------------------------------------------------------------------------------
+	
 	return message;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAvatar:(PFUser *)user
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
@@ -286,8 +315,20 @@
 	}];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	SendPushNotification(groupId, text);
-	UpdateRecentCounter(groupId, 1, text);
-	//---------------------------------------------------------------------------------------------------------------------------------------------
+
+    PFObject *recent = self.event[@"Recent"];
+    if (recent[PF_RECENT_USER] != [PFUser currentUser]) {
+        [recent incrementKey:PF_RECENT_COUNTER byAmount:[NSNumber numberWithInteger:1]];
+        recent[PF_RECENT_LASTUSER] = [PFUser currentUser];
+        recent[PF_RECENT_LASTMESSAGE] = text;
+        recent[PF_RECENT_UPDATEDACTION] = [NSDate date];
+        self.event[@"Recent"] = recent;
+        [self.event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             if (error != nil) NSLog(@"UpdateRecentCounter save error.");
+         }];
+    }
+
 	[self finishSendingMessage];
 }
 
@@ -302,13 +343,13 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)didPressAccessoryButton:(UIButton *)sender
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 {
 	[self.view endEditing:YES];
 	NSArray *menuItems = @[[[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"chat_camera"] title:@"Camera"],
 						   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"chat_pictures"] title:@"Pictures"],
 						   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"chat_videos"] title:@"Videos"],
-						   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"chat_location"] title:@"Location"],
+						   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"5"] title:@"Be there in 5'"],
 						   ];
 	RNGridMenu *gridMenu = [[RNGridMenu alloc] initWithItems:menuItems];
 	gridMenu.delegate = self;
@@ -506,7 +547,6 @@
 	}
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
@@ -524,8 +564,43 @@
 	if ([item.title isEqualToString:@"Audio"])		ActionPremium(self);
 	if ([item.title isEqualToString:@"Pictures"])	PresentPhotoLibrary(self, YES);
 	if ([item.title isEqualToString:@"Videos"])		PresentVideoLibrary(self, YES);
-	if ([item.title isEqualToString:@"Location"])	ActionPremium(self);
+	if ([item.title isEqualToString:@"Be there in 5'"])	[self action5];
 	if ([item.title isEqualToString:@"Stickers"])	ActionPremium(self);
+}
+
+-(void)action5{
+    NSString *text = [NSString stringWithFormat:@"be there in 5'"];
+    PFObject *object = [PFObject objectWithClassName:PF_MESSAGE_CLASS_NAME];
+    object[PF_MESSAGE_USER] = [PFUser currentUser];
+    object[PF_MESSAGE_GROUPID] = groupId;
+    object[PF_MESSAGE_TEXT] = text;
+    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+     {
+         if (error == nil)
+         {
+             [JSQSystemSoundPlayer jsq_playMessageSentSound];
+             [self loadMessages];
+         }
+         else {
+             [ProgressHUD showError:@"Network error."];
+             NSLog(@"error");
+         }
+     }];
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    SendPushNotification(groupId, text);
+    PFObject *recent = self.event[@"Recent"];
+    if (recent[PF_RECENT_USER] != [PFUser currentUser]) {
+        [recent incrementKey:PF_RECENT_COUNTER byAmount:[NSNumber numberWithInteger:1]];
+        recent[PF_RECENT_LASTUSER] = [PFUser currentUser];
+        recent[PF_RECENT_LASTMESSAGE] = text;
+        recent[PF_RECENT_UPDATEDACTION] = [NSDate date];
+        self.event[@"Recent"] = recent;
+        [self.event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            if (error != nil) NSLog(@"UpdateRecentCounter save error.");
+        }];
+        }
+    [self finishSendingMessage];
 }
 
 #pragma mark - UIImagePickerControllerDelegate

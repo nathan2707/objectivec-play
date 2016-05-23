@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "FSVenue.h"
+#import "Foursquare2.h"
+#import "FSConverter.h"
 @interface GalleryView : UICollectionViewController
 @property (strong, nonatomic) PFObject *house;
 @property (strong, nonatomic) NSMutableArray *events;
 @property (strong, nonatomic) PFFile *fileP;
 @property (strong, nonatomic) PFFile *fileT;
+@property (strong, nonatomic) FSVenue *venue;
+@property (strong,nonatomic) PFObject *theEventFromCreateMode;
 @end

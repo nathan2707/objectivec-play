@@ -14,6 +14,7 @@
 #import "GroupsView.h"
 #import "CategoryChoiceController.h"
 #import "BrowserViewController.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
@@ -25,7 +26,6 @@
 @property (strong, nonatomic) GroupsView *groupsView;
 @property (strong, nonatomic) CategoryChoiceController *cat;
 @property (strong, nonatomic) BrowserViewController *browserView;
-
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocationCoordinate2D coordinate;

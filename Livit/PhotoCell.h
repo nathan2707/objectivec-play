@@ -12,4 +12,6 @@
 @interface PhotoCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet PFImageView *imageView;
 
+@property (strong, nonatomic) IBOutlet UIButton *selectedButton;
+
 @end

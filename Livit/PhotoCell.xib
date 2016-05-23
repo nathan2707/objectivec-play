@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,14 +16,30 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVh-Jm-y34" customClass="PFImageView">
                         <rect key="frame" x="0.0" y="-1" width="136" height="137"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnn-5k-P7X">
+                        <rect key="frame" x="87" y="5" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="d3y-aq-gos"/>
+                            <constraint firstAttribute="width" constant="44" id="t67-oE-w0t"/>
+                        </constraints>
+                        <state key="normal" image="ImageOff.png"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dnn-5k-P7X" secondAttribute="trailing" constant="5" id="o2c-2u-Sve"/>
+                <constraint firstItem="dnn-5k-P7X" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="uM4-9A-YcT"/>
+            </constraints>
             <size key="customSize" width="136" height="136"/>
             <connections>
                 <outlet property="imageView" destination="VVh-Jm-y34" id="NZT-IA-gG2"/>
+                <outlet property="selectedButton" destination="dnn-5k-P7X" id="z1Z-dc-9Nb"/>
             </connections>
             <point key="canvasLocation" x="333" y="383"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="ImageOff.png" width="44" height="44"/>
+    </resources>
 </document>

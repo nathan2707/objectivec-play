@@ -61,14 +61,24 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-a6-mIJ">
-                    <rect key="frame" x="180" y="12" width="55" height="21"/>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-a6-mIJ">
+                    <rect key="frame" x="8" y="12" width="398" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="398" id="JsM-NI-OcF"/>
+                        <constraint firstAttribute="height" constant="21" id="Qwz-Pl-0vV"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.2901960784" green="0.54901960780000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="EnQ-a6-mIJ" firstAttribute="top" secondItem="g7P-3e-i5O" secondAttribute="top" constant="12" id="Eul-Nn-URv"/>
+                <constraint firstAttribute="bottom" secondItem="EnQ-a6-mIJ" secondAttribute="bottom" constant="12" id="RwP-RA-U0D"/>
+                <constraint firstAttribute="trailing" secondItem="EnQ-a6-mIJ" secondAttribute="trailing" constant="8" id="sdI-R4-2Xx"/>
+                <constraint firstItem="EnQ-a6-mIJ" firstAttribute="leading" secondItem="g7P-3e-i5O" secondAttribute="leading" constant="8" id="wTf-wd-5ow"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-421" y="140.5"/>

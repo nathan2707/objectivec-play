@@ -81,7 +81,7 @@ int sel;
     cell.logoView.image = [UIImage imageNamed:[cats objectAtIndex:indexPath.row]];
     
     if (indexPath.row == sel){
-      cell.selectedView.image = [UIImage imageNamed:@"Ok-32"];
+      cell.selectedView.image = [UIImage imageNamed:@"OK-32"];
       cell.userInteractionEnabled = NO;
     } else {
       cell.selectedView.image = [UIImage imageNamed:@"Full Moon Filled-32"];

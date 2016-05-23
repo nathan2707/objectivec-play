@@ -12,7 +12,7 @@
 
 -(void)drawHeader{
     [self.nameButton setTitle:self.event[@"Name"] forState:UIControlStateNormal];
-    self.adressLabel.text = self.event[@"LocationString"];
+    [self.adressButton setTitle: self.event[@"LocationString"] forState:UIControlStateNormal];
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"eeee, HH:mm a"];
 //    NSString *dateInString = [dateFormatter stringFromDate:self.event[@"Date"]];

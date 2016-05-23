@@ -11,6 +11,8 @@
 #import <Parse/Parse.h>
 #import "GroupSettingsView.h"
 #import "GroupsView.h"
+#import "AppConstant.h"
+#import "push.h"
 
 @interface InvitesController () <EventCellDelegate>
 
@@ -96,6 +98,7 @@
         if (succeeded){
             [self.groups removeObject:group_];
             [self.tableView reloadData];
+            SendNotificationAboutAcceptingInvitation(group_, @"house");
         }
     }];
 }

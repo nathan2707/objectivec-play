@@ -1,13 +1,10 @@
 //
-// Copyright (c) 2015 Related Code - http://relatedcode.com
+//  RecentCell.m
+//  Livit
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+//  Created by Nathan on 11/2/15.
+//  Copyright © 2015 Nathan. All rights reserved.
+//
 
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -17,13 +14,12 @@
 
 #import "RecentCell.h"
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface RecentCell()
 {
 	PFObject *recent;
 }
 
-@property (strong, nonatomic) IBOutlet PFImageView *imageUser;
+
 @property (strong, nonatomic) IBOutlet UILabel *labelDescription;
 @property (strong, nonatomic) IBOutlet UILabel *labelLastMessage;
 @property (strong, nonatomic) IBOutlet UILabel *labelElapsed;
@@ -31,7 +27,6 @@
 
 
 @end
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 
 @implementation RecentCell
 
@@ -39,9 +34,7 @@
 @synthesize labelDescription;
 @synthesize labelElapsed, labelCounter;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)bindData:(PFObject *)recent_
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     recent = recent_;
     
@@ -68,16 +61,15 @@
         [self.labelElapsed setTextColor:[UIColor redColor]];
     }
 
-    
-    imageUser.image = [UIImage imageNamed:recent[@"Category"]];
-    //---------------------------------------------------------------------------------------------------------------------------------------------
+    //imageUser.image = [UIImage imageNamed:recent[@"Category"]];
+
     labelDescription.text = recent[PF_RECENT_DESCRIPTION];
     NSLog(@"%@",self.address);
     self.labelLastMessage.text = self.address;
 
 //    NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:recent[PF_RECENT_UPDATEDACTION]];
 //    labelElapsed.text = TimeElapsed(seconds);
-    //---------------------------------------------------------------------------------------------------------------------------------------------
+
     int counter = [recent[PF_RECENT_COUNTER] intValue];
     labelCounter.text = (counter == 0) ? @"" : [NSString stringWithFormat:@"%d new messages", counter];
 }

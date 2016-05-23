@@ -1,43 +1,31 @@
 //
-// Copyright (c) 2015 Related Code - http://relatedcode.com
+//  AppConstant.h
+//  Livit
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+//  Created by Nathan on 9/19/15.
+//  Copyright (c) 2015 Nathan. All rights reserved.
+//
 #define HEXCOLOR(c) [UIColor colorWithRed:((c>>24)&0xFF)/255.0 green:((c>>16)&0xFF)/255.0 blue:((c>>8)&0xFF)/255.0 alpha:((c)&0xFF)/255.0]
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 #define		DEFAULT_TAB							0
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 #define		VIDEO_LENGTH						5
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 #define		COLOR_OUTGOING                      HEXCOLOR(0x007AFFFF)
 
 #define		COLOR_INCOMING						HEXCOLOR(0xE6E5EAFF)
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 #define		SCREEN_WIDTH						[UIScreen mainScreen].bounds.size.width
 #define		SCREEN_HEIGHT						[UIScreen mainScreen].bounds.size.height
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-#define		PREMIUM_LINK						@"http://www.relatedcode.com/realtimepremium"
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-#define		MESSAGE_INVITE						@"Check out chatexamples.com"
+#define		PREMIUM_LINK						@"Available soon"
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+#define		MESSAGE_INVITE						@"Check out Ocur on the App Store"
+
+
 #define		PF_INSTALLATION_CLASS_NAME			@"_Installation"		//	Class name
 #define		PF_INSTALLATION_OBJECTID			@"objectId"				//	String
 #define		PF_INSTALLATION_USER				@"user"					//	Pointer to User Class
-//-----------------------------------------------------------------------
 #define		PF_USER_CLASS_NAME					@"_User"				//	Class name
 #define		PF_USER_OBJECTID					@"objectId"				//	String
 #define		PF_USER_USERNAME					@"username"				//	String
@@ -101,7 +89,7 @@
 #define		PF_REPORT_CLASS_NAME				@"Report"				//	Class name
 #define		PF_REPORT_USER1						@"user1"				//	Pointer to User Class
 #define		PF_REPORT_USER2						@"user2"				//	Pointer to User Class
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 #define		NOTIFICATION_APP_STARTED			@"NCAppStarted"
 #define		NOTIFICATION_USER_LOGGED_IN			@"NCUserLoggedIn"
 #define		NOTIFICATION_USER_LOGGED_OUT		@"NCUserLoggedOut"

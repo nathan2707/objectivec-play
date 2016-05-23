@@ -10,4 +10,5 @@
 #import <Parse/Parse.h>
 @interface FinishController : UITableViewController
 @property (nonatomic,strong) PFObject *event;
+@property (nonatomic,strong) NSArray *houseNames;
 @end

@@ -12,9 +12,10 @@
 @interface TableHeader : UITableViewHeaderFooterView
 @property (strong, nonatomic) IBOutlet UIView *bv;
 @property (strong, nonatomic) IBOutlet myButton *buttonCategory;
+@property (strong, nonatomic) IBOutlet myButton *adressButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *nameButton;
-@property (strong, nonatomic) IBOutlet UILabel *adressLabel;
+
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 -(void)drawHeader;
 @property (nonatomic,strong) PFObject *event;

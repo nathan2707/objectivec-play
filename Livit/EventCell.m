@@ -14,19 +14,28 @@
 
 - (void)awakeFromNib {
     
-    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    self.eventImage.image = [UIImage imageNamed:group[@"Category"]];
+    //self.eventImage.image = [UIImage imageNamed:group[@"Category"]];
+    
+    self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width/2;
+    self.eventImage.layer.masksToBounds = YES;
+    [self.eventImage setFile:group[@"Picture"]];
+    [self.eventImage loadInBackground];
     self.nameLabel.text = group[@"Name"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"eeee, HH:mm a"];
     NSString *dateInString = [dateFormatter stringFromDate:group[@"Date"]];
-    self.nameLabel.text = [self.nameLabel.text stringByAppendingString:[NSString stringWithFormat:@", %@", dateInString]];
-    self.placeLabel.text = group[@"LocationString"];
+    self.dateLabel.text = dateInString;
+    self.dateLabel.textAlignment = NSTextAlignmentRight;
+    if ([group[@"timeInterval"] doubleValue] >= NSTimeIntervalSince1970){
+        [self.dateLabel setTextColor:[UIColor redColor]];
+    } 
+    [self.placeButton setTitle:[group[@"Location"] objectForKey:@"string"] forState:UIControlStateNormal];
     self.relationLabel.text = self.number;
-    self.relationLabel.text = [self.relationLabel.text stringByAppendingString:@" people that you know"];
+    self.relationLabel.text = [self.relationLabel.text stringByAppendingString:@" interested"];
 
 }
 - (IBAction)actionOui:(id)sender {

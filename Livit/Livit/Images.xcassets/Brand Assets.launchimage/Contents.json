@@ -3,29 +3,45 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "LaunchMountain.png",
+      "minimum-system-version" : "7.0",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "filename" : "LaunchMountain@2x.png",
+      "minimum-system-version" : "7.0",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "minimum-system-version" : "7.0",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "minimum-system-version" : "7.0",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
       "filename" : "LaunchScreen.png",
       "minimum-system-version" : "7.0",
+      "unassigned" : true,
       "scale" : "2x"
     },
     {
-      "orientation" : "portrait",
       "idiom" : "iphone",
-      "minimum-system-version" : "7.0",
-      "scale" : "2x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
+      "subtype" : "retina4",
       "filename" : "LaunchScreen@2x.png",
       "minimum-system-version" : "7.0",
-      "subtype" : "retina4",
-      "scale" : "2x"
-    },
-    {
       "orientation" : "portrait",
-      "idiom" : "iphone",
-      "minimum-system-version" : "7.0",
-      "subtype" : "retina4",
+      "unassigned" : true,
       "scale" : "2x"
     }
   ],

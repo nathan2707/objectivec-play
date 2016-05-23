@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A57576F5F2DA8F43A26765F1'
+               BlueprintIdentifier = '9D5023FC5ACBF933F1629028'
                BlueprintName = 'Foursquare-iOS-API'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libFoursquare-iOS-API.a'>

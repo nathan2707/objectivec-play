@@ -4,7 +4,7 @@ platform :ios, '8.0'
 # use_frameworks!
 
 target 'Livit' do
-pod 'HNKGooglePlacesAutocomplete','1.1.1'
+
 pod 'JSQMessagesViewController','7.2.0'
 pod 'JSQSystemSoundPlayer', '~>2.0.1'
 pod 'FBSDKShareKit', '~>4.8.0'
@@ -15,10 +15,11 @@ pod 'ParseCrashReporting', '1.9.2'
 pod 'ParseTwitterUtils','1.9.1'
 pod 'ParseUI','1.1.7'
 pod 'Parse','1.10.0'
-pod 'GoogleMaps', '1.11.0'
 pod 'MWPhotoBrowser', '2.1.1'
 pod 'Foursquare-iOS-API', '~> 2.0'
-pod 'ACPButton'
+pod 'AFNetworking'
+pod 'SDWebImage'
+pod 'SlackTextViewController'
 end
 
 target 'LivitTests' do

@@ -14,7 +14,7 @@
 #import "FacebookFriendsView.h"
 #import "FinishController.h"
 
-@interface FriendsController ()
+@interface FriendsController () <FBSDKAppInviteDialogDelegate>
 {
     NSMutableArray *users;
     NSMutableArray *selection;
@@ -102,9 +102,9 @@
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"UserCell" bundle:nil] forCellReuseIdentifier:@"UserCell"];
     
-    if (self.navigationController.viewControllers.count == 4){
+    if (self.navigationController.viewControllers.count == 5){
     
-    if ( self == [self.navigationController.viewControllers objectAtIndex:3] ){
+    if ( self == [self.navigationController.viewControllers objectAtIndex:4] ){
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(actionNext) forControlEvents:UIControlEventTouchUpInside];
@@ -277,7 +277,8 @@
 
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
 {
-    // Intentionally no-op.
+    
+    NSLog(@"results: %@",results);
 }
 
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error

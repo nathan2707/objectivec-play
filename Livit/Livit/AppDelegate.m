@@ -18,7 +18,7 @@
 #import "Foursquare2.h"
 
 @implementation AppDelegate
-static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3lJGcL8JsgYvl-8WquhmRd4f0k";
+//static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3lJGcL8JsgYvl-8WquhmRd4f0k";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -59,6 +59,7 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     self.housesView = [[HousesController alloc]initWithNibName:@"HousesController" bundle:nil];
     self.cat = [[CategoryChoiceController alloc]initWithNibName:@"CategoryChoiceController" bundle:nil];
     self.browserView = [[BrowserViewController alloc] initWithNibName:@"BrowserViewController" bundle:nil];
+    
     NavigationController *navController1 = [[NavigationController alloc] initWithRootViewController:self.recentView];
     NavigationController *navController2 = [[NavigationController alloc] initWithRootViewController:self.settingsView];
     NavigationController *navController3 = [[NavigationController alloc] initWithRootViewController:self.cat];
@@ -69,11 +70,12 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     self.tabBarController.tabBar.translucent = NO;
     self.tabBarController.selectedIndex = DEFAULT_TAB;
     
-    navController1.navigationBar.barTintColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
-    navController2.navigationBar.barTintColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
-    navController3.navigationBar.barTintColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
-    navController4.navigationBar.barTintColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
-    navController5.navigationBar.barTintColor = [UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1];
+    navController1.navigationBar.barTintColor = [UIColor colorWithRed:(255.f/255.f) green:(205.f/255.f) blue:(34.f/255.f) alpha:1];
+    navController2.navigationBar.barTintColor = [UIColor colorWithRed:(255.f/255.f) green:(205.f/255.f) blue:(34.f/255.f) alpha:1];
+    navController3.navigationBar.barTintColor = [UIColor colorWithRed:(255.f/255.f) green:(205.f/255.f) blue:(34.f/255.f) alpha:1];
+    navController4.navigationBar.barTintColor = [UIColor colorWithRed:(255.f/255.f) green:(205.f/255.f) blue:(34.f/255.f) alpha:1];
+    navController5.navigationBar.barTintColor = [UIColor colorWithRed:(255.f/255.f) green:(205.f/255.f) blue:(34.f/255.f) alpha:1];
+    
     
     [navController1.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [navController2.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -87,10 +89,13 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     [navController4.navigationBar setTintColor:[UIColor whiteColor]];
     [navController5.navigationBar setTintColor:[UIColor whiteColor]];
     
+    
+
+    
     UIColor *backgroundColor = [UIColor colorWithRed:102/255.0 green:107/255.0 blue:102/255.0 alpha:1];
     
     // set the bar background color
-    [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(414, 51) withCornerRadius:0]];
+    [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(self.tabBarController.tabBar.frame.size.width, self.tabBarController.tabBar.frame.size.height) withCornerRadius:0]];
     
     // set the text color for selected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
@@ -100,10 +105,27 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     // set the selected icon color
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     // Set the dark color to selected tab (the dimmed background)
-    [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:(44.f/255.f) green:(161.f/255.f) blue:(18.f/255.f) alpha:1] forSize:CGSizeMake(414/5, 51) withCornerRadius:0]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:(255.f/255.f) green:(205.f/255.f) blue:(34.f/255.f) alpha:1] forSize:CGSizeMake(self.tabBarController.tabBar.frame.size.width/5, self.tabBarController.tabBar.frame.size.height) withCornerRadius:7]];
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if ([[notificationPayload objectForKey:@"info"] isEqualToString:@"GroupsView"]){
+        [self.window.rootViewController presentViewController:navController5 animated:YES completion:NULL];
+        UITabBarItem *item = self.tabBarController.tabBar.items[3];
+        item.badgeValue = [NSString stringWithFormat:@"%i", (int)item.badgeValue.doubleValue + 1];
+    } else if ([[notificationPayload objectForKey:@"info"] isEqualToString:@"GroupSettingsView"]){
+        [self.window.rootViewController presentViewController:navController1 animated:YES completion:NULL];
+        UITabBarItem *item = self.tabBarController.tabBar.items[4];
+        item.badgeValue = [NSString stringWithFormat:@"%i", (int)item.badgeValue.doubleValue + 1];
+    } else if ([[notificationPayload objectForKey:@"info"] isEqualToString:@"InvitesView"]){
+        [self.window.rootViewController presentViewController:navController2 animated:YES completion:NULL];
+        UITabBarItem *item = self.tabBarController.tabBar.items[0];
+        item.badgeValue = [NSString stringWithFormat:@"%i", (int)item.badgeValue.doubleValue + 1];
+    }
+    
+    
     return YES;
 }
 
@@ -113,8 +135,44 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSDate *d = [NSDate dateWithTimeIntervalSinceNow: 60.0*30];
+    NSTimer *t = [[NSTimer alloc] initWithFireDate: d
+                                          interval: 60.0*30
+                                            target: self
+                                          selector:@selector(sendNotification)
+                                          userInfo:nil repeats:YES];
+    
+    NSRunLoop *runner = [NSRunLoop currentRunLoop];
+    [runner addTimer:t forMode: NSDefaultRunLoopMode];}
+
+-(void)sendNotification{
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    NSMutableArray *channels = [[NSMutableArray alloc]init];
+    
+    PFQuery *queryForHouses = [PFQuery queryWithClassName:@"Houses"];
+    [queryForHouses whereKey:@"Members" equalTo:[PFUser currentUser].objectId];
+    [queryForHouses findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError * error) {
+        if (!error){
+            for (PFObject *house in objects){
+                [channels addObject:[@"h" stringByAppendingString:house.objectId]];
+            }
+            
+        }
+        PFQuery *queryForEvents = [PFQuery queryWithClassName:@"Events"];
+        [queryForEvents whereKey:@"Identities" equalTo:[PFUser currentUser].objectId];
+        [queryForEvents findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError * error) {
+            if (!error){
+                for (PFObject *event in objects){
+                    [channels addObject:[@"h" stringByAppendingString:event.objectId]];
+                }
+                [currentInstallation setChannels:channels];
+                if (currentInstallation.badge != 0) {
+                    currentInstallation.badge = 0;
+                    [currentInstallation saveEventually];
+                }
+            }
+        }];
+    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -127,6 +185,35 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
     [self locationManagerStart];
     [FBSDKAppEvents activateApp];
     PostNotification(NOTIFICATION_APP_STARTED);
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    NSMutableArray *channels = [[NSMutableArray alloc]init];
+    
+    if ([PFUser currentUser]){
+    PFQuery *queryForHouses = [PFQuery queryWithClassName:@"Houses"];
+    [queryForHouses whereKey:@"Members" equalTo:[PFUser currentUser].objectId];
+    [queryForHouses findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError * error) {
+        if (!error){
+            for (PFObject *house in objects){
+                [channels addObject:[@"h" stringByAppendingString:house.objectId]];
+            }
+            
+        }
+        PFQuery *queryForEvents = [PFQuery queryWithClassName:@"Events"];
+        [queryForEvents whereKey:@"Identities" equalTo:[PFUser currentUser].objectId];
+        [queryForEvents findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError * error) {
+            if (!error){
+                for (PFObject *event in objects){
+                    [channels addObject:[@"h" stringByAppendingString:event.objectId]];
+                }
+                 [currentInstallation setChannels:channels];
+                if (currentInstallation.badge != 0) {
+                    currentInstallation.badge = 0;
+                    [currentInstallation saveEventually];
+                }
+            }
+        }];
+    }];
+    }
 }
 
 #pragma mark - Facebook responses
@@ -159,29 +246,41 @@ static NSString *const kHNKDemoGooglePlacesAutocompleteApiKey = @"AIzaSyAfyalPB3
 
 #pragma mark - Push notification methods
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global" ];
+    [currentInstallation addUniqueObject:@"global" forKey:@"channels"];
+    if ([PFUser currentUser].objectId != nil){
+    currentInstallation[@"user"] = [PFUser currentUser].objectId;
+    }
     [currentInstallation saveInBackground];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 {
     //NSLog(@"didFailToRegisterForRemoteNotificationsWithError %@", error);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 {
-    //[PFPush handlePush:userInfo];
-    //---------------------------------------------------------------------------------------------------------------------------------------------
+    
+    if ([[userInfo objectForKey:@"info"] isEqualToString:@"GroupsView"]){
+        UITabBarItem *item = self.tabBarController.tabBar.items[3];
+        item.badgeValue = [NSString stringWithFormat:@"%i", (int)item.badgeValue.doubleValue + 1];
+    } else if ([[userInfo objectForKey:@"info"] isEqualToString:@"GroupSettingsView"]){
+        UITabBarItem *item = self.tabBarController.tabBar.items[4];
+        item.badgeValue = [NSString stringWithFormat:@"%i", (int)item.badgeValue.doubleValue + 1];
+    } else if ([[userInfo objectForKey:@"info"] isEqualToString:@"InvitesView"]){
+        UITabBarItem *item = self.tabBarController.tabBar.items[0];
+        item.badgeValue = [NSString stringWithFormat:@"%i", (int)item.badgeValue.doubleValue + 1];
+    }
+
     if ([PFUser currentUser] != nil)
     {
         [self performSelector:@selector(refreshRecentView) withObject:nil afterDelay:4.0];
